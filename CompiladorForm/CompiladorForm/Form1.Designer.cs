@@ -111,6 +111,7 @@ namespace CompiladorForm
             // 
             // buttonSelectArchivo
             // 
+            this.buttonSelectArchivo.Enabled = false;
             this.buttonSelectArchivo.Location = new System.Drawing.Point(640, 48);
             this.buttonSelectArchivo.Name = "buttonSelectArchivo";
             this.buttonSelectArchivo.Size = new System.Drawing.Size(96, 54);
