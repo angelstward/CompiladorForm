@@ -6,8 +6,7 @@ using System.Windows.Forms;
 namespace CompiladorForm
 {
     public partial class Form1 : Form
-    {
-        public string routeName { get; set; }
+    {       
         public Form1()
         {
             InitializeComponent();
@@ -18,7 +17,7 @@ namespace CompiladorForm
 
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (archivoCheck.Checked)
             {
@@ -29,17 +28,17 @@ namespace CompiladorForm
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void Label1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        private void OpenFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
 
         }
 
-        private void consolaCheck_CheckedChanged(object sender, EventArgs e)
+        private void ConsolaCheck_CheckedChanged(object sender, EventArgs e)
         {
             if (consolaCheck.Checked)
             {
@@ -50,26 +49,23 @@ namespace CompiladorForm
             }
         }
 
-        private void inputText_TextChanged(object sender, EventArgs e)
+        private void InputText_TextChanged(object sender, EventArgs e)
         {
             inputText.ScrollBars = ScrollBars.Vertical;
         }
 
-        private void buttonSelect_Click(object sender, EventArgs e)
+        private void ButtonSelect_Click(object sender, EventArgs e)
         {
             string route = string.Empty;
-
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 route = openFileDialog.FileName;
-            }
-            routeName = route;
-            nameArchivoText.Text = routeName;
-
+            }            
+            nameArchivoText.Text = route;
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void TextBox1_TextChanged(object sender, EventArgs e)
         {
             
         }
@@ -78,7 +74,7 @@ namespace CompiladorForm
         public void ReadFile(string route)
         {
             var lines = File.ReadAllLines(route);
-            var response = returnLinesNumber(lines);
+            var response = ReturnLinesNumber(lines);
             outputText.Text = String.Join(Environment.NewLine,response);
             
         }
@@ -92,13 +88,13 @@ namespace CompiladorForm
             if (consolaCheck.Checked)
             {
                 var text = inputText.Text;
-                var response = returnLinesNumber(text.Split(Environment.NewLine));
+                var response = ReturnLinesNumber(text.Split(Environment.NewLine));
                 outputText.Text = String.Join(Environment.NewLine, response);
             }
             
         }
 
-        private void outputText_TextChanged(object sender, EventArgs e)
+        private void OutputText_TextChanged(object sender, EventArgs e)
         {
             if(outputText.Text != string.Empty)
             {
@@ -107,18 +103,18 @@ namespace CompiladorForm
             outputText.ScrollBars = ScrollBars.Vertical;
         }
 
-        private void limpiarButton_Click(object sender, EventArgs e)
+        private void LimpiarButton_Click(object sender, EventArgs e)
         {
             outputText.Text = string.Empty;
             inputText.Text = string.Empty;
             nameArchivoText.Text = string.Empty;
         }
 
-        private string[] returnLinesNumber(string[] vs)
+        private string[] ReturnLinesNumber(string[] vs)
         {            
             for(int i = 0; i< vs.Length; i++)
             {
-                vs[i] = String.Format((i + 1).ToString() +". " + vs[i], vs[i]);
+                vs[i] = String.Format((i + 1).ToString() +"-> " + vs[i], vs[i]);
             }            
             return vs;
         }

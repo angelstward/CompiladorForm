@@ -29,6 +29,7 @@ namespace CompiladorForm
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.archivoCheck = new System.Windows.Forms.CheckBox();
             this.consolaCheck = new System.Windows.Forms.CheckBox();
             this.inputText = new System.Windows.Forms.TextBox();
@@ -52,7 +53,7 @@ namespace CompiladorForm
             this.archivoCheck.TabIndex = 0;
             this.archivoCheck.Text = "Archivo";
             this.archivoCheck.UseVisualStyleBackColor = true;
-            this.archivoCheck.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.archivoCheck.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
             // consolaCheck
             // 
@@ -63,7 +64,7 @@ namespace CompiladorForm
             this.consolaCheck.TabIndex = 1;
             this.consolaCheck.Text = "Consola";
             this.consolaCheck.UseVisualStyleBackColor = true;
-            this.consolaCheck.CheckedChanged += new System.EventHandler(this.consolaCheck_CheckedChanged);
+            this.consolaCheck.CheckedChanged += new System.EventHandler(this.ConsolaCheck_CheckedChanged);
             // 
             // inputText
             // 
@@ -73,7 +74,7 @@ namespace CompiladorForm
             this.inputText.Name = "inputText";
             this.inputText.Size = new System.Drawing.Size(359, 223);
             this.inputText.TabIndex = 2;
-            this.inputText.TextChanged += new System.EventHandler(this.inputText_TextChanged);
+            this.inputText.TextChanged += new System.EventHandler(this.InputText_TextChanged);
             // 
             // outputText
             // 
@@ -83,7 +84,7 @@ namespace CompiladorForm
             this.outputText.Name = "outputText";
             this.outputText.Size = new System.Drawing.Size(359, 223);
             this.outputText.TabIndex = 3;
-            this.outputText.TextChanged += new System.EventHandler(this.outputText_TextChanged);
+            this.outputText.TextChanged += new System.EventHandler(this.OutputText_TextChanged);
             // 
             // label1
             // 
@@ -93,7 +94,7 @@ namespace CompiladorForm
             this.label1.Size = new System.Drawing.Size(35, 15);
             this.label1.TabIndex = 4;
             this.label1.Text = "Input";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.label1.Click += new System.EventHandler(this.Label1_Click);
             // 
             // label2
             // 
@@ -107,7 +108,7 @@ namespace CompiladorForm
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.OpenFileDialog1_FileOk);
             // 
             // buttonSelectArchivo
             // 
@@ -118,7 +119,7 @@ namespace CompiladorForm
             this.buttonSelectArchivo.TabIndex = 6;
             this.buttonSelectArchivo.Text = "Selecionar Archivo";
             this.buttonSelectArchivo.UseVisualStyleBackColor = true;
-            this.buttonSelectArchivo.Click += new System.EventHandler(this.buttonSelect_Click);
+            this.buttonSelectArchivo.Click += new System.EventHandler(this.ButtonSelect_Click);
             // 
             // nameArchivoText
             // 
@@ -127,16 +128,16 @@ namespace CompiladorForm
             this.nameArchivoText.Name = "nameArchivoText";
             this.nameArchivoText.Size = new System.Drawing.Size(585, 23);
             this.nameArchivoText.TabIndex = 7;
-            this.nameArchivoText.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.nameArchivoText.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(49, 44);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 15);
+            this.label3.Size = new System.Drawing.Size(51, 15);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Archivo";
+            this.label3.Text = "Archivo:";
             // 
             // CargarButton
             // 
@@ -156,7 +157,7 @@ namespace CompiladorForm
             this.limpiarButton.TabIndex = 10;
             this.limpiarButton.Text = "Limpiar";
             this.limpiarButton.UseVisualStyleBackColor = true;
-            this.limpiarButton.Click += new System.EventHandler(this.limpiarButton_Click);
+            this.limpiarButton.Click += new System.EventHandler(this.LimpiarButton_Click);
             // 
             // Form1
             // 
@@ -174,6 +175,7 @@ namespace CompiladorForm
             this.Controls.Add(this.inputText);
             this.Controls.Add(this.consolaCheck);
             this.Controls.Add(this.archivoCheck);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Compilador";
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -28,3 +28,4 @@ C:\Users\angel\Documents\Universidad\2021-1\Compiladores\repo\CompiladorForm\Com
 C:\Users\angel\Documents\Universidad\2021-1\Compiladores\repo\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.dll
 C:\Users\angel\Documents\Universidad\2021-1\Compiladores\repo\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.pdb
 C:\Users\angel\Documents\Universidad\2021-1\Compiladores\repo\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.genruntimeconfig.cache
+C:\Users\angel\Documents\Universidad\2021-1\Compiladores\repo\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.Properties.Resources.resources
