@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\angel\\Documents\\Universidad\\2021-1\\Compiladores\\repo\\CompiladorForm\\CompiladorForm\\CompiladorForm\\CompiladorForm.csproj",
+      "projectUniqueName": "C:\\Users\\angel\\Documents\\Universidad\\2021-1\\Compiladores\\Repositorios\\CompiladorForm\\CompiladorForm\\CompiladorForm\\CompiladorForm.csproj",
       "projectName": "CompiladorForm",
-      "projectPath": "C:\\Users\\angel\\Documents\\Universidad\\2021-1\\Compiladores\\repo\\CompiladorForm\\CompiladorForm\\CompiladorForm\\CompiladorForm.csproj",
+      "projectPath": "C:\\Users\\angel\\Documents\\Universidad\\2021-1\\Compiladores\\Repositorios\\CompiladorForm\\CompiladorForm\\CompiladorForm\\CompiladorForm.csproj",
       "packagesPath": "C:\\Users\\angel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\angel\\Documents\\Universidad\\2021-1\\Compiladores\\repo\\CompiladorForm\\CompiladorForm\\CompiladorForm\\obj\\",
+      "outputPath": "C:\\Users\\angel\\Documents\\Universidad\\2021-1\\Compiladores\\Repositorios\\CompiladorForm\\CompiladorForm\\CompiladorForm\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\angel\\AppData\\Roaming\\NuGet\\NuGet.Config",
