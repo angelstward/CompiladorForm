@@ -1,5 +1,4 @@
 ﻿using CompiladorForm.Transversal;
-using System;
 
 namespace CompiladorForm.AnalisisLexico
 {
@@ -236,7 +235,7 @@ namespace CompiladorForm.AnalisisLexico
                 else if (EstadoActual == 36)
                 {
                     EstadoTreintaiseis();
-                }            
+                }
 
             }
         }
@@ -342,11 +341,7 @@ namespace CompiladorForm.AnalisisLexico
         private bool EsFinLinea()
         {
             return "@FL@".Equals(CaracterActual);
-        }
-        private void LeerSiguienteLinea()
-        {            
-            LeerSiguienteCaracter();
-        }
+        }        
         private void EstadoCero()
         {
             LeerSiguienteCaracter();
@@ -556,9 +551,9 @@ namespace CompiladorForm.AnalisisLexico
 
         private void EstadoTrece()
         {
-            LeerSiguienteLinea();
+            CargarNuevaLinea();
         }
-        
+
 
         private void EstadoCatorce()
         {
