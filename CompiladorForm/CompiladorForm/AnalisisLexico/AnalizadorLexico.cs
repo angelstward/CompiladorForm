@@ -99,6 +99,22 @@ namespace CompiladorForm.AnalisisLexico
                 {
                     EstadoTres();
                 }
+                else if(EstadoActual == 4)
+                {
+                    EstadoCuatro();
+                }
+                                else if(EstadoActual == 5)
+                {
+                    EstadoCinco();
+                }
+                                else if(EstadoActual == 6)
+                {
+                    EstadoSeis();
+                }
+                                else if(EstadoActual == 7)
+                {
+                    EstadoSiete();
+                }
                 else if (EstadoActual == 14)
                 {
                     EstadoCatorce();
@@ -106,6 +122,10 @@ namespace CompiladorForm.AnalisisLexico
                 else if (EstadoActual == 15)
                 {
                     EstadoQuince();
+                }
+                else if(EstadoActual == 16)
+                {
+                    EstadoDieciseis();
                 }
                 else if (EstadoActual == 17)
                 {
@@ -172,24 +192,22 @@ namespace CompiladorForm.AnalisisLexico
             }
             else if (EsSignoSuma())
             {
-
+                EstadoActual = 5;
             }
             else if (EsSignoResta())
             {
-
+              EstadoActual = 6;
             }
             else if (EsSignoMultiplicacion())
             {
-
+                EstadoActual = 7;
             }
             else if (EsSignoDivision())
             {
-
+                 EstadoActual = 8;
             }
             //Pendiente terminar
         }
-
-
 
         private void EstadoUno()
         {
@@ -238,6 +256,70 @@ namespace CompiladorForm.AnalisisLexico
                 FormarComponente();
             }
         }
+
+                private void EstadoCuatro()
+        {
+            LeerSiguienteCaracter();
+            if(EsLetra() || EsDigito() || EsGuionBajo() || EsSignoPesos())
+            {
+                FormarComponente();
+            }
+            else
+            {
+                EstadoActual = 16;
+            }
+        }
+
+        private void EstadoCinco()
+        {
+            ContiniarAnalisis = false;
+            string Categoria = "SUMA";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
+
+        private void EstadoSeis()
+        {
+            ContiniarAnalisis = false;
+            string Categoria = "RESTA";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
+
+        private void EstadoSiete()
+        {
+            ContiniarAnalisis = false;
+            string Categoria = "MULTIPLICACION";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
+
+        private void EstadoOcho()
+        {
+            LeerSiguienteCaracter();
+            if (EsAsterisco()){
+                EstadoActual = 34;
+            }else if (EsSignoDivision())
+            {
+                EstadoActual = 36;
+            }
+            else
+            {
+                EstadoActual = 33;
+            }
+        }
+
+                private bool EsAsterico()
+        {
+            return "*".Equals(CaracterActual);
+        }
+
+        private void EstadoTrece()
+        {
+            LeerSiguienteCaracter();
+
+        }
+
         private void EstadoCatorce()
         {
             DevolverPuntero();
@@ -257,6 +339,15 @@ namespace CompiladorForm.AnalisisLexico
             int PosicionFinal = Puntero - 1;
         }
 
+        private void EstadoDieciseis()
+        {
+            DevolverPuntero();
+            ContiniarAnalisis = false;
+            string Categoria = "IDENTIFICADOR";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
+
         private void EstadoDiecisiete()
         {
             DevolverPuntero();
@@ -267,6 +358,46 @@ namespace CompiladorForm.AnalisisLexico
             int PosicionInicial = Puntero - Lexema.Length;
             int PosicionFinal = Puntero - 1;
         }
+
+                private void EstadoTreintaYCuatro()
+        {
+            LeerSiguienteCaracter();
+            if (EsAsterico())
+            {
+                EstadoActual = 35;
+            }
+        }
+
+                private void EstadoTreintaYCinco()
+        {
+            LeerSiguienteCaracter();
+            if (!EsAsterico())
+            {
+                EstadoActual = 34;
+            }else if (EsSignoDivision())
+            {
+                EstadoActual = 0;
+            }
+        }
+
+        private void EstadoTreintaYTres()
+        {
+            DevolverPuntero();
+            ContiniarAnalisis = false;
+            string Categoria = "DIVISION";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
+
+        private void EstadoTreintaYSeis()
+        {
+            LeerSiguienteCaracter()
+            if ("@FL@".Equals(CaracterActual))
+            {
+                EstadoActual = 13
+            }
+        }
+
 
     }
 }
