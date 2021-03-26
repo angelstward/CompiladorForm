@@ -34,6 +34,11 @@ namespace CompiladorForm.AnalisisLexico
         {
             Puntero = Puntero != 1 ? Puntero - 1 : 1;
         }
+        
+        private void EsFinalLinea()
+        {
+            return "@FL@".Equals(CaracterActual);
+        }
 
         private void LeerSiguienteCaracter()
         {
@@ -176,6 +181,61 @@ namespace CompiladorForm.AnalisisLexico
         {
             return ",".Equals(CaracterActual);
         }
+
+                        private bool EsAsterico()
+        {
+            return "*".Equals(CaracterActual);
+        }
+
+        private bool EsPorcentaje()
+        {
+         return "%".Equals(CaracterActual);
+
+        }
+                private bool EsParentesisAbre()
+        {
+         return "(".Equals(CaracterActual);
+
+        }
+                        private bool EsParentesisCierra()
+        {
+         return ")".Equals(CaracterActual);
+
+        }
+
+                                private bool EsFinArchivo()
+        {
+         return "@EOF@".Equals(CaracterActual);
+
+        }
+                                        private bool EsSignoIgual()
+        {
+         return "=".Equals(CaracterActual);
+
+        }
+                                        private bool EsSignoMenorQue()
+        {
+         return "<".Equals(CaracterActual);
+
+        }
+                                                private bool EsSignoMayorQue()
+        {
+         return ">".Equals(CaracterActual);
+
+        }
+
+                                                private bool EsAsignacion()
+        {
+         return ":".Equals(CaracterActual);
+
+        }
+
+                                                private bool EsSignoDiferenteQue()
+        {
+         return "!".Equals(CaracterActual);
+
+        }
+
         private void EstadoCero()
         {
             LeerSiguienteCaracter();
@@ -206,6 +266,41 @@ namespace CompiladorForm.AnalisisLexico
             {
                  EstadoActual = 8;
             }
+           else if (EsPorcentaje())
+            {
+                EstadoActual = 9;
+            }
+                       else if (EsParentesisAbre())
+            {
+                EstadoActual = 10;
+            }
+                       else if (EsParentesisCierra())
+            {
+                EstadoActual = 11;
+            }else if (EsFinArchivo())
+            {
+                EstadoActual = 12;
+            }else if (EsSignoIgual())
+            {
+                EstadoActual = 12;
+            }
+            else if (EsSignoMenorQue())
+            {
+                EstadoActual = 20;
+            }
+            else if (EsSignoMayorQue())
+            {
+                EstadoActual = 21;
+            }
+            else if (EsAsignacion())
+            {
+                EstadoActual = 22;
+            }
+            else if (EsSignoDiferenteQue())
+            {
+                EstadoActual = 30;
+            }
+            else if (EsFinLinea())
             //Pendiente terminar
         }
 
@@ -309,10 +404,28 @@ namespace CompiladorForm.AnalisisLexico
             }
         }
 
-                private bool EsAsterico()
+        private void EstadoNueve()
         {
-            return "*".Equals(CaracterActual);
+            ContiniarAnalisis = false;
+            string Categoria = "MODULO";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
         }
+                private void EstadoDiez()
+        {
+            ContiniarAnalisis = false;
+            string Categoria = "PARENTESIS ABRE";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
+                private void EstadoOnce()
+        {
+            ContiniarAnalisis = false;
+            string Categoria = "PARENTESIS CIERRA";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
+
 
         private void EstadoTrece()
         {
@@ -392,7 +505,7 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoTreintaYSeis()
         {
             LeerSiguienteCaracter()
-            if ("@FL@".Equals(CaracterActual))
+            if (EsFinLinea())
             {
                 EstadoActual = 13
             }
