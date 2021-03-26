@@ -11,7 +11,7 @@ namespace CompiladorForm.AnalisisLexico
         private string CaracterActual;
         private string Lexema;
         private int EstadoActual;
-        private bool ContiniarAnalisis;
+        private bool ContinuarAnalisis;
         private AnalizadorLexico()
         {
             NumeroLineaActual = 0;
@@ -34,8 +34,8 @@ namespace CompiladorForm.AnalisisLexico
         {
             Puntero = Puntero != 1 ? Puntero - 1 : 1;
         }
-        
-        private void EsFinalLinea()
+
+        private bool EsFinalLinea()
         {
             return "@FL@".Equals(CaracterActual);
         }
@@ -86,7 +86,7 @@ namespace CompiladorForm.AnalisisLexico
         public void Analizar()
         {
             Resetear();
-            while (ContiniarAnalisis)
+            while (ContinuarAnalisis)
             {
                 if (EstadoActual == 0)
                 {
@@ -120,6 +120,30 @@ namespace CompiladorForm.AnalisisLexico
                 {
                     EstadoSiete();
                 }
+                else if (EstadoActual == 8)
+                {
+                    EstadoOcho();
+                }
+                else if (EstadoActual == 9)
+                {
+                    EstadoNueve();
+                }
+                else if (EstadoActual == 10)
+                {
+                    EstadoDiez();
+                }
+                else if (EstadoActual == 11)
+                {
+                    EstadoOnce();
+                }
+                else if (EstadoActual == 12)
+                {
+                    EstadoDoce();
+                }
+                else if (EstadoActual == 13)
+                {
+                    EstadoTrece();
+                }
                 else if (EstadoActual == 14)
                 {
                     EstadoCatorce();
@@ -136,6 +160,84 @@ namespace CompiladorForm.AnalisisLexico
                 {
                     EstadoDiecisiete();
                 }
+                else if (EstadoActual == 18)
+                {
+                    EstadoDieciocho();
+                }
+                else if (EstadoActual == 19)
+                {
+                    EstadoDiecinueve();
+                }
+                else if (EstadoActual == 20)
+                {
+                    EstadoVeinte();
+                }
+                else if (EstadoActual == 21)
+                {
+                    EstadoVeintiuno();
+                }
+                else if (EstadoActual == 22)
+                {
+                    EstadoVeintidos();
+                }
+                else if (EstadoActual == 23)
+                {
+                    EstadoVeintitres();
+                }
+                else if (EstadoActual == 24)
+                {
+                    EstadoVeinticuatro();
+                }
+                else if (EstadoActual == 25)
+                {
+                    EstadoVeinticinco();
+                }
+                else if (EstadoActual == 26)
+                {
+                    EstadoVeintiseis();
+                }
+                else if (EstadoActual == 27)
+                {
+                    EstadoVeintisiete();
+
+                }
+                else if (EstadoActual == 28)
+                {
+                    EstadoVeintiocho();
+                }
+                else if (EstadoActual == 29)
+                {
+                    EstadoVeintinueve();
+                }
+                else if (EstadoActual == 30)
+                {
+                    EstadoTreinta();
+                }
+                else if (EstadoActual == 31)
+                {
+                    EstadoTreintaiuno();
+                }
+                else if (EstadoActual == 32)
+                {
+                    EstadoTreintaidos();
+                }
+                else if (EstadoActual == 33)
+                {
+                    EstadoTreintaitres();
+                }
+                else if (EstadoActual == 34)
+                {
+                    EstadoTreintaicuatro();
+                }
+                else if (EstadoActual == 35)
+                {
+                    EstadoTreintaicinco();
+                }
+                else if (EstadoActual == 36)
+                {
+                    EstadoTreintaiseis();
+                }            
+
             }
         }
 
@@ -180,60 +282,71 @@ namespace CompiladorForm.AnalisisLexico
             return ",".Equals(CaracterActual);
         }
 
-                        private bool EsAsterico()
+        private bool EsAsterico()
         {
             return "*".Equals(CaracterActual);
         }
 
         private bool EsPorcentaje()
         {
-         return "%".Equals(CaracterActual);
+            return "%".Equals(CaracterActual);
 
         }
-                private bool EsParentesisAbre()
+        private bool EsParentesisAbre()
         {
-         return "(".Equals(CaracterActual);
+            return "(".Equals(CaracterActual);
 
         }
-                        private bool EsParentesisCierra()
+        private bool EsParentesisCierra()
         {
-         return ")".Equals(CaracterActual);
+            return ")".Equals(CaracterActual);
 
         }
 
-                                private bool EsFinArchivo()
+        private bool EsFinArchivo()
         {
-         return "@EOF@".Equals(CaracterActual);
+            return "@EOF@".Equals(CaracterActual);
 
         }
-                                        private bool EsSignoIgual()
+        private bool EsSignoIgual()
         {
-         return "=".Equals(CaracterActual);
+            return "=".Equals(CaracterActual);
 
         }
-                                        private bool EsSignoMenorQue()
+        private bool EsSignoMenorQue()
         {
-         return "<".Equals(CaracterActual);
+            return "<".Equals(CaracterActual);
 
         }
-                                                private bool EsSignoMayorQue()
+        private bool EsSignoMayorQue()
         {
-         return ">".Equals(CaracterActual);
+            return ">".Equals(CaracterActual);
 
         }
 
-                                                private bool EsAsignacion()
+        private bool EsAsignacion()
         {
-         return ":".Equals(CaracterActual);
+            return ":".Equals(CaracterActual);
 
         }
 
-                                                private bool EsSignoDiferenteQue()
+        private bool EsSignoDiferenteQue()
         {
-         return "!".Equals(CaracterActual);
+            return "!".Equals(CaracterActual);
 
         }
-
+        private bool EsAsterisco()
+        {
+            return "*".Equals(CaracterActual);
+        }
+        private bool EsFinLinea()
+        {
+            return "@FL@".Equals(CaracterActual);
+        }
+        private void LeerSiguienteLinea()
+        {            
+            LeerSiguienteCaracter();
+        }
         private void EstadoCero()
         {
             LeerSiguienteCaracter();
@@ -264,21 +377,23 @@ namespace CompiladorForm.AnalisisLexico
             {
                 EstadoActual = 8;
             }
-           else if (EsPorcentaje())
+            else if (EsPorcentaje())
             {
                 EstadoActual = 9;
             }
-                       else if (EsParentesisAbre())
+            else if (EsParentesisAbre())
             {
                 EstadoActual = 10;
             }
-                       else if (EsParentesisCierra())
+            else if (EsParentesisCierra())
             {
                 EstadoActual = 11;
-            }else if (EsFinArchivo())
+            }
+            else if (EsFinArchivo())
             {
                 EstadoActual = 12;
-            }else if (EsSignoIgual())
+            }
+            else if (EsSignoIgual())
             {
                 EstadoActual = 12;
             }
@@ -299,7 +414,13 @@ namespace CompiladorForm.AnalisisLexico
                 EstadoActual = 30;
             }
             else if (EsFinLinea())
-            //Pendiente terminar
+            {
+                EstadoActual = 13;
+            }
+            else
+            {
+                EstadoActual = 18;
+            }
         }
 
         private void EstadoUno()
@@ -365,7 +486,7 @@ namespace CompiladorForm.AnalisisLexico
 
         private void EstadoCinco()
         {
-            ContiniarAnalisis = false;
+            ContinuarAnalisis = false;
             string Categoria = "SUMA";
             int PosicionInicial = Puntero - Lexema.Length;
             int PosicionFinal = Puntero - 1;
@@ -373,7 +494,7 @@ namespace CompiladorForm.AnalisisLexico
 
         private void EstadoSeis()
         {
-            ContiniarAnalisis = false;
+            ContinuarAnalisis = false;
             string Categoria = "RESTA";
             int PosicionInicial = Puntero - Lexema.Length;
             int PosicionFinal = Puntero - 1;
@@ -381,7 +502,7 @@ namespace CompiladorForm.AnalisisLexico
 
         private void EstadoSiete()
         {
-            ContiniarAnalisis = false;
+            ContinuarAnalisis = false;
             string Categoria = "MULTIPLICACION";
             int PosicionInicial = Puntero - Lexema.Length;
             int PosicionFinal = Puntero - 1;
@@ -403,46 +524,46 @@ namespace CompiladorForm.AnalisisLexico
                 EstadoActual = 33;
             }
         }
-
-<<<<<<< HEAD
-        
-
-        private bool EsAsterico()
-=======
         private void EstadoNueve()
->>>>>>> cae78bb68ae538687f04c349e3e8f722c072b6ee
+
         {
-            ContiniarAnalisis = false;
+            ContinuarAnalisis = false;
             string Categoria = "MODULO";
             int PosicionInicial = Puntero - Lexema.Length;
             int PosicionFinal = Puntero - 1;
         }
-                private void EstadoDiez()
+        private void EstadoDiez()
         {
-            ContiniarAnalisis = false;
+            ContinuarAnalisis = false;
             string Categoria = "PARENTESIS ABRE";
             int PosicionInicial = Puntero - Lexema.Length;
             int PosicionFinal = Puntero - 1;
         }
-                private void EstadoOnce()
+        private void EstadoOnce()
         {
-            ContiniarAnalisis = false;
+            ContinuarAnalisis = false;
             string Categoria = "PARENTESIS CIERRA";
             int PosicionInicial = Puntero - Lexema.Length;
             int PosicionFinal = Puntero - 1;
         }
-
+        private void EstadoDoce()
+        {
+            ContinuarAnalisis = false;
+            string Categoria = "FIN DE ARCHIVO";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
 
         private void EstadoTrece()
         {
-            LeerSiguienteCaracter();
-
+            LeerSiguienteLinea();
         }
+        
 
         private void EstadoCatorce()
         {
             DevolverPuntero();
-            ContiniarAnalisis = false;
+            ContinuarAnalisis = false;
             string Categoria = "NUMERO ENTERO";
             int PosicionInicial = Puntero - Lexema.Length;
             int PosicionFinal = Puntero - 1;
@@ -452,7 +573,7 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoQuince()
         {
             DevolverPuntero();
-            ContiniarAnalisis = false;
+            ContinuarAnalisis = false;
             string Categoria = "NUMERO ENTERO";
             int PosicionInicial = Puntero - Lexema.Length;
             int PosicionFinal = Puntero - 1;
@@ -461,7 +582,7 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoDieciseis()
         {
             DevolverPuntero();
-            ContiniarAnalisis = false;
+            ContinuarAnalisis = false;
             string Categoria = "IDENTIFICADOR";
             int PosicionInicial = Puntero - Lexema.Length;
             int PosicionFinal = Puntero - 1;
@@ -470,15 +591,156 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoDiecisiete()
         {
             DevolverPuntero();
-            ContiniarAnalisis = false;
-            string Causa = "Se esperaba un digito y se recibió" + CaracterActual;
+            ContinuarAnalisis = false;
+            string Causa = "Se esperaba un digito y se recibió: " + CaracterActual;
             string Falla = "NUMERO DECIMAL NO VALIDO";
             string Solucion = "";
             int PosicionInicial = Puntero - Lexema.Length;
             int PosicionFinal = Puntero - 1;
         }
+        private void EstadoDieciocho()
+        {
+            ContinuarAnalisis = false;
+            string Causa = "Se esperaba un caracter diferente a: " + CaracterActual;
+            string Falla = "ERROR SIMBOLO NO VALIDO";
+            string Solucion = "";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
+        private void EstadoDiecinueve()
+        {
+            ContinuarAnalisis = false;
+            string Categoria = "IGUAL QUE";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
+        private void EstadoVeinte()
+        {
+            LeerSiguienteCaracter();
+            if (EsSignoMayorQue())
+            {
+                EstadoActual = 23;
+            }
+            if (EsSignoIgual())
+            {
+                EstadoActual = 24;
+            }
+            else
+            {
+                EstadoActual = 25;
+            }
+        }
+        private void EstadoVeintiuno()
+        {
+            LeerSiguienteCaracter();
+            if (EsSignoIgual())
+            {
+                EstadoActual = 26;
+            }
+            else
+            {
+                EstadoActual = 27;
+            }
+        }
+        private void EstadoVeintidos()
+        {
+            LeerSiguienteCaracter();
+            if (EsSignoIgual())
+            {
+                EstadoActual = 28;
+            }
+            else
+            {
+                EstadoActual = 29;
+            }
+        }
+        private void EstadoVeintitres()
+        {
+            ContinuarAnalisis = false;
+            string Categoria = "DIFERENTE QUE";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
 
-        private void EstadoTreintaYCuatro()
+        }
+        private void EstadoVeinticuatro()
+        {
+            ContinuarAnalisis = false;
+            string Categoria = "MENOR O IGUAL QUE";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+
+        }
+        private void EstadoVeinticinco()
+        {
+            DevolverPuntero();
+            ContinuarAnalisis = false;
+            string Categoria = "MENOR QUE";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
+        private void EstadoVeintiseis()
+        {
+            ContinuarAnalisis = false;
+            string Categoria = "MAYOR O IGUAL QUE";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
+        private void EstadoVeintisiete()
+        {
+            DevolverPuntero();
+            ContinuarAnalisis = false;
+            string Categoria = "MAYOR QUE";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
+        private void EstadoVeintiocho()
+        {
+            ContinuarAnalisis = false;
+            string Categoria = "ASIGNACION";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
+        private void EstadoVeintinueve()
+        {
+
+            DevolverPuntero();
+            ContinuarAnalisis = false;
+            string Causa = "Se esperaba un = y se recibio " + CaracterActual;
+            string Falla = "ERROR ASIGNACION NO VALIDA";
+            string Solucion = "";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
+        private void EstadoTreinta()
+        {
+            LeerSiguienteCaracter();
+            if (EsSignoIgual())
+            {
+                EstadoActual = 31;
+            }
+            else
+            {
+                EstadoActual = 32;
+            }
+        }
+        private void EstadoTreintaiuno()
+        {
+            ContinuarAnalisis = false;
+            string Categoria = "DIFERENTE QUE";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
+        private void EstadoTreintaidos()
+        {
+            DevolverPuntero();
+            ContinuarAnalisis = false;
+            string Causa = "Se esperaba un = y se recibio " + CaracterActual;
+            string Falla = "ERROR ASIGNACION NO VALIDA";
+            string Solucion = "";
+            int PosicionInicial = Puntero - Lexema.Length;
+            int PosicionFinal = Puntero - 1;
+        }
+        private void EstadoTreintaicuatro()
         {
             LeerSiguienteCaracter();
             if (EsAsterico())
@@ -487,7 +749,7 @@ namespace CompiladorForm.AnalisisLexico
             }
         }
 
-        private void EstadoTreintaYCinco()
+        private void EstadoTreintaicinco()
         {
             LeerSiguienteCaracter();
             if (!EsAsterico())
@@ -500,29 +762,26 @@ namespace CompiladorForm.AnalisisLexico
             }
         }
 
-        private void EstadoTreintaYTres()
+        private void EstadoTreintaitres()
         {
             DevolverPuntero();
-            ContiniarAnalisis = false;
+            ContinuarAnalisis = false;
             string Categoria = "DIVISION";
             int PosicionInicial = Puntero - Lexema.Length;
             int PosicionFinal = Puntero - 1;
         }
 
-        private void EstadoTreintaYSeis()
+        private void EstadoTreintaiseis()
         {
-<<<<<<< HEAD
             LeerSiguienteCaracter();
             if ("@FL@".Equals(CaracterActual))
-=======
-            LeerSiguienteCaracter()
+            {
+                LeerSiguienteCaracter();
+            }
             if (EsFinLinea())
->>>>>>> cae78bb68ae538687f04c349e3e8f722c072b6ee
             {
                 EstadoActual = 13;
             }
         }
-
-
     }
 }
