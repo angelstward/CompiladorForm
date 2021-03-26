@@ -1,4 +1,5 @@
 ﻿using CompiladorForm.Transversal;
+using System;
 
 namespace CompiladorForm.AnalisisLexico
 {
@@ -11,7 +12,6 @@ namespace CompiladorForm.AnalisisLexico
         private string Lexema;
         private int EstadoActual;
         private bool ContiniarAnalisis;
-
         private AnalizadorLexico()
         {
             NumeroLineaActual = 0;
@@ -99,19 +99,19 @@ namespace CompiladorForm.AnalisisLexico
                 {
                     EstadoTres();
                 }
-                else if(EstadoActual == 4)
+                else if (EstadoActual == 4)
                 {
                     EstadoCuatro();
                 }
-                                else if(EstadoActual == 5)
+                else if (EstadoActual == 5)
                 {
                     EstadoCinco();
                 }
-                                else if(EstadoActual == 6)
+                else if (EstadoActual == 6)
                 {
                     EstadoSeis();
                 }
-                                else if(EstadoActual == 7)
+                else if (EstadoActual == 7)
                 {
                     EstadoSiete();
                 }
@@ -123,7 +123,7 @@ namespace CompiladorForm.AnalisisLexico
                 {
                     EstadoQuince();
                 }
-                else if(EstadoActual == 16)
+                else if (EstadoActual == 16)
                 {
                     EstadoDieciseis();
                 }
@@ -133,8 +133,6 @@ namespace CompiladorForm.AnalisisLexico
                 }
             }
         }
-
-
 
         private bool EsLetra()
         {
@@ -176,6 +174,10 @@ namespace CompiladorForm.AnalisisLexico
         {
             return ",".Equals(CaracterActual);
         }
+        private bool EsAsterisco()
+        {
+            return "*".Equals(CaracterActual);
+        }
         private void EstadoCero()
         {
             LeerSiguienteCaracter();
@@ -196,7 +198,7 @@ namespace CompiladorForm.AnalisisLexico
             }
             else if (EsSignoResta())
             {
-              EstadoActual = 6;
+                EstadoActual = 6;
             }
             else if (EsSignoMultiplicacion())
             {
@@ -204,7 +206,7 @@ namespace CompiladorForm.AnalisisLexico
             }
             else if (EsSignoDivision())
             {
-                 EstadoActual = 8;
+                EstadoActual = 8;
             }
             //Pendiente terminar
         }
@@ -257,10 +259,10 @@ namespace CompiladorForm.AnalisisLexico
             }
         }
 
-                private void EstadoCuatro()
+        private void EstadoCuatro()
         {
             LeerSiguienteCaracter();
-            if(EsLetra() || EsDigito() || EsGuionBajo() || EsSignoPesos())
+            if (EsLetra() || EsDigito() || EsGuionBajo() || EsSignoPesos())
             {
                 FormarComponente();
             }
@@ -297,9 +299,11 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoOcho()
         {
             LeerSiguienteCaracter();
-            if (EsAsterisco()){
+            if (EsAsterisco())
+            {
                 EstadoActual = 34;
-            }else if (EsSignoDivision())
+            }
+            else if (EsSignoDivision())
             {
                 EstadoActual = 36;
             }
@@ -309,7 +313,9 @@ namespace CompiladorForm.AnalisisLexico
             }
         }
 
-                private bool EsAsterico()
+        
+
+        private bool EsAsterico()
         {
             return "*".Equals(CaracterActual);
         }
@@ -359,7 +365,7 @@ namespace CompiladorForm.AnalisisLexico
             int PosicionFinal = Puntero - 1;
         }
 
-                private void EstadoTreintaYCuatro()
+        private void EstadoTreintaYCuatro()
         {
             LeerSiguienteCaracter();
             if (EsAsterico())
@@ -368,13 +374,14 @@ namespace CompiladorForm.AnalisisLexico
             }
         }
 
-                private void EstadoTreintaYCinco()
+        private void EstadoTreintaYCinco()
         {
             LeerSiguienteCaracter();
             if (!EsAsterico())
             {
                 EstadoActual = 34;
-            }else if (EsSignoDivision())
+            }
+            else if (EsSignoDivision())
             {
                 EstadoActual = 0;
             }
@@ -391,10 +398,10 @@ namespace CompiladorForm.AnalisisLexico
 
         private void EstadoTreintaYSeis()
         {
-            LeerSiguienteCaracter()
+            LeerSiguienteCaracter();
             if ("@FL@".Equals(CaracterActual))
             {
-                EstadoActual = 13
+                EstadoActual = 13;
             }
         }
 
