@@ -26,11 +26,17 @@ namespace CompiladorForm.Transversal
         {
             if(Contenido != null)
             {
-                //int NumeroLinea = (Lineas.Count()==0)?1:Lineas.Keys().Max
+                //int NumeroLinea = (Lineas.Count() == 0) ? 1 : Lineas.Count();
+                string[] response = Contenido.Split(Environment.NewLine);
+                for(int i =1; i<= response.Count(); i++)
+                {
+                    var linea = Linea.Crear(i, response[i-1]);
+                    Lineas.Add(i, linea);                    
+                }
+                var lineaFin = Linea.Crear(response.Count() + 1, "@EOF@");
+                Lineas.Add(response.Count() + 1,lineaFin);
             }
-
         }
-
         public Linea ObtenerLinea(int NumeroLinea)
         {
             Linea LineaRetorno = Linea.Crear(Lineas.Count() + 1, "@EOF@");

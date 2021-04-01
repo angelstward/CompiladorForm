@@ -41,7 +41,7 @@ C:\Users\angel\Documents\Universidad\2021-1\Compiladores\Repositorios\Compilador
 C:\Users\angel\Documents\Universidad\2021-1\Compiladores\Repositorios\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.csproj.GenerateResource.cache
 C:\Users\angel\Documents\Universidad\2021-1\Compiladores\Repositorios\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.AssemblyInfoInputs.cache
 C:\Users\angel\Documents\Universidad\2021-1\Compiladores\Repositorios\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.AssemblyInfo.cs
-C:\Users\angel\Documents\Universidad\2021-1\Compiladores\Repositorios\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.csproj.CoreCompileInputs.cache
 C:\Users\angel\Documents\Universidad\2021-1\Compiladores\Repositorios\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.dll
 C:\Users\angel\Documents\Universidad\2021-1\Compiladores\Repositorios\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.pdb
 C:\Users\angel\Documents\Universidad\2021-1\Compiladores\Repositorios\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.genruntimeconfig.cache
+C:\Users\angel\Documents\Universidad\2021-1\Compiladores\Repositorios\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.csproj.CoreCompileInputs.cache

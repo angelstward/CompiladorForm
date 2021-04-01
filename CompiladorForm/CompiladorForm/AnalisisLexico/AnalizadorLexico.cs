@@ -14,14 +14,14 @@ namespace CompiladorForm.AnalisisLexico
         private AnalizadorLexico()
         {
             NumeroLineaActual = 0;
-        }
+        }       
 
         private void CargarNuevaLinea()
         {
             NumeroLineaActual++;
             LineaActual = Cache.ObtenerCache().ObtenerLinea(NumeroLineaActual);
             NumeroLineaActual = LineaActual.ObtenerNumeroLinea();
-            InicializarPuntero();
+            InicializarPuntero();            
         }
 
         private void InicializarPuntero()
@@ -655,7 +655,6 @@ namespace CompiladorForm.AnalisisLexico
             string Categoria = "DIFERENTE QUE";
             int PosicionInicial = Puntero - Lexema.Length;
             int PosicionFinal = Puntero - 1;
-
         }
         private void EstadoVeinticuatro()
         {

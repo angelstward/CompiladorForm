@@ -26,12 +26,12 @@ namespace CompiladorForm.Transversal
 
         internal static Linea Crear(int v1, string v2)
         {
-            throw new NotImplementedException();
+            return new Linea(v1, v2);
         }
 
         internal bool EsFinArchivo()
         {
-            throw new NotImplementedException();
+            return false;
         }
     }
 }

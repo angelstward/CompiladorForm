@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CompiladorForm.AnalisisLexico;
+using CompiladorForm.Transversal;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
@@ -6,7 +8,7 @@ using System.Windows.Forms;
 namespace CompiladorForm
 {
     public partial class Form1 : Form
-    {       
+    {
         public Form1()
         {
             InitializeComponent();
@@ -61,22 +63,22 @@ namespace CompiladorForm
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 route = openFileDialog.FileName;
-            }            
+            }
             nameArchivoText.Text = route;
         }
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
 
         public void ReadFile(string route)
         {
-            var lines = File.ReadAllLines(route);
-            var response = ReturnLinesNumber(lines);
-            outputText.Text = String.Join(Environment.NewLine,response);
-            
+            string[] lines = File.ReadAllLines(route);
+            string[] response = ReturnLinesNumber(lines);
+            outputText.Text = string.Join(Environment.NewLine, response);
+
         }
 
         private void CargarButton_Click(object sender, EventArgs e)
@@ -87,16 +89,47 @@ namespace CompiladorForm
             }
             if (consolaCheck.Checked)
             {
-                var text = inputText.Text;
-                var response = ReturnLinesNumber(text.Split(Environment.NewLine));
-                outputText.Text = String.Join(Environment.NewLine, response);
+                string text = inputText.Text.ToUpper();
+                string Morse = GoToMorse(text);
+                string[] response = ReturnLinesNumber(Morse.Split(Environment.NewLine));
+                outputText.Text = string.Join(Environment.NewLine, response);
             }
-            
+
+        }
+
+        private string GoToMorse(string text)
+        {
+            AnalizadorLexicoMorse analizadorLexicoMorse = new AnalizadorLexicoMorse();
+            var cache = Cache.ObtenerCache();
+            cache.AgregarLineas(text);
+            analizadorLexicoMorse.Analizar();
+            return AnalizadorLexicoMorse.Compilado; 
+
+            //string respose = "";
+            //char[] caracteres = text.ToCharArray();
+            //foreach (char caracter in caracteres)
+            //{
+            //    if (caracter == '\r')
+            //    {
+            //        respose = respose;
+            //    }
+            //    else if (caracter == '\n')
+            //    {
+            //        respose += "\r\n";
+            //    }
+            //    else
+            //    {
+            //        respose += DiccionarioToMorse.MorseAlfabeto.ContainsKey(
+            //            caracter.ToString()) == false ? "# " : DiccionarioToMorse.MorseAlfabeto[caracter.ToString()] + " ";
+            //    }
+            //}
+
+            //return respose;
         }
 
         private void OutputText_TextChanged(object sender, EventArgs e)
         {
-            if(outputText.Text != string.Empty)
+            if (outputText.Text != string.Empty)
             {
                 outputText.Enabled = true;
             }
@@ -111,11 +144,11 @@ namespace CompiladorForm
         }
 
         private string[] ReturnLinesNumber(string[] vs)
-        {            
-            for(int i = 0; i< vs.Length; i++)
+        {
+            for (int i = 0; i < vs.Length; i++)
             {
-                vs[i] = String.Format((i + 1).ToString() +"-> " + vs[i], vs[i]);
-            }            
+                vs[i] = string.Format((i + 1).ToString() + "-> " + vs[i], vs[i]);
+            }
             return vs;
         }
     }
