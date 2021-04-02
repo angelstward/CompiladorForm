@@ -26,7 +26,7 @@ namespace CompiladorForm.Transversal
         {
             if(Contenido != null)
             {
-                //int NumeroLinea = (Lineas.Count() == 0) ? 1 : Lineas.Count();
+                Limpiar();
                 string[] response = Contenido.Split(Environment.NewLine);
                 for(int i =1; i<= response.Count(); i++)
                 {

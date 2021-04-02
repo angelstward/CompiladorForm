@@ -62,7 +62,6 @@ namespace CompiladorForm.AnalisisLexico
             CargarNuevaLinea();
             while (ContinuarAnalisis)
             {
-                LeerSiguienteCaracter();
                 if (EstadoActual == 0)
                 {
                     EstadoCero();
@@ -109,15 +108,12 @@ namespace CompiladorForm.AnalisisLexico
         }
         private void EstadoSeis()
         {
-            Compilado += Lexema + " ";
             CargarNuevaLinea();
-
         }
         private void EstadoCinco()
         {
             Lexema = "#";
             Compilado += Lexema + " ";
-            //LeerSiguienteCaracter();
             EstadoActual = 0;
         }
         private void EstadoCuatro()
@@ -137,7 +133,6 @@ namespace CompiladorForm.AnalisisLexico
             FormaSigno();
             EstadoActual = 0;
             Compilado += Lexema + " ";
-            //LeerSiguienteCaracter();
             
         }
 
@@ -146,7 +141,6 @@ namespace CompiladorForm.AnalisisLexico
             FormarDigito();
             EstadoActual = 0;
             Compilado += Lexema + " ";
-            //LeerSiguienteCaracter();
         }
 
         private void EstadoUno()
@@ -154,12 +148,11 @@ namespace CompiladorForm.AnalisisLexico
             FormarLetra();
             EstadoActual = 0;
             Compilado += Lexema + " ";
-            //LeerSiguienteCaracter();            
         }
 
         private void EstadoCero()
         {
-            //LeerSiguienteCaracter();
+            LeerSiguienteCaracter();
             if (EsLetra())
             {
                 EstadoActual = 1;
