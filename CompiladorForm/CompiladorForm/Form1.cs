@@ -104,27 +104,6 @@ namespace CompiladorForm
             cache.AgregarLineas(text);
             analizadorLexicoMorse.Analizar();
             return AnalizadorLexicoMorse.Compilado; 
-
-            //string respose = "";
-            //char[] caracteres = text.ToCharArray();
-            //foreach (char caracter in caracteres)
-            //{
-            //    if (caracter == '\r')
-            //    {
-            //        respose = respose;
-            //    }
-            //    else if (caracter == '\n')
-            //    {
-            //        respose += "\r\n";
-            //    }
-            //    else
-            //    {
-            //        respose += DiccionarioToMorse.MorseAlfabeto.ContainsKey(
-            //            caracter.ToString()) == false ? "# " : DiccionarioToMorse.MorseAlfabeto[caracter.ToString()] + " ";
-            //    }
-            //}
-
-            //return respose;
         }
 
         private void OutputText_TextChanged(object sender, EventArgs e)
@@ -138,6 +117,8 @@ namespace CompiladorForm
 
         private void LimpiarButton_Click(object sender, EventArgs e)
         {
+            Cache cache = Cache.ObtenerCache();
+            cache.Limpiar();
             outputText.Text = string.Empty;
             inputText.Text = string.Empty;
             nameArchivoText.Text = string.Empty;
