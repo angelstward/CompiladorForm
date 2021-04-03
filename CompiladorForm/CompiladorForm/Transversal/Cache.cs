@@ -30,12 +30,21 @@ namespace CompiladorForm.Transversal
                 string[] response = Contenido.Split(Environment.NewLine);
                 for(int i =1; i<= response.Count(); i++)
                 {
-                    var linea = Linea.Crear(i, response[i-1]);
+                    var linea = Linea.Crear(i, AsignarLineaAgregar(response[i - 1]));
                     Lineas.Add(i, linea);                    
                 }
                 var lineaFin = Linea.Crear(response.Count() + 1, "@EOF@");
                 Lineas.Add(response.Count() + 1,lineaFin);
             }
+        }
+
+        private string AsignarLineaAgregar(string response)
+        {
+            if ("".Equals(response))
+            {
+                return "@JL@";
+            }
+            return response;
         }
         public Linea ObtenerLinea(int NumeroLinea)
         {

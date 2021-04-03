@@ -38,6 +38,10 @@ namespace CompiladorForm.AnalisisLexico
             {
                 CaracterActual = LineaActual.ObtenerContenido();
             }
+            if ("@JL@".Equals(LineaActual.ObtenerContenido()))
+            {
+                CaracterActual = "@JL@";
+            }
             else if (Puntero > LineaActual.ObtenerContenido().Length)
             {
                 CaracterActual = "@FL@";
@@ -121,7 +125,7 @@ namespace CompiladorForm.AnalisisLexico
             {
                 EstadoActual = 6;
             }
-            else if (EsSaltoDeLineaOBlanco())
+            else if (EsSaltoDeLinea() || EsBlanco())
             {
                 EstadoActual = 4;
             }
@@ -161,8 +165,12 @@ namespace CompiladorForm.AnalisisLexico
         {
             do
             {
+                if (EsSaltoDeLinea())
+                {
+                    CargarNuevaLinea();
+                }
                 LeerSiguienteCaracter();
-            } while (EsSaltoDeLineaOBlanco());
+            } while (EsSaltoDeLinea() || EsBlanco());
             EstadoActual = 7;
         }
 
@@ -175,6 +183,7 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoSeis()
         {
             CargarNuevaLinea();
+
             EstadoActual = 0;
         }
 
@@ -196,10 +205,14 @@ namespace CompiladorForm.AnalisisLexico
             return DiccionarioToMorse.MorseAlfabeto.ContainsKey(CaracterActual) || DiccionarioToMorse.MorseaNumeros.ContainsKey(CaracterActual) || DiccionarioToMorse.MorseaPuntuacion.ContainsKey(CaracterActual);
         }
         
-        private bool EsSaltoDeLineaOBlanco()
+        private bool EsBlanco()
         {
-            string[] blancoSalto = { " ", "\n", "\r" };
-            return blancoSalto.Contains(CaracterActual);
+            return " ".Equals(CaracterActual); 
+        }
+
+        private bool EsSaltoDeLinea()
+        {
+            return "@JL@".Equals(CaracterActual);
         }
 
         private bool EsFinLinea()
