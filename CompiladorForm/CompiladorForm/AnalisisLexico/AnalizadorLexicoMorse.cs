@@ -57,6 +57,11 @@ namespace CompiladorForm.AnalisisLexico
             Puntero++;
         }
 
+        private void DevolverPuntero()
+        {
+            Puntero = Puntero != 1 ? Puntero - 1 : 1;
+        }
+
         public void Analizar()
         {
             CargarNuevaLinea();
@@ -96,59 +101,6 @@ namespace CompiladorForm.AnalisisLexico
                 }
             }
         }
-       
-        private void EstadoSiete()
-        {
-            if (!EsSaltoDeLineaOBlanco())
-            {
-                Lexema = "/";
-            }
-            Compilado += Lexema +" ";
-            EstadoActual = 0;
-        }
-        private void EstadoSeis()
-        {
-            CargarNuevaLinea();
-        }
-        private void EstadoCinco()
-        {
-            Lexema = "#";
-            Compilado += Lexema + " ";
-            EstadoActual = 0;
-        }
-        private void EstadoCuatro()
-        {
-            if (EsOtro() || !EsSaltoDeLineaOBlanco())
-            {
-                EstadoActual = 7;
-            }
-            else if (EsSaltoDeLineaOBlanco())
-            {
-                EstadoActual = 4;
-            }               
-        }        
-
-        private void EstadoTres()
-        {
-            FormaSigno();
-            EstadoActual = 0;
-            Compilado += Lexema + " ";
-            
-        }
-
-        private void EstadoDos()
-        {
-            FormarDigito();
-            EstadoActual = 0;
-            Compilado += Lexema + " ";
-        }
-
-        private void EstadoUno()
-        {
-            FormarLetra();
-            EstadoActual = 0;
-            Compilado += Lexema + " ";
-        }
 
         private void EstadoCero()
         {
@@ -181,6 +133,57 @@ namespace CompiladorForm.AnalisisLexico
             {
                 ContinuarAnalisis = false;
             }
+        }
+
+        private void EstadoUno()
+        {
+            FormarLetra();
+            EstadoActual = 0;
+            Compilado += Lexema + " ";
+        }
+
+        private void EstadoDos()
+        {
+            FormarDigito();
+            EstadoActual = 0;
+            Compilado += Lexema + " ";
+        }
+
+        private void EstadoTres()
+        {
+            FormaSigno();
+            EstadoActual = 0;
+            Compilado += Lexema + " ";
+
+        }
+
+        private void EstadoCuatro()
+        {
+            do
+            {
+                LeerSiguienteCaracter();
+            } while (EsSaltoDeLineaOBlanco());
+            EstadoActual = 7;
+        }
+
+        private void EstadoCinco()
+        {
+            Lexema = "#";
+            Compilado += Lexema + " ";
+            EstadoActual = 0;
+        }
+        private void EstadoSeis()
+        {
+            CargarNuevaLinea();
+            EstadoActual = 0;
+        }
+
+        private void EstadoSiete()
+        {
+            Lexema = "/";
+            Compilado += Lexema +" ";
+            DevolverPuntero();
+            EstadoActual = 0;
         }
 
         private bool EsFinDocumento()
