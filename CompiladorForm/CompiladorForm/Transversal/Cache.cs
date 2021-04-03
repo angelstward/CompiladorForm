@@ -27,24 +27,46 @@ namespace CompiladorForm.Transversal
             if(Contenido != null)
             {
                 Limpiar();
-                string[] response = Contenido.Split(Environment.NewLine);
-                for(int i =1; i<= response.Count(); i++)
+                string[] response = Contenido.Split("\r");
+                int i = 1;
+                for (int pos=1; pos<= response.Count();pos++)
                 {
-                    var linea = Linea.Crear(i, AsignarLineaAgregar(response[i - 1]));
-                    Lineas.Add(i, linea);                    
+                    string[] contenidoAgregar = AsignarLineaAgregar(response[pos - 1]);
+                    foreach(string l in contenidoAgregar)
+                    {
+                        string stringAgregar = l;
+                        if (l.Equals(""))
+                        {
+                            stringAgregar = "@JL@";
+                        }
+                        var linea = Linea.Crear(i, stringAgregar);
+                        Lineas.Add(i, linea);
+                        i++;
+                    }
+                    if (contenidoAgregar.Contains("\n"))
+                    {
+                        pos--;
+                    }
+                    
                 }
-                var lineaFin = Linea.Crear(response.Count() + 1, "@EOF@");
-                Lineas.Add(response.Count() + 1,lineaFin);
+                Dictionary<int, Linea>.KeyCollection keyColl = Lineas.Keys;
+
+                var lineaFin = Linea.Crear(keyColl.Max() + 1, "@EOF@");
+                Lineas.Add(keyColl.Max() + 1, lineaFin);
             }
         }
 
-        private string AsignarLineaAgregar(string response)
+        private string [] AsignarLineaAgregar(string response)
         {
-            if ("".Equals(response))
+            if (!response.Equals(""))
             {
-                return "@JL@";
+                if (response.Contains("\n"))
+                {
+                    return (new string[] { "@JL@", response.Replace("\n", "") });
+                }
+                return (new string[1] { response });
             }
-            return response;
+            return new string[] { };
         }
         public Linea ObtenerLinea(int NumeroLinea)
         {
