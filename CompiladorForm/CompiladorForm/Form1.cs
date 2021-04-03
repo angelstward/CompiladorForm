@@ -9,6 +9,7 @@ namespace CompiladorForm
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
@@ -122,6 +123,7 @@ namespace CompiladorForm
             outputText.Text = string.Empty;
             inputText.Text = string.Empty;
             nameArchivoText.Text = string.Empty;
+            AnalizadorLexicoMorse.Compilado = "";
         }
 
         private string[] ReturnLinesNumber(string[] vs)
