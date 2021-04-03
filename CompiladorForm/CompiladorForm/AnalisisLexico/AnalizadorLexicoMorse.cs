@@ -202,7 +202,7 @@ namespace CompiladorForm.AnalisisLexico
 
         private bool EsOtro()
         {
-            return DiccionarioToMorse.MorseAlfabeto.ContainsKey(CaracterActual) || DiccionarioToMorse.MorseaNumeros.ContainsKey(CaracterActual) || DiccionarioToMorse.MorseaPuntuacion.ContainsKey(CaracterActual);
+            return !(DiccionarioToMorse.MorseAlfabeto.ContainsKey(CaracterActual) && DiccionarioToMorse.MorseaNumeros.ContainsKey(CaracterActual) && DiccionarioToMorse.MorseaPuntuacion.ContainsKey(CaracterActual));
         }
         
         private bool EsBlanco()
@@ -231,7 +231,7 @@ namespace CompiladorForm.AnalisisLexico
             char comillaDoble = '"';
             string[] opciones = { ".", ",", "?", "'","!","/","(",")","&",":",";",
             "=","+","-","_", comillaDoble.ToString(),"$","@","¿", "¡"};
-            return opciones.Contains(CaracterActual);
+            return opciones.Contains(CaracterActual) && DiccionarioToMorse.MorseaPuntuacion.ContainsKey(CaracterActual);
         }
 
         private void FormarDigito()
@@ -246,7 +246,7 @@ namespace CompiladorForm.AnalisisLexico
 
         private bool EsLetra()
         {
-            return char.IsLetter(CaracterActual.ToCharArray()[0]);
+            return char.IsLetter(CaracterActual.ToCharArray()[0]) && DiccionarioToMorse.MorseAlfabeto.ContainsKey(CaracterActual);
         }
 
         private void FormarLetra()
