@@ -1,16 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "PDHkuNUsObyLLpnhWp3XZ3Uy6Hnpvu5r0kmjMzvJ5Ch4wwebvq44NWdWbKwx/EnKMCk8XktfWdh7/OpbxrkKdg==",
+  "dgSpecHash": "aFR2JXmRMu93BMOLYejGq+TfNnXxdNBtZfDs1T7FFYyhND5wcM0unUAuB5xh+jvw0jQ59iWQ2HxJT0iJCM/U3w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\angel\\Documents\\Universidad\\2021-1\\Compiladores\\Repositorios\\CompiladorForm\\CompiladorForm\\CompiladorForm\\CompiladorForm.csproj",
+  "projectFilePath": "C:\\Users\\denni\\Documents\\Universidad\\Semestre 9\\Compiladores\\Parcial\\CompiladorForm\\CompiladorForm\\CompiladorForm\\CompiladorForm.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\angel\\.nuget\\packages\\nunit.console\\3.12.0\\nunit.console.3.12.0.nupkg.sha512",
-    "C:\\Users\\angel\\.nuget\\packages\\nunit.consolerunner\\3.12.0\\nunit.consolerunner.3.12.0.nupkg.sha512",
-    "C:\\Users\\angel\\.nuget\\packages\\nunit.extension.nunitprojectloader\\3.6.0\\nunit.extension.nunitprojectloader.3.6.0.nupkg.sha512",
-    "C:\\Users\\angel\\.nuget\\packages\\nunit.extension.nunitv2driver\\3.8.0\\nunit.extension.nunitv2driver.3.8.0.nupkg.sha512",
-    "C:\\Users\\angel\\.nuget\\packages\\nunit.extension.nunitv2resultwriter\\3.6.0\\nunit.extension.nunitv2resultwriter.3.6.0.nupkg.sha512",
-    "C:\\Users\\angel\\.nuget\\packages\\nunit.extension.teamcityeventlistener\\1.0.7\\nunit.extension.teamcityeventlistener.1.0.7.nupkg.sha512",
-    "C:\\Users\\angel\\.nuget\\packages\\nunit.extension.vsprojectloader\\3.8.0\\nunit.extension.vsprojectloader.3.8.0.nupkg.sha512"
+    "C:\\Users\\denni\\.nuget\\packages\\nunit.console\\3.12.0\\nunit.console.3.12.0.nupkg.sha512",
+    "C:\\Users\\denni\\.nuget\\packages\\nunit.consolerunner\\3.12.0\\nunit.consolerunner.3.12.0.nupkg.sha512",
+    "C:\\Users\\denni\\.nuget\\packages\\nunit.extension.nunitprojectloader\\3.6.0\\nunit.extension.nunitprojectloader.3.6.0.nupkg.sha512",
+    "C:\\Users\\denni\\.nuget\\packages\\nunit.extension.nunitv2driver\\3.8.0\\nunit.extension.nunitv2driver.3.8.0.nupkg.sha512",
+    "C:\\Users\\denni\\.nuget\\packages\\nunit.extension.nunitv2resultwriter\\3.6.0\\nunit.extension.nunitv2resultwriter.3.6.0.nupkg.sha512",
+    "C:\\Users\\denni\\.nuget\\packages\\nunit.extension.teamcityeventlistener\\1.0.7\\nunit.extension.teamcityeventlistener.1.0.7.nupkg.sha512",
+    "C:\\Users\\denni\\.nuget\\packages\\nunit.extension.vsprojectloader\\3.8.0\\nunit.extension.vsprojectloader.3.8.0.nupkg.sha512"
   ],
   "logs": []
 }

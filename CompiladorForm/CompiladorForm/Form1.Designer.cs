@@ -175,7 +175,7 @@ namespace CompiladorForm
             this.Controls.Add(this.inputText);
             this.Controls.Add(this.consolaCheck);
             this.Controls.Add(this.archivoCheck);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            //this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Compilador";
             this.Load += new System.EventHandler(this.Form1_Load);

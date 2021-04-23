@@ -45,3 +45,19 @@ C:\Users\angel\Documents\Universidad\2021-1\Compiladores\Repositorios\Compilador
 C:\Users\angel\Documents\Universidad\2021-1\Compiladores\Repositorios\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.pdb
 C:\Users\angel\Documents\Universidad\2021-1\Compiladores\Repositorios\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.genruntimeconfig.cache
 C:\Users\angel\Documents\Universidad\2021-1\Compiladores\Repositorios\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.csproj.CoreCompileInputs.cache
+C:\Users\denni\Documents\Universidad\Semestre 9\Compiladores\Parcial\CompiladorForm\CompiladorForm\CompiladorForm\bin\Debug\netcoreapp3.1\CompiladorForm.exe
+C:\Users\denni\Documents\Universidad\Semestre 9\Compiladores\Parcial\CompiladorForm\CompiladorForm\CompiladorForm\bin\Debug\netcoreapp3.1\CompiladorForm.deps.json
+C:\Users\denni\Documents\Universidad\Semestre 9\Compiladores\Parcial\CompiladorForm\CompiladorForm\CompiladorForm\bin\Debug\netcoreapp3.1\CompiladorForm.runtimeconfig.json
+C:\Users\denni\Documents\Universidad\Semestre 9\Compiladores\Parcial\CompiladorForm\CompiladorForm\CompiladorForm\bin\Debug\netcoreapp3.1\CompiladorForm.runtimeconfig.dev.json
+C:\Users\denni\Documents\Universidad\Semestre 9\Compiladores\Parcial\CompiladorForm\CompiladorForm\CompiladorForm\bin\Debug\netcoreapp3.1\CompiladorForm.dll
+C:\Users\denni\Documents\Universidad\Semestre 9\Compiladores\Parcial\CompiladorForm\CompiladorForm\CompiladorForm\bin\Debug\netcoreapp3.1\CompiladorForm.pdb
+C:\Users\denni\Documents\Universidad\Semestre 9\Compiladores\Parcial\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.csprojAssemblyReference.cache
+C:\Users\denni\Documents\Universidad\Semestre 9\Compiladores\Parcial\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.Form1.resources
+C:\Users\denni\Documents\Universidad\Semestre 9\Compiladores\Parcial\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.Properties.Resources.resources
+C:\Users\denni\Documents\Universidad\Semestre 9\Compiladores\Parcial\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.csproj.GenerateResource.cache
+C:\Users\denni\Documents\Universidad\Semestre 9\Compiladores\Parcial\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.AssemblyInfoInputs.cache
+C:\Users\denni\Documents\Universidad\Semestre 9\Compiladores\Parcial\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.AssemblyInfo.cs
+C:\Users\denni\Documents\Universidad\Semestre 9\Compiladores\Parcial\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.csproj.CoreCompileInputs.cache
+C:\Users\denni\Documents\Universidad\Semestre 9\Compiladores\Parcial\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.dll
+C:\Users\denni\Documents\Universidad\Semestre 9\Compiladores\Parcial\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.pdb
+C:\Users\denni\Documents\Universidad\Semestre 9\Compiladores\Parcial\CompiladorForm\CompiladorForm\CompiladorForm\obj\Debug\netcoreapp3.1\CompiladorForm.genruntimeconfig.cache
