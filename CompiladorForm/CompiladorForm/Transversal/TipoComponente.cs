@@ -1,8 +1,10 @@
 ﻿using System;
 
-public class Class1
+namespace CompiladorForm.Transversal
 {
-	public Class1()
+	public class TipoComponente
 	{
+		SIMBOLO; DUMMY, PALABRA_RESERVADA, LITERAL
+
 	}
 }

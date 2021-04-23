@@ -11,9 +11,16 @@ namespace CompiladorForm.AnalisisLexico
         private string Lexema;
         private int EstadoActual;
         private bool ContinuarAnalisis;
-        private AnalizadorLexico()
+        private ComponenteLexico Componente;
+
+
+
+
+
+        public AnalizadorLexico()
         {
             NumeroLineaActual = 0;
+            CargarNuevaLinea();
         }       
 
         private void CargarNuevaLinea()
@@ -79,10 +86,13 @@ namespace CompiladorForm.AnalisisLexico
         }
         private void Resetear()
         {
+            ContinuarAnalisis = falase;
+            Componente = null;
+            ResetearLexema();
 
         }
 
-        public void Analizar()
+        public ComponenteLexico Analizar()
         {
             Resetear();
             while (ContinuarAnalisis)
@@ -238,6 +248,8 @@ namespace CompiladorForm.AnalisisLexico
                 }
 
             }
+            //Colocar el componente en la tabla de símbolos.
+            return TablaMaestra.SincronizarTabla(Componente);
         }
 
         private bool EsLetra()
@@ -481,26 +493,22 @@ namespace CompiladorForm.AnalisisLexico
 
         private void EstadoCinco()
         {
+            CrearComponente(Lexema, Categoria.SUMA, NumeroLinea, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
-            string Categoria = "SUMA";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
+
         }
 
         private void EstadoSeis()
         {
+           
+            CrearComponente(Lexema, Categoria.RESTA, NumeroLinea, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
-            string Categoria = "RESTA";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
         }
 
         private void EstadoSiete()
         {
+            CrearComponente(Lexema, Categoria.MULTIPLICACION, NumeroLinea, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
-            string Categoria = "MULTIPLICACION";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
         }
 
         private void EstadoOcho()
@@ -522,10 +530,9 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoNueve()
 
         {
+
+            CrearComponente(Lexema, Categoria.MODULO, NumeroLinea, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
-            string Categoria = "MODULO";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
         }
         private void EstadoDiez()
         {
@@ -558,49 +565,47 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoCatorce()
         {
             DevolverPuntero();
+            CrearComponente(Lexema, Categoria.NUMERO_ENTERO, NumeroLinea, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
-            string Categoria = "NUMERO ENTERO";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
 
         }
 
         private void EstadoQuince()
         {
             DevolverPuntero();
+            CrearComponente(Lexema, Categoria.NUMERO_DECIMAL, NumeroLinea, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
-            string Categoria = "NUMERO ENTERO";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
         }
 
         private void EstadoDieciseis()
         {
             DevolverPuntero();
+            CrearComponente(Lexema, Categoria.IDENTIFICADOR, NumeroLinea, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
-            string Categoria = "IDENTIFICADOR";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
+
         }
 
         private void EstadoDiecisiete()
         {
             DevolverPuntero();
+            
             ContinuarAnalisis = false;
             string Causa = "Se esperaba un digito y se recibió: " + CaracterActual;
             string Falla = "NUMERO DECIMAL NO VALIDO";
             string Solucion = "";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
+            Error error = Error.CrearErrorLexico(Lexema, Categoria.NUMERO_DECIMAL, NumeroLineaActual, Puntero - Lexema.Lengt, Puntero - 1, Causa, Falla, Solucion);
+            ManejadorErrores.Reportar(error);
+            CrearComponente("1", error.ObtenerCategoria(), error.ObtenerNumeroLinea(), error.ObtenerPosicionInicial(), error.ObtenerPosicionFinal());
         }
         private void EstadoDieciocho()
         {
             ContinuarAnalisis = false;
-            string Causa = "Se esperaba un caracter diferente a: " + CaracterActual;
+            string Causa = "Se esperaba un caracter válido el lenguaje y se recibió " + CaracterActual;
             string Falla = "ERROR SIMBOLO NO VALIDO";
-            string Solucion = "";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
+            string Solucion = "Asegúrese que el caracter sea válido";
+            Error error = Error.CrearErrorLexico(Lexema, Categoria.NUMERO_DECIMAL, NumeroLineaActual, Puntero - Lexema.Lengt, Puntero - 1, Causa, Falla, Solucion);
+            ManejadorErrores.Reportar(error);
+            throw new Exception("Se ha presentado un error de tipo stopper del proceso de compilación. Por favor revise la consola de errores...");
         }
         private void EstadoDiecinueve()
         {
@@ -759,10 +764,8 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoTreintaitres()
         {
             DevolverPuntero();
+            CrearComponente(Lexema, Categoria.DIVISION, NumeroLinea, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
-            string Categoria = "DIVISION";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
         }
 
         private void EstadoTreintaiseis()
@@ -776,6 +779,13 @@ namespace CompiladorForm.AnalisisLexico
             {
                 EstadoActual = 13;
             }
+        }
+
+
+        private void CrearComponente(String Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal){
+
+            Componente = ComponenteLexico.Crear(Lexema, Categoria, NumeroLinea, PosicionIncial, PosicionFinal);
+
         }
     }
 }

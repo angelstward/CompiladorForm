@@ -1,14 +1,53 @@
 ﻿using System;
 
-/// <summary>
-/// Summary description for Class1
-/// </summary>
-public class Class1
+namespace CompiladorForm.Tablas
 {
-	public Class1()
+	public class TablaMaestra
 	{
-		//
-		// TODO: Add constructor logic here
-		//
+
+		private TablaMaestra()
+        {
+
+        }
+
+		public static ComponenteLexico SincronizarTabla(componenteLexico Componente)
+        {
+            if (Componente != null)
+            {
+                Componente = TablaPalabrasReservadas.ComprobarPalabraReservada(Componente);
+                switch(Componente.ObtenerCategoria())
+                {
+                    case  TipoComponente.DUMMY
+                          TablaDummys.Agregar(Componente);
+                        break;
+                   case TipoComponente.PALABRA_RESERVADA
+                        TablaPalabrasReservadas.Agregar(Componente);
+                        break;
+                   case TipoComponente.LITERAL
+                        TablaLiterales.Agregar(Componente);
+                        break;
+                   case TipoComponente.SIMBOLO
+                        TablaSimbolos.Agregar(Componente);
+                        break;
+
+                }
+
+
+                return Componente;
+
+
+            }
+
+            public static Limpiar()
+            {
+                TablaDummys.Limpiar();
+                TablaPalabrasReservadas.Limpiar();
+                TablaLiterales.Limpiar();
+                TablaSimbolos.Limpiar();
+
+            }
+
+        }
+
 	}
 }

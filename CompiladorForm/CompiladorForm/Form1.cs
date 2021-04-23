@@ -14,9 +14,41 @@ namespace CompiladorForm
         {
             InitializeComponent();
         }
+        private void Resetear(){
+            Cache.ObtenerCache().Limpiar();
+            ManejadorErrores.Limpirar();
+            TablaMaestra.Limpiar();
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //Resetear
+            Resetear();
+
+            //Cargar a caché los datos
+
+            try{
+                //Disparar el procesamiento a nivel de Analizador Léxico
+                AnalizadorLexico anaLex = new AnalizadorLexico();
+                ComponenteLexico componente = anaLex.Analizar();
+
+                while(!componente.ObtenerCategoria.Equals(Categoria.FIN_ARCHIVO))
+                {
+                     MessageBox.Show(componente.ToString());
+                     componente = anaLex.Analizar();
+                }
+                if(ManejadorErrores.HayErrores()){
+                    MessageBox.Show("El proceso de compilación ha finalizado con errores.");
+                }
+                else {
+                    MessageBox.Show("El proceso de compilación ha finalizado de forma exitosa.");
+                }
+
+            }catch(Exception exception) 
+            {
+                MessageBox.Show(exception.Message);
+            }
+           
 
         }
 
