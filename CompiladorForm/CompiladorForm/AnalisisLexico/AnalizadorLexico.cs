@@ -11,10 +11,16 @@ namespace CompiladorForm.AnalisisLexico
         private string Lexema;
         private int EstadoActual;
         private bool ContinuarAnalisis;
+        private ComponenteLexico Componente;
         private AnalizadorLexico()
         {
             NumeroLineaActual = 0;
-        }       
+        }     
+        
+        private void CrearComponente(string Lexema, Categoria Categoria, int NumeroLinea, int PosicionInicial, int PosicionFinal)
+        {
+            Componente = ComponenteLexico.Crear(Lexema,Categoria,NumeroLinea,PosicionInicial,PosicionFinal)
+        }
 
         private void CargarNuevaLinea()
         {
@@ -79,10 +85,13 @@ namespace CompiladorForm.AnalisisLexico
         }
         private void Resetear()
         {
-
+            EstadoActual = 0;
+            ContinuarAnalisis = true;
+            Componente =null;
+            ResetearLexema();
         }
 
-        public void Analizar()
+        public Componente Analizar()
         {
             Resetear();
             while (ContinuarAnalisis)
@@ -238,6 +247,9 @@ namespace CompiladorForm.AnalisisLexico
                 }
 
             }
+
+            //Colocar en la tabla de simbolos;
+            return TablaMaestra.SincronizarTabla(Componente);
         }
 
         private bool EsLetra()
@@ -558,6 +570,7 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoCatorce()
         {
             DevolverPuntero();
+            CrearComponente(Lexema,Categoria.NUMERO_ENTERO,NumeroLineaActual,Puntero-Lexema.Length,Puntero-1);
             ContinuarAnalisis = false;
             string Categoria = "NUMERO ENTERO";
             int PosicionInicial = Puntero - Lexema.Length;
@@ -568,6 +581,7 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoQuince()
         {
             DevolverPuntero();
+            CrearComponente(Lexema,Categoria.NUMERO_DECIMAL,NumeroLineaActual,Puntero-Lexema.Length,Puntero-1);
             ContinuarAnalisis = false;
             string Categoria = "NUMERO ENTERO";
             int PosicionInicial = Puntero - Lexema.Length;
@@ -590,17 +604,22 @@ namespace CompiladorForm.AnalisisLexico
             string Causa = "Se esperaba un digito y se recibió: " + CaracterActual;
             string Falla = "NUMERO DECIMAL NO VALIDO";
             string Solucion = "";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
+            Error Error = Error.CrearErrorLexico(Lexema,Categoria.NUMERO_DECIMAL,NumeroLineaActual, Puntero-Lexema.Length,Puntero-1, Falla,  Causa,  Solucion);
+            ManejadorErrores.Reportar(error);
+
+            CrearComponente("1",Error.ObtenerCategoria(),Error.ObtenerNumeroLinea(),
+                Error.ObtenerPosiciionInicial(),Error.ObtenerPosicionFinal());
+
         }
         private void EstadoDieciocho()
         {
             ContinuarAnalisis = false;
-            string Causa = "Se esperaba un caracter diferente a: " + CaracterActual;
-            string Falla = "ERROR SIMBOLO NO VALIDO";
-            string Solucion = "";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
+            string Causa = "Se esperaba un caracter valido dentro del lenguaje: " + CaracterActual;
+            string Falla = "ERROR caracter NO VALIDO para el lenguaje";
+            string Solucion = "Asegurese que el caracter sea valido";
+            Error Error = Error.CrearErrorLexico(Lexema,Categoria.NUMERO_DECIMAL,NumeroLineaActual, Puntero-Lexema.Length,Puntero-1, Falla,  Causa,  Solucion);
+            ManejadorErrores.Reportar(error);
+            throw new Exception("Se ha presentado un error de tipo stopper dentro del proceso de compilacion. Por favor revise la consola de erorres...")
         }
         private void EstadoDiecinueve()
         {

@@ -10,7 +10,7 @@ namespace CompiladorForm.AnalisisLexico
         private int EstadoActual;
         private bool ContinuarAnalisis = true;
         private int Puntero;
-        private int NumeroLineaActual;
+        private int NumeroLineaActual
         private Linea LineaActual;
         private string CaracterActual;
         public static string Compilado = "";
