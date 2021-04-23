@@ -3,6 +3,7 @@ using CompiladorForm.Transversal;
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace CompiladorForm
@@ -109,7 +110,14 @@ namespace CompiladorForm
         public void ReadFile(string route)
         {
             string[] lines = File.ReadAllLines(route);
-            string[] response = ReturnLinesNumber(lines);
+            var linesConvert = lines[0];
+            for (int i = 1; i < lines.Count(); i++)
+            {
+                linesConvert += "\r\n" + lines[i];
+            }
+
+            string morse = GoToMorse(linesConvert.ToUpper());
+            string[] response = ReturnLinesNumber(morse.Split(Environment.NewLine));
             outputText.Text = string.Join(Environment.NewLine, response);
 
         }
@@ -133,10 +141,10 @@ namespace CompiladorForm
         private string GoToMorse(string text)
         {
             AnalizadorLexicoMorse analizadorLexicoMorse = new AnalizadorLexicoMorse();
-            var cache = Cache.ObtenerCache();
+            Cache cache = Cache.ObtenerCache();
             cache.AgregarLineas(text);
             analizadorLexicoMorse.Analizar();
-            return AnalizadorLexicoMorse.Compilado; 
+            return AnalizadorLexicoMorse.Compilado;
         }
 
         private void OutputText_TextChanged(object sender, EventArgs e)
