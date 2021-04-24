@@ -40,36 +40,44 @@ namespace CompiladorForm
             this.CargarButton = new System.Windows.Forms.Button();
             this.limpiarButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Lexema = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CategoriaC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumeroLineaC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PosicionInicial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PosicionFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IngresoTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.IngresoInformacionButton = new System.Windows.Forms.Button();
             this.TablaSimbolosButton = new System.Windows.Forms.Button();
             this.IngresoInfoButton = new System.Windows.Forms.Button();
             this.ErroresButton = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelSimbolos = new System.Windows.Forms.Panel();
+            this.TablaDummies = new System.Windows.Forms.DataGridView();
+            this.label6 = new System.Windows.Forms.Label();
+            this.TablaLiteralesGrid = new System.Windows.Forms.DataGridView();
+            this.label5 = new System.Windows.Forms.Label();
+            this.TablaReservadas = new System.Windows.Forms.DataGridView();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tablasimbolos = new System.Windows.Forms.DataGridView();
             this.panelErrores = new System.Windows.Forms.Panel();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ErroresSemanticosGrid = new System.Windows.Forms.DataGridView();
+            this.label9 = new System.Windows.Forms.Label();
+            this.ErroresSintacticosGrid = new System.Windows.Forms.DataGridView();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.ErroresLexicosGrid = new System.Windows.Forms.DataGridView();
+            this.LexemaC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CategoriaC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumeroLineaC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PosicionInicialC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PosicionFinalC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label10 = new System.Windows.Forms.Label();
+            this.EOFButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panelSimbolos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TablaDummies)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TablaLiteralesGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TablaReservadas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablasimbolos)).BeginInit();
             this.panelErrores.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ErroresSemanticosGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ErroresSintacticosGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ErroresLexicosGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // archivoCheck
@@ -182,56 +190,6 @@ namespace CompiladorForm
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.Text = "dataGridView1";
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "ColumnLexema";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "ColumnCategoriaC";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "ColumnNumeroLineaC";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "ColumnPosicinInicial";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "ColumnPosicionFinal";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // Lexema
-            // 
-            this.Lexema.HeaderText = "ColumnLexema";
-            this.Lexema.Name = "Lexema";
-            // 
-            // CategoriaC
-            // 
-            this.CategoriaC.HeaderText = "ColumnCategoriaC";
-            this.CategoriaC.Name = "CategoriaC";
-            // 
-            // NumeroLineaC
-            // 
-            this.NumeroLineaC.HeaderText = "ColumnNumeroLineaC";
-            this.NumeroLineaC.Name = "NumeroLineaC";
-            // 
-            // PosicionInicial
-            // 
-            this.PosicionInicial.HeaderText = "ColumnPosicinInicial";
-            this.PosicionInicial.Name = "PosicionInicial";
-            // 
-            // PosicionFinal
-            // 
-            this.PosicionFinal.HeaderText = "ColumnPosicionFinal";
-            this.PosicionFinal.Name = "PosicionFinal";
-            // 
             // IngresoTextBox
             // 
             this.IngresoTextBox.Name = "IngresoTextBox";
@@ -276,87 +234,209 @@ namespace CompiladorForm
             this.ErroresButton.UseVisualStyleBackColor = true;
             this.ErroresButton.Click += new System.EventHandler(this.ErroresButton_Click);
             // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3});
-            this.dataGridView2.Location = new System.Drawing.Point(30, 101);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(480, 127);
-            this.dataGridView2.TabIndex = 0;
-            this.dataGridView2.Text = "dataGridView1";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Column2";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Column3";
-            this.Column3.Name = "Column3";
-            // 
             // panelSimbolos
             // 
-            this.panelSimbolos.Controls.Add(this.dataGridView2);
-            this.panelSimbolos.Location = new System.Drawing.Point(388, 43);
+            this.panelSimbolos.Controls.Add(this.TablaDummies);
+            this.panelSimbolos.Controls.Add(this.label6);
+            this.panelSimbolos.Controls.Add(this.TablaLiteralesGrid);
+            this.panelSimbolos.Controls.Add(this.label5);
+            this.panelSimbolos.Controls.Add(this.TablaReservadas);
+            this.panelSimbolos.Controls.Add(this.label4);
+            this.panelSimbolos.Controls.Add(this.label2);
+            this.panelSimbolos.Controls.Add(this.tablasimbolos);
+            this.panelSimbolos.Location = new System.Drawing.Point(20, 4);
             this.panelSimbolos.Name = "panelSimbolos";
-            this.panelSimbolos.Size = new System.Drawing.Size(400, 384);
+            this.panelSimbolos.Size = new System.Drawing.Size(744, 402);
             this.panelSimbolos.TabIndex = 12;
             this.panelSimbolos.Visible = false;
             // 
+            // TablaDummies
+            // 
+            this.TablaDummies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.TablaDummies.Location = new System.Drawing.Point(27, 321);
+            this.TablaDummies.Name = "TablaDummies";
+            this.TablaDummies.Size = new System.Drawing.Size(699, 76);
+            this.TablaDummies.TabIndex = 7;
+            this.TablaDummies.Text = "dataGridView2";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(27, 303);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(104, 15);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Tabla de Dummies";
+            // 
+            // TablaLiteralesGrid
+            // 
+            this.TablaLiteralesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.TablaLiteralesGrid.Location = new System.Drawing.Point(27, 215);
+            this.TablaLiteralesGrid.Name = "TablaLiteralesGrid";
+            this.TablaLiteralesGrid.Size = new System.Drawing.Size(699, 76);
+            this.TablaLiteralesGrid.TabIndex = 5;
+            this.TablaLiteralesGrid.Text = "dataGridView3";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(27, 197);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(96, 15);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Tabla de Literales";
+            // 
+            // TablaReservadas
+            // 
+            this.TablaReservadas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.TablaReservadas.Location = new System.Drawing.Point(27, 120);
+            this.TablaReservadas.Name = "TablaReservadas";
+            this.TablaReservadas.Size = new System.Drawing.Size(699, 74);
+            this.TablaReservadas.TabIndex = 3;
+            this.TablaReservadas.Text = "dataGridView2";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(27, 102);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(109, 15);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Palabras reservadas";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(27, 5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(102, 15);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Tabla de Simbolos";
+            // 
+            // tablasimbolos
+            // 
+            this.tablasimbolos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablasimbolos.Location = new System.Drawing.Point(27, 23);
+            this.tablasimbolos.Name = "tablasimbolos";
+            this.tablasimbolos.Size = new System.Drawing.Size(699, 76);
+            this.tablasimbolos.TabIndex = 0;
+            this.tablasimbolos.Text = "dataGridView1";
+            // 
             // panelErrores
             // 
-            this.panelErrores.Controls.Add(this.dataGridView3);
-            this.panelErrores.Location = new System.Drawing.Point(35, 43);
+            this.panelErrores.Controls.Add(this.ErroresSemanticosGrid);
+            this.panelErrores.Controls.Add(this.label9);
+            this.panelErrores.Controls.Add(this.panelSimbolos);
+            this.panelErrores.Controls.Add(this.ErroresSintacticosGrid);
+            this.panelErrores.Controls.Add(this.label8);
+            this.panelErrores.Controls.Add(this.label7);
+            this.panelErrores.Controls.Add(this.ErroresLexicosGrid);
+            this.panelErrores.Location = new System.Drawing.Point(12, 39);
             this.panelErrores.Name = "panelErrores";
-            this.panelErrores.Size = new System.Drawing.Size(316, 384);
+            this.panelErrores.Size = new System.Drawing.Size(755, 406);
             this.panelErrores.TabIndex = 14;
             this.panelErrores.Visible = false;
             // 
-            // dataGridView3
+            // ErroresSemanticosGrid
             // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column4,
-            this.Column5,
-            this.Column6});
-            this.dataGridView3.Location = new System.Drawing.Point(14, 65);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(186, 150);
-            this.dataGridView3.TabIndex = 0;
-            this.dataGridView3.Text = "dataGridView3";
+            this.ErroresSemanticosGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ErroresSemanticosGrid.Location = new System.Drawing.Point(11, 265);
+            this.ErroresSemanticosGrid.Name = "ErroresSemanticosGrid";
+            this.ErroresSemanticosGrid.Size = new System.Drawing.Size(726, 86);
+            this.ErroresSemanticosGrid.TabIndex = 4;
+            this.ErroresSemanticosGrid.Text = "dataGridView3";
             // 
-            // Column4
+            // label9
             // 
-            this.Column4.HeaderText = "Column4";
-            this.Column4.Name = "Column4";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(11, 247);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(106, 15);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "Errores semánticos";
             // 
-            // Column5
+            // ErroresSintacticosGrid
             // 
-            this.Column5.HeaderText = "Column5";
-            this.Column5.Name = "Column5";
+            this.ErroresSintacticosGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ErroresSintacticosGrid.Location = new System.Drawing.Point(11, 139);
+            this.ErroresSintacticosGrid.Name = "ErroresSintacticosGrid";
+            this.ErroresSintacticosGrid.Size = new System.Drawing.Size(726, 93);
+            this.ErroresSintacticosGrid.TabIndex = 2;
+            this.ErroresSintacticosGrid.Text = "dataGridView2";
             // 
-            // Column6
+            // label8
             // 
-            this.Column6.HeaderText = "Column6";
-            this.Column6.Name = "Column6";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(11, 121);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(103, 15);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Errores Sintácticos";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(11, 14);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(85, 15);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Errores Lexicos";
+            // 
+            // ErroresLexicosGrid
+            // 
+            this.ErroresLexicosGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ErroresLexicosGrid.Location = new System.Drawing.Point(11, 32);
+            this.ErroresLexicosGrid.Name = "ErroresLexicosGrid";
+            this.ErroresLexicosGrid.Size = new System.Drawing.Size(726, 86);
+            this.ErroresLexicosGrid.TabIndex = 0;
+            this.ErroresLexicosGrid.Text = "dataGridView3";
+            // 
+            // LexemaC
+            // 
+            this.LexemaC.Name = "LexemaC";
+            // 
+            // CategoriaC
+            // 
+            this.CategoriaC.Name = "CategoriaC";
+            // 
+            // NumeroLineaC
+            // 
+            this.NumeroLineaC.Name = "NumeroLineaC";
+            // 
+            // PosicionInicialC
+            // 
+            this.PosicionInicialC.Name = "PosicionInicialC";
+            // 
+            // PosicionFinalC
+            // 
+            this.PosicionFinalC.Name = "PosicionFinalC";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(12, 426);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(194, 15);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "Resultado Proceso de Compilación:";
+            // 
+            // EOFButton
+            // 
+            this.EOFButton.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.EOFButton.Location = new System.Drawing.Point(212, 422);
+            this.EOFButton.Name = "EOFButton";
+            this.EOFButton.Size = new System.Drawing.Size(75, 23);
+            this.EOFButton.TabIndex = 16;
+            this.EOFButton.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.EOFButton);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.panelErrores);
-            this.Controls.Add(this.panelSimbolos);
             this.Controls.Add(this.TablaSimbolosButton);
             this.Controls.Add(this.ErroresButton);
             this.Controls.Add(this.IngresoInfoButton);
@@ -375,10 +455,17 @@ namespace CompiladorForm
             this.Text = "Compilador";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.panelSimbolos.ResumeLayout(false);
+            this.panelSimbolos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TablaDummies)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TablaLiteralesGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TablaReservadas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablasimbolos)).EndInit();
             this.panelErrores.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            this.panelErrores.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ErroresSemanticosGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ErroresSintacticosGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ErroresLexicosGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -396,32 +483,35 @@ namespace CompiladorForm
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button CargarButton;
         private System.Windows.Forms.Button limpiarButton;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Lexema;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CategoriaC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroLineaC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PosicionInicial;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PosicionFinal;
+        private System.Windows.Forms.DataGridView dataGridView1;        
         private System.Windows.Forms.ToolStripTextBox IngresoTextBox;
         private System.Windows.Forms.Button IngresoInformacionButton;
         private System.Windows.Forms.Button TablaSimbolosButton;
         private System.Windows.Forms.Button IngresoInfoButton;
         private System.Windows.Forms.Button ErroresButton;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridView tablasimbolos;
         private System.Windows.Forms.Panel panelSimbolos;
         private System.Windows.Forms.Panel panelErrores;
-        private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridView ErroresLexicosGrid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LexemaC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CategoriaC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroLineaC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PosicionInicialC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PosicionFinalC;
+        private System.Windows.Forms.DataGridView TablaReservadas;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView TablaLiteralesGrid;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridView TablaDummies;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridView ErroresSemanticosGrid;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DataGridView ErroresSintacticosGrid;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button EOFButton;
     }
 }
 

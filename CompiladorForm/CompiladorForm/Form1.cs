@@ -3,7 +3,9 @@ using CompiladorForm.GestorErrores;
 using CompiladorForm.Tablas;
 using CompiladorForm.Transversal;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -137,6 +139,17 @@ namespace CompiladorForm
                 outputText.Text = string.Join(Environment.NewLine, response);
             }
 
+            if (ManejadorErrores.HayErrores())
+            {
+                EOFButton.Text ="Fallido";
+                EOFButton.BackColor = Color.FromArgb(255, 189, 189);
+            }
+            else
+            {
+                EOFButton.Text = "Exitoso";
+                EOFButton.BackColor = Color.FromArgb(204, 255, 217);
+            }
+
         }
 
         private string GoToMorse(string text)
@@ -185,7 +198,33 @@ namespace CompiladorForm
         {
             panelSimbolos.Visible = true;
             panelErrores.Visible = false;
-        }       
+            
+            foreach(var col in TablaSimbolosList.ColumnasTablaSimbolos)
+            {
+                tablasimbolos.Columns.Add(col+"S", col);
+                TablaReservadas.Columns.Add(col + "R", col);
+                TablaLiteralesGrid.Columns.Add(col + "L", col);
+                TablaDummies.Columns.Add(col + "D", col);
+            }
+            ListarTablasSimbolos(TablaSimbolos.ObtenerSimbolos(), tablasimbolos);
+            ListarTablasSimbolos(TablaDummys.ObtenerDummys(), TablaDummies);
+            ListarTablasSimbolos(TablaLiterales.ObtenerLiterales(), TablaLiteralesGrid);
+        }
+
+        private void ListarTablasSimbolos(List<ComponenteLexico> list, DataGridView tabla)
+        {
+            DataGridViewRow fila = new DataGridViewRow();
+            fila.CreateCells(tabla);
+            foreach (var simbolo in list)
+            {
+                fila.Cells[0].Value = simbolo.ObtenerLexema();
+                fila.Cells[1].Value = simbolo.ObtenerCategoria();
+                fila.Cells[2].Value = simbolo.ObtenerNumeroLinea();
+                fila.Cells[3].Value = simbolo.ObtenerPosicionInicial();
+                fila.Cells[4].Value = simbolo.ObtenerPosicionFinal();
+            }
+            tabla.Rows.Add(fila);
+        }
 
         
 
@@ -193,6 +232,36 @@ namespace CompiladorForm
         {
             panelErrores.Visible = true;
             panelSimbolos.Visible = false;
+
+            foreach (var col in TablaSimbolosList.ColumnasTablaErrores)
+            {
+                ErroresLexicosGrid.Columns.Add(col + "S", col);
+                ErroresSemanticosGrid.Columns.Add(col + "R", col);
+                ErroresSintacticosGrid.Columns.Add(col + "L", col);                
+            }
+            ListarTablaErrores(TipoError.LEXICO, ErroresLexicosGrid);
+            ListarTablaErrores(TipoError.SINTACTICO, ErroresSintacticosGrid);
+            ListarTablaErrores(TipoError.SEMANTICO, ErroresSemanticosGrid);
+        }
+
+        private void ListarTablaErrores(TipoError tipoError, DataGridView tabla)
+        {
+            var errores = ManejadorErrores.ObtenerErrores(tipoError);
+            DataGridViewRow fila = new DataGridViewRow();
+            fila.CreateCells(tabla);
+            foreach (var error in errores)
+            {
+                fila.Cells[0].Value = error.ObtenerLexema();
+                fila.Cells[1].Value = error.ObtenerCategoria();
+                fila.Cells[2].Value = error.ObtenerNumeroLinea();
+                fila.Cells[3].Value = error.ObtenerPosicionInicial();
+                fila.Cells[4].Value = error.ObtenerPosicionFinal();
+                fila.Cells[5].Value = error.ObtenerFalla();
+                fila.Cells[6].Value = error.ObtenerCausa();
+                fila.Cells[7].Value = error.ObtenerSolucion();
+            }
+            tabla.Rows.Add(fila);
+
         }
 
         private void IngresoInfoButton_Click(object sender, EventArgs e)
