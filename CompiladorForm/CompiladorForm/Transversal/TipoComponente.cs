@@ -2,9 +2,9 @@
 
 namespace CompiladorForm.Transversal
 {
-	public class TipoComponente
+	public enum TipoComponente
 	{
-		SIMBOLO; DUMMY, PALABRA_RESERVADA, LITERAL
+		SIMBOLO, DUMMY, PALABRA_RESERVADA, LITERAL, PALABRA_MAESTRA
 
 	}
 }

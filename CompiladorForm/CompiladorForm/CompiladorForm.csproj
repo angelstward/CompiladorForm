@@ -25,4 +25,9 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Modelos\Errores\" />
+    <Folder Include="Modelos\Simbolos\" />
+  </ItemGroup>
+
 </Project>

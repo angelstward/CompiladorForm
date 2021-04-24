@@ -1,11 +1,12 @@
 using System;
-
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CompiladorForm.GestorErrores
 {
 	public class ManejadorErrores
 	{
-		private  Dictionary<TipoError, List<Error>> ERRORES = new Dictionary<TipoError, List<Error>>
+		private Dictionary<TipoError, List<Error>> ERRORES = new Dictionary<TipoError, List<Error>>();
 		private static ManejadorErrores INSTANCIA = new ManejadorErrores();
 
 		private ManejadorErrores()
@@ -27,13 +28,12 @@ namespace CompiladorForm.GestorErrores
 			return INSTANCIA.ERRORES[Tipo];
         }
 
-		public static void Reportar(ManejadorErrores Error)
+		public static void Reportar(Error Error)
         {
 			if(Error != null)
             {
 				ObtenerErrores(Error.ObtenerTipo()).Add(Error);
             }
-
         }
 
 		public static bool HayErrores(TipoError Tipo)

@@ -1,4 +1,7 @@
-﻿using CompiladorForm.Transversal;
+﻿using CompiladorForm.GestorErrores;
+using CompiladorForm.Tablas;
+using CompiladorForm.Transversal;
+using System;
 
 namespace CompiladorForm.AnalisisLexico
 {
@@ -12,9 +15,6 @@ namespace CompiladorForm.AnalisisLexico
         private int EstadoActual;
         private bool ContinuarAnalisis;
         private ComponenteLexico Componente;
-
-
-
 
 
         public AnalizadorLexico()
@@ -86,8 +86,8 @@ namespace CompiladorForm.AnalisisLexico
         }
         private void Resetear()
         {
-            ContinuarAnalisis = falase;
-            Componente = null;
+            ContinuarAnalisis = false;
+            //Componente = null;
             ResetearLexema();
 
         }
@@ -493,7 +493,7 @@ namespace CompiladorForm.AnalisisLexico
 
         private void EstadoCinco()
         {
-            CrearComponente(Lexema, Categoria.SUMA, NumeroLinea, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.SUMA, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
 
         }
@@ -501,13 +501,13 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoSeis()
         {
            
-            CrearComponente(Lexema, Categoria.RESTA, NumeroLinea, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.RESTA, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
         }
 
         private void EstadoSiete()
         {
-            CrearComponente(Lexema, Categoria.MULTIPLICACION, NumeroLinea, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.MULTIPLICACION, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
         }
 
@@ -531,7 +531,7 @@ namespace CompiladorForm.AnalisisLexico
 
         {
 
-            CrearComponente(Lexema, Categoria.MODULO, NumeroLinea, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.MODULO, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
         }
         private void EstadoDiez()
@@ -565,7 +565,7 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoCatorce()
         {
             DevolverPuntero();
-            CrearComponente(Lexema, Categoria.NUMERO_ENTERO, NumeroLinea, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.NUMERO_ENTERO, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
 
         }
@@ -573,14 +573,14 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoQuince()
         {
             DevolverPuntero();
-            CrearComponente(Lexema, Categoria.NUMERO_DECIMAL, NumeroLinea, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.NUMERO_DECIMAL, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
         }
 
         private void EstadoDieciseis()
         {
             DevolverPuntero();
-            CrearComponente(Lexema, Categoria.IDENTIFICADOR, NumeroLinea, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.IDENTIFICADOR, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
 
         }
@@ -593,8 +593,9 @@ namespace CompiladorForm.AnalisisLexico
             string Causa = "Se esperaba un digito y se recibió: " + CaracterActual;
             string Falla = "NUMERO DECIMAL NO VALIDO";
             string Solucion = "";
-            Error error = Error.CrearErrorLexico(Lexema, Categoria.NUMERO_DECIMAL, NumeroLineaActual, Puntero - Lexema.Lengt, Puntero - 1, Causa, Falla, Solucion);
+            Error error = Error.CrearErrorLexico(Lexema, Categoria.NUMERO_DECIMAL, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1, Causa, Falla, Solucion);
             ManejadorErrores.Reportar(error);
+            
             CrearComponente("1", error.ObtenerCategoria(), error.ObtenerNumeroLinea(), error.ObtenerPosicionInicial(), error.ObtenerPosicionFinal());
         }
         private void EstadoDieciocho()
@@ -603,7 +604,7 @@ namespace CompiladorForm.AnalisisLexico
             string Causa = "Se esperaba un caracter válido el lenguaje y se recibió " + CaracterActual;
             string Falla = "ERROR SIMBOLO NO VALIDO";
             string Solucion = "Asegúrese que el caracter sea válido";
-            Error error = Error.CrearErrorLexico(Lexema, Categoria.NUMERO_DECIMAL, NumeroLineaActual, Puntero - Lexema.Lengt, Puntero - 1, Causa, Falla, Solucion);
+            Error error = Error.CrearErrorLexico(Lexema, Categoria.NUMERO_DECIMAL, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1, Causa, Falla, Solucion);
             ManejadorErrores.Reportar(error);
             throw new Exception("Se ha presentado un error de tipo stopper del proceso de compilación. Por favor revise la consola de errores...");
         }
@@ -764,7 +765,7 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoTreintaitres()
         {
             DevolverPuntero();
-            CrearComponente(Lexema, Categoria.DIVISION, NumeroLinea, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.DIVISION, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
         }
 
@@ -782,7 +783,7 @@ namespace CompiladorForm.AnalisisLexico
         }
 
 
-        private void CrearComponente(String Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal){
+        private void CrearComponente(string Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal){
 
             Componente = ComponenteLexico.Crear(Lexema, Categoria, NumeroLinea, PosicionIncial, PosicionFinal);
 

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CompiladorForm.Transversal;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CompiladorForm.Tablas
 {
@@ -22,7 +25,7 @@ namespace CompiladorForm.Tablas
 
         private List<ComponenteLexico> ObtenerSimbolo(String Lexema)
         {
-            if (SIMBOLOS.Containskey(Lexema))
+            if (SIMBOLOS.ContainsKey(Lexema))
             {
                 SIMBOLOS.Add(Lexema, new List<ComponenteLexico>());
             }
@@ -36,7 +39,7 @@ namespace CompiladorForm.Tablas
         {
             if (componente != null 
                 && !componente.ObtenerLexema().Equals("") 
-                && componente.ObtenerTipo.Equals(TipoComponente.SIMBOLO) )
+                && componente.ObtenerTipo().Equals(TipoComponente.SIMBOLO) )
             {
                 INSTANCIA.ObtenerSimbolo(componente.ObtenerLexema()).Add(componente);
 

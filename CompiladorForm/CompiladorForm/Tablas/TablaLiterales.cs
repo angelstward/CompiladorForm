@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CompiladorForm.Transversal;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CompiladorForm.Tablas
 {
@@ -23,7 +26,7 @@ namespace CompiladorForm.Tablas
 
         private List<ComponenteLexico> ObtenerLiteral(String Lexema)
         {
-            if (LITERALES.Containskey(Lexema))
+            if (LITERALES.ContainsKey(Lexema))
             {
                 LITERALES.Add(Lexema, new List<ComponenteLexico>());
             }
@@ -37,7 +40,7 @@ namespace CompiladorForm.Tablas
         {
             if (componente != null
                 && !componente.ObtenerLexema().Equals("")
-                && componente.ObtenerTipo.Equals(TipoComponente.LITERAL))
+                && componente.ObtenerTipo().Equals(TipoComponente.LITERAL))
                 
             {
                 INSTANCIA.ObtenerLiteral(componente.ObtenerLexema()).Add(componente);

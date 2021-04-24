@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CompiladorForm.GestorErrores;
+using System;
+using System.Text;
 
 namespace CompiladorForm.Transversal
 {
@@ -29,7 +31,7 @@ namespace CompiladorForm.Transversal
 			return new ComponenteLexico(Lexema, Categoria, NumeroLinea, PosicionIncial, PosicionFinal, TipoComponente.SIMBOLO);
 		}
 
-		public static ComponenteLexico CrearDummy(String Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal)
+		public static ComponenteLexico Crear(String Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal)
 		{
 			return new ComponenteLexico(Lexema, Categoria, NumeroLinea, PosicionIncial, PosicionFinal, TipoComponente.DUMMY);
 		}
@@ -55,27 +57,27 @@ namespace CompiladorForm.Transversal
 			return Lexema;
 		}
 
-		public String ObtenerCategoria()
+		public Categoria ObtenerCategoria()
 		{
 			return Categoria;
 		}
 
-		public String ObtenerNumeroLinea()
+		public int ObtenerNumeroLinea()
 		{
 			return NumeroLinea;
 		}
 
-		public String ObtenerPosicionInicial()
+		public int ObtenerPosicionInicial()
 		{
 			return PosicionIncial;
 		}
 
-		public String ObtenerPosicionFinal()
+		public int ObtenerPosicionFinal()
 		{
 			return PosicionFinal;
 		}
 
-		public String ObtenerPosicionTipo()
+		public TipoComponente ObtenerTipo()
 		{
 			return Tipo;
 		}
@@ -83,16 +85,16 @@ namespace CompiladorForm.Transversal
 		public override string ToString()
         {
 			StringBuilder informacion = new StringBuilder();
-			informacion.Append("Categoria: " ).Append(ObtenerCategoria())Append(Environment.NewLine);
-			informacion.Append("Lexema: ").Append(ObtenerLexema())Append(Environment.NewLine);
-			informacion.Append("Numero de linea: ").Append(ObtenerNumeroLinea())Append(Environment.NewLine);
-			informacion.Append("Posición inicial: ").Append(ObtenerPosicionInicial())Append(Environment.NewLine);
-			informacion.Append("Posición final: ").Append(ObtenerPosicionFinal())Append(Environment.NewLine);
+			informacion.Append("Categoria: " ).Append(ObtenerCategoria()).Append(Environment.NewLine);
+			informacion.Append("Lexema: ").Append(ObtenerLexema()).Append(Environment.NewLine);
+			informacion.Append("Numero de linea: ").Append(ObtenerNumeroLinea()).Append(Environment.NewLine);
+			informacion.Append("Posición inicial: ").Append(ObtenerPosicionInicial()).Append(Environment.NewLine);
+			informacion.Append("Posición final: ").Append(ObtenerPosicionFinal()).Append(Environment.NewLine);
 
 			return informacion.ToString();
 
         }
 
-
-	}
+        
+    }
 }

@@ -1,5 +1,7 @@
-﻿using System;
-
+﻿using CompiladorForm.Transversal;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CompiladorForm.Tablas
 {
@@ -11,8 +13,6 @@ namespace CompiladorForm.Tablas
 
         private TablaDummys()
         {
-
-
         }
 
         public static void Limpiar()
@@ -23,7 +23,7 @@ namespace CompiladorForm.Tablas
 
         private List<ComponenteLexico> ObtenerDummys(String Lexema)
         {
-            if (DUMMYS.Containskey(Lexema))
+            if (DUMMYS.ContainsKey(Lexema))
             {
                 DUMMYS.Add(Lexema, new List<ComponenteLexico>());
             }
@@ -37,7 +37,7 @@ namespace CompiladorForm.Tablas
         {
             if (componente != null
                 && !componente.ObtenerLexema().Equals("")
-                && componente.ObtenerTipo.Equals(TipoComponente.DUMMY))
+                && componente.ObtenerTipo().Equals(TipoComponente.DUMMY))
 
             {
                 INSTANCIA.ObtenerDummys(componente.ObtenerLexema()).Add(componente);

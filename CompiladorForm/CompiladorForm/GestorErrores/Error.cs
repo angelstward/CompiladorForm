@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CompiladorForm.Transversal;
+using System;
 
 namespace CompiladorForm.GestorErrores
 {
@@ -24,13 +25,13 @@ namespace CompiladorForm.GestorErrores
 			this.Falla = Falla;
 			this.Causa = Causa;
 			this.Solucion = Solucion;
-			this.Tipo = Tipo;
-	
+			this.Tipo = Tipo;	
 		}
+       
 
-		public static  Error CreaErrorLexico(String Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal, String Falla, String Causa, String Solucion)
+        public  static Error CrearErrorLexico(String Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal, String Falla, String Causa, String Solucion)
 		{
-			return (Lexema, Categoria,NumeroLinea, PosicionIncial, PosicionFinal,Falla,Causa,Solucion);
+			return new Error(Lexema, Categoria,NumeroLinea, PosicionIncial, PosicionFinal,Falla,Causa,Solucion, TipoError.LEXICO);
 
 		}
 
@@ -39,22 +40,22 @@ namespace CompiladorForm.GestorErrores
 			return Lexema;
 		}
 
-		public String ObtenerCategoria()
+		public Categoria ObtenerCategoria()
 		{
 			return Categoria;
 		}
 
-		public String ObtenerNumeroLinea()
+		public int ObtenerNumeroLinea()
 		{
 			return NumeroLinea;
 		}
 
-		public String ObtenerPosicionInicial()
+		public int ObtenerPosicionInicial()
 		{
 			return PosicionIncial;
 		}
 
-		public String ObtenerPosicionFinal()
+		public int ObtenerPosicionFinal()
 		{
 			return PosicionFinal;
 		}
@@ -75,7 +76,7 @@ namespace CompiladorForm.GestorErrores
 			return Solucion;
 		}
 
-		public String ObtenerTipo()
+		public TipoError ObtenerTipo()
 		{
 			return Tipo;
 		}

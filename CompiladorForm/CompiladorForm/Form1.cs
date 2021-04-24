@@ -1,4 +1,6 @@
 ﻿using CompiladorForm.AnalisisLexico;
+using CompiladorForm.GestorErrores;
+using CompiladorForm.Tablas;
 using CompiladorForm.Transversal;
 using System;
 using System.ComponentModel;
@@ -13,43 +15,42 @@ namespace CompiladorForm
 
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
         private void Resetear(){
             Cache.ObtenerCache().Limpiar();
-            ManejadorErrores.Limpirar();
+            ManejadorErrores.Limpiar();
             TablaMaestra.Limpiar();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //Resetear
+            
             Resetear();
 
             //Cargar a caché los datos
 
-            try{
-                //Disparar el procesamiento a nivel de Analizador Léxico
-                AnalizadorLexico anaLex = new AnalizadorLexico();
-                ComponenteLexico componente = anaLex.Analizar();
+            //try{
+            //    //Disparar el procesamiento a nivel de Analizador Léxico
+            //    AnalizadorLexico anaLex = new AnalizadorLexico();
+            //    ComponenteLexico componente = anaLex.Analizar();
 
-                while(!componente.ObtenerCategoria.Equals(Categoria.FIN_ARCHIVO))
-                {
-                     MessageBox.Show(componente.ToString());
-                     componente = anaLex.Analizar();
-                }
-                if(ManejadorErrores.HayErrores()){
-                    MessageBox.Show("El proceso de compilación ha finalizado con errores.");
-                }
-                else {
-                    MessageBox.Show("El proceso de compilación ha finalizado de forma exitosa.");
-                }
+            //    while(!componente.ObtenerCategoria().Equals(Categoria.FIN_ARCHIVO))
+            //    {
+            //         MessageBox.Show(componente.ToString());
+            //         componente = anaLex.Analizar();
+            //    }
+            //    if(ManejadorErrores.HayErrores()){
+            //        MessageBox.Show("El proceso de compilación ha finalizado con errores.");
+            //    }
+            //    else {
+            //        MessageBox.Show("El proceso de compilación ha finalizado de forma exitosa.");
+            //    }
 
-            }catch(Exception exception) 
-            {
-                MessageBox.Show(exception.Message);
-            }
-           
+            //}catch(Exception exception) 
+            //{
+            //    MessageBox.Show(exception.Message);
+            //}          
 
         }
 
@@ -173,6 +174,31 @@ namespace CompiladorForm
                 vs[i] = string.Format((i + 1).ToString() + "-> " + vs[i], vs[i]);
             }
             return vs;
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            
+        }
+
+        private void TablaSimbolosButton_Click(object sender, EventArgs e)
+        {
+            panelSimbolos.Visible = true;
+            panelErrores.Visible = false;
+        }       
+
+        
+
+        private void ErroresButton_Click(object sender, EventArgs e)
+        {
+            panelErrores.Visible = true;
+            panelSimbolos.Visible = false;
+        }
+
+        private void IngresoInfoButton_Click(object sender, EventArgs e)
+        {
+            panelSimbolos.Visible = false;
+            panelErrores.Visible = false;
         }
     }
 }
