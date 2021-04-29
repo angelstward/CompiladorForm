@@ -536,24 +536,18 @@ namespace CompiladorForm.AnalisisLexico
         }
         private void EstadoDiez()
         {
+            CrearComponente(Lexema,Transversal.Categoria.PARENTESIS_ABRE,NumeroLineaActual,Puntero - Lexema.Length,Puntero-1)
             ContinuarAnalisis = false;
-            string Categoria = "PARENTESIS ABRE";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
         }
         private void EstadoOnce()
         {
+            CrearComponente(Lexema,Transversal.Categoria.PARENTESIS_ABRE,NumeroLineaActual,Puntero - Lexema.Length,Puntero-1)
             ContinuarAnalisis = false;
-            string Categoria = "PARENTESIS CIERRA";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
         }
         private void EstadoDoce()
         {
+            CrearComponente(Lexema,Transversal.Categoria.FIN_ARCHIVO,NumeroLineaActual,Puntero - Lexema.Length,Puntero-1)
             ContinuarAnalisis = false;
-            string Categoria = "FIN DE ARCHIVO";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
         }
 
         private void EstadoTrece()
@@ -611,9 +605,7 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoDiecinueve()
         {
             ContinuarAnalisis = false;
-            string Categoria = "IGUAL QUE";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
+            CrearComponente(Lexema,Transversal.Categoria.IGUAL_QUE,NumeroLineaActual,Puntero - Lexema.Length,Puntero-1)
         }
         private void EstadoVeinte()
         {
@@ -658,47 +650,35 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoVeintitres()
         {
             ContinuarAnalisis = false;
-            string Categoria = "DIFERENTE QUE";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
+            CrearComponente(Lexema,Transversal.Categoria.DIFERENTE_QUE,NumeroLineaActual,Puntero - Lexema.Length,Puntero-1)
         }
         private void EstadoVeinticuatro()
         {
             ContinuarAnalisis = false;
-            string Categoria = "MENOR O IGUAL QUE";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
+            CrearComponente(Lexema,Transversal.Categoria.MENOR_IGUAL_QUE,NumeroLineaActual,Puntero - Lexema.Length,Puntero-1)
 
         }
         private void EstadoVeinticinco()
         {
             DevolverPuntero();
             ContinuarAnalisis = false;
-            string Categoria = "MENOR QUE";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
+            CrearComponente(Lexema,Transversal.Categoria.MENOR_QUE,NumeroLineaActual,Puntero - Lexema.Length,Puntero-1)
         }
         private void EstadoVeintiseis()
         {
             ContinuarAnalisis = false;
-            string Categoria = "MAYOR O IGUAL QUE";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
+            CrearComponente(Lexema,Transversal.Categoria.MAYOR_IGUAL_QUE,NumeroLineaActual,Puntero - Lexema.Length,Puntero-1)
         }
         private void EstadoVeintisiete()
         {
             DevolverPuntero();
             ContinuarAnalisis = false;
-            string Categoria = "MAYOR QUE";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
+            CrearComponente(Lexema,Transversal.Categoria.MAYOR_QUE,NumeroLineaActual,Puntero - Lexema.Length,Puntero-1)
         }
         private void EstadoVeintiocho()
         {
             ContinuarAnalisis = false;
-            string Categoria = "ASIGNACION";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
+            CrearComponente(Lexema,Transversal.Categoria.ASIGNACION,NumeroLineaActual,Puntero - Lexema.Length,Puntero-1)
         }
         private void EstadoVeintinueve()
         {
@@ -708,8 +688,9 @@ namespace CompiladorForm.AnalisisLexico
             string Causa = "Se esperaba un = y se recibio " + CaracterActual;
             string Falla = "ERROR ASIGNACION NO VALIDA";
             string Solucion = "";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
+            Error error = Error.CrearErrorLexico(Lexema, Categoria.ASIGNACION, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1, Causa, Falla, Solucion);
+            ManejadorErrores.Reportar(error);
+            throw new Exception("Se ha presentado un error de tipo stopper del proceso de compilación. Por favor revise la consola de errores...");
         }
         private void EstadoTreinta()
         {
@@ -726,9 +707,7 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoTreintaiuno()
         {
             ContinuarAnalisis = false;
-            string Categoria = "DIFERENTE QUE";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
+            CrearComponente(Lexema,Transversal.Categoria.DIFERENTE_QUE,NumeroLineaActual,Puntero - Lexema.Length,Puntero-1)
         }
         private void EstadoTreintaidos()
         {
@@ -737,8 +716,9 @@ namespace CompiladorForm.AnalisisLexico
             string Causa = "Se esperaba un = y se recibio " + CaracterActual;
             string Falla = "ERROR ASIGNACION NO VALIDA";
             string Solucion = "";
-            int PosicionInicial = Puntero - Lexema.Length;
-            int PosicionFinal = Puntero - 1;
+            Error error = Error.CrearErrorLexico(Lexema, Categoria.ASIGNACION, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1, Causa, Falla, Solucion);
+            ManejadorErrores.Reportar(error);
+            throw new Exception("Se ha presentado un error de tipo stopper del proceso de compilación. Por favor revise la consola de errores...");
         }
         private void EstadoTreintaicuatro()
         {
