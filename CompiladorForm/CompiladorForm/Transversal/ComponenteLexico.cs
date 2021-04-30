@@ -31,7 +31,7 @@ namespace CompiladorForm.Transversal
 			return new ComponenteLexico(Lexema, Categoria, NumeroLinea, PosicionIncial, PosicionFinal, TipoComponente.SIMBOLO);
 		}
 
-		public static ComponenteLexico Crear(String Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal)
+		public static ComponenteLexico CrearDummy(String Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal)
 		{
 			return new ComponenteLexico(Lexema, Categoria, NumeroLinea, PosicionIncial, PosicionFinal, TipoComponente.DUMMY);
 		}

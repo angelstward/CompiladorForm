@@ -764,9 +764,27 @@ namespace CompiladorForm.AnalisisLexico
 
 
         private void CrearComponente(string Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal){
+                switch (Categoria)
+                {
+                    case Categoria.IDENTIFICADOR:
+                          TablaDummys.Agregar(Componente);
+                        break;
+                    case TipoComponente.PALABRA_RESERVADA:
+                        TablaPalabrasReservadas.Agregar(Componente);
+                        break;
+                    case TipoComponente.LITERAL:
+                        TablaLiterales.Agregar(Componente);
+                        break;
+                    case TipoComponente.SIMBOLO:
+                        TablaSimbolos.Agregar(Componente);
+                        break;
+
+                }
+                return Componente;
+            }
+            return default;
 
             Componente = ComponenteLexico.Crear(Lexema, Categoria, NumeroLinea, PosicionIncial, PosicionFinal);
-
         }
     }
 }
