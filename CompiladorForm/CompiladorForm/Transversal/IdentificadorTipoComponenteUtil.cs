@@ -30,6 +30,15 @@ public class IdentificadorTipoComponenteUtil
 		return TipoLiteral;
 	}
 
+	public static EsLiteral(Categoria Categoria)
+	{
+		return TIPO_LITERAL.contains(Categoria);
+	}
+	public static EsSimbolo(Categoria Categoria)
+	{
+		return TIPO_SIMBOLO.contains(Categoria);
+	}
+
 	public IdentificadorTipoComponenteUtil()
 	{
 	}

@@ -41,7 +41,7 @@ namespace CompiladorForm.Transversal
 			return new ComponenteLexico(Lexema, Categoria, NumeroLinea, PosicionIncial, PosicionFinal, TipoComponente.PALABRA_RESERVADA);
 		}
 
-		public static ComponenteLexico CrearPalabraLiteral(String Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal)
+		public static ComponenteLexico CrearLiteral(String Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal)
 		{
 			return new ComponenteLexico(Lexema, Categoria, NumeroLinea, PosicionIncial, PosicionFinal, TipoComponente.LITERAL);
 		}
