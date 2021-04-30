@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CompiladorForm.Transversal;
+using System;
+using System.Collections.Generic;
 
 public class IdentificadorTipoComponenteUtil
 {
@@ -7,14 +9,14 @@ public class IdentificadorTipoComponenteUtil
 
 
 
-	private static crearTipoSimbolo()
+	private static List<Categoria> crearTipoSimbolo()
     {
 		List<Categoria> TipoSimbolo = new List<Categoria>();
 		TipoSimbolo.Add(Categoria.IDENTIFICADOR);
 		return TipoSimbolo;
     }
 
-	private static crearTipoLiteral()
+	private static List<Categoria> crearTipoLiteral()
 	{
 		List<Categoria> TipoLiteral = new List<Categoria>();
 		TipoLiteral.Add(Categoria.NUMERO_ENTERO);
@@ -30,13 +32,13 @@ public class IdentificadorTipoComponenteUtil
 		return TipoLiteral;
 	}
 
-	public static EsLiteral(Categoria Categoria)
+	public static bool EsLiteral(Categoria Categoria)
 	{
-		return TIPO_LITERAL.contains(Categoria);
+		return TIPO_LITERAL.Contains(Categoria);
 	}
-	public static EsSimbolo(Categoria Categoria)
+	public static bool EsSimbolo(Categoria Categoria)
 	{
-		return TIPO_SIMBOLO.contains(Categoria);
+		return TIPO_SIMBOLO.Contains(Categoria);
 	}
 
 	public IdentificadorTipoComponenteUtil()
