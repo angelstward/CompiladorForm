@@ -244,7 +244,7 @@ namespace CompiladorForm
             this.panelSimbolos.Controls.Add(this.label4);
             this.panelSimbolos.Controls.Add(this.label2);
             this.panelSimbolos.Controls.Add(this.tablasimbolos);
-            this.panelSimbolos.Location = new System.Drawing.Point(20, 4);
+            this.panelSimbolos.Location = new System.Drawing.Point(12, 39);
             this.panelSimbolos.Name = "panelSimbolos";
             this.panelSimbolos.Size = new System.Drawing.Size(744, 402);
             this.panelSimbolos.TabIndex = 12;
@@ -326,7 +326,6 @@ namespace CompiladorForm
             // 
             this.panelErrores.Controls.Add(this.ErroresSemanticosGrid);
             this.panelErrores.Controls.Add(this.label9);
-            this.panelErrores.Controls.Add(this.panelSimbolos);
             this.panelErrores.Controls.Add(this.ErroresSintacticosGrid);
             this.panelErrores.Controls.Add(this.label8);
             this.panelErrores.Controls.Add(this.label7);
@@ -436,6 +435,7 @@ namespace CompiladorForm
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.EOFButton);
             this.Controls.Add(this.label10);
+            this.Controls.Add(this.panelSimbolos);
             this.Controls.Add(this.panelErrores);
             this.Controls.Add(this.TablaSimbolosButton);
             this.Controls.Add(this.ErroresButton);

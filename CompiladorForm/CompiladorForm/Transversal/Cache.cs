@@ -46,13 +46,8 @@ namespace CompiladorForm.Transversal
                     if (contenidoAgregar.Contains("\n"))
                     {
                         pos--;
-                    }
-                    
-                }
-                Dictionary<int, Linea>.KeyCollection keyColl = Lineas.Keys;
-
-                var lineaFin = Linea.Crear(keyColl.Max() + 1, "@EOF@");
-                Lineas.Add(keyColl.Max() + 1, lineaFin);
+                    }                    
+                }                
             }
         }
 

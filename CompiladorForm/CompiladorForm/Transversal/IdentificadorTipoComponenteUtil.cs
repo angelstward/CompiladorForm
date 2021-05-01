@@ -29,6 +29,7 @@ public class IdentificadorTipoComponenteUtil
 		TipoLiteral.Add(Categoria.MULTIPLICACION);
 		TipoLiteral.Add(Categoria.DIVISION);
 		TipoLiteral.Add(Categoria.MODULO);
+		TipoLiteral.Add(Categoria.ASIGNACION);
 		return TipoLiteral;
 	}
 

@@ -32,27 +32,31 @@ namespace CompiladorForm
 
             //Cargar a caché los datos
 
-            //try{
+            //try
+            //{
             //    //Disparar el procesamiento a nivel de Analizador Léxico
             //    AnalizadorLexico anaLex = new AnalizadorLexico();
             //    ComponenteLexico componente = anaLex.Analizar();
 
-            //    while(!componente.ObtenerCategoria().Equals(Categoria.FIN_ARCHIVO))
+            //    while (!componente.ObtenerCategoria().Equals(Categoria.FIN_ARCHIVO))
             //    {
-            //         MessageBox.Show(componente.ToString());
-            //         componente = anaLex.Analizar();
+            //        MessageBox.Show(componente.ToString());
+            //        componente = anaLex.Analizar();
             //    }
-            //    if(ManejadorErrores.HayErrores()){
+            //    if (ManejadorErrores.HayErrores())
+            //    {
             //        MessageBox.Show("El proceso de compilación ha finalizado con errores.");
             //    }
-            //    else {
+            //    else
+            //    {
             //        MessageBox.Show("El proceso de compilación ha finalizado de forma exitosa.");
             //    }
 
-            //}catch(Exception exception) 
+            //}
+            //catch (Exception exception)
             //{
             //    MessageBox.Show(exception.Message);
-            //}          
+            //}
 
         }
 
@@ -154,11 +158,16 @@ namespace CompiladorForm
 
         private string GoToMorse(string text)
         {
-            AnalizadorLexicoMorse analizadorLexicoMorse = new AnalizadorLexicoMorse();
+            
+            //AnalizadorLexicoMorse analizadorLexicoMorse = new AnalizadorLexicoMorse();
             Cache cache = Cache.ObtenerCache();
             cache.AgregarLineas(text);
-            analizadorLexicoMorse.Analizar();
-            return AnalizadorLexicoMorse.Compilado;
+            AnalizadorLexico analizadorLexico = new AnalizadorLexico();
+            
+            //analizadorLexicoMorse.Analizar();
+            var comp= analizadorLexico.Analizar();
+            //return AnalizadorLexicoMorse.Compilado;
+            return comp.ToString();
         }
 
         private void OutputText_TextChanged(object sender, EventArgs e)
@@ -177,7 +186,7 @@ namespace CompiladorForm
             outputText.Text = string.Empty;
             inputText.Text = string.Empty;
             nameArchivoText.Text = string.Empty;
-            AnalizadorLexicoMorse.Compilado = "";
+            //AnalizadorLexicoMorse.Compilado = "";
         }
 
         private string[] ReturnLinesNumber(string[] vs)
@@ -196,8 +205,8 @@ namespace CompiladorForm
 
         private void TablaSimbolosButton_Click(object sender, EventArgs e)
         {
-            panelSimbolos.Visible = true;
             panelErrores.Visible = false;
+            panelSimbolos.Visible = true;            
             
             foreach(var col in TablaSimbolosList.ColumnasTablaSimbolos)
             {

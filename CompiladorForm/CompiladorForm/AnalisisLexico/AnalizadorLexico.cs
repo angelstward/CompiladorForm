@@ -15,11 +15,9 @@ namespace CompiladorForm.AnalisisLexico
         private int EstadoActual;
         private bool ContinuarAnalisis;
         private ComponenteLexico Componente;
-
-
         public AnalizadorLexico()
         {
-            NumeroLineaActual = 0;
+            NumeroLineaActual = 0;            
             CargarNuevaLinea();
         }       
 
@@ -28,7 +26,8 @@ namespace CompiladorForm.AnalisisLexico
             NumeroLineaActual++;
             LineaActual = Cache.ObtenerCache().ObtenerLinea(NumeroLineaActual);
             NumeroLineaActual = LineaActual.ObtenerNumeroLinea();
-            InicializarPuntero();            
+            InicializarPuntero();
+            
         }
 
         private void InicializarPuntero()
@@ -60,7 +59,7 @@ namespace CompiladorForm.AnalisisLexico
             }
             else
             {
-                CaracterActual = LineaActual.ObtenerContenido().Substring(Puntero, 1);
+                CaracterActual = LineaActual.ObtenerContenido().Substring(Puntero-1, 1);
                 AdelantarPuntero();
             }
         }
@@ -86,7 +85,7 @@ namespace CompiladorForm.AnalisisLexico
         }
         private void Resetear()
         {
-            ContinuarAnalisis = false;
+            ContinuarAnalisis = true;
             //Componente = null;
             ResetearLexema();
 
@@ -546,7 +545,7 @@ namespace CompiladorForm.AnalisisLexico
         }
         private void EstadoDoce()
         {
-            CrearComponente(Lexema, Transversal.Categoria.FIN_ARCHIVO, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Transversal.Categoria.ASIGNACION, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
         }
 

@@ -25,7 +25,7 @@ namespace CompiladorForm.Tablas
 
         private List<ComponenteLexico> ObtenerSimbolo(String Lexema)
         {
-            if (SIMBOLOS.ContainsKey(Lexema))
+            if (!SIMBOLOS.ContainsKey(Lexema))
             {
                 SIMBOLOS.Add(Lexema, new List<ComponenteLexico>());
             }

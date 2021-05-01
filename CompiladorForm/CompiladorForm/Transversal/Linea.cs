@@ -31,7 +31,7 @@ namespace CompiladorForm.Transversal
 
         internal bool EsFinArchivo()
         {
-            return false;
+            return Contenido.Equals("@EOF@");
         }
     }
 }
