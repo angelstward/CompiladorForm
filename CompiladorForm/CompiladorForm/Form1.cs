@@ -1,14 +1,15 @@
-﻿using CompiladorForm.AnalisisLexico;
-using CompiladorForm.GestorErrores;
-using CompiladorForm.Tablas;
-using CompiladorForm.Transversal;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+
+using CompiladorForm.AnalisisLexico;
+using CompiladorForm.GestorErrores;
+using CompiladorForm.Tablas;
+using CompiladorForm.Transversal;
 
 namespace CompiladorForm
 {
@@ -171,7 +172,7 @@ namespace CompiladorForm
             string[] response = ReturnLinesNumber(text.Split(Environment.NewLine));
             return string.Join(Environment.NewLine, response);
         }
-    
+
         private void OutputText_TextChanged(object sender, EventArgs e)
         {
             if (outputText.Text != string.Empty)
@@ -188,7 +189,26 @@ namespace CompiladorForm
             outputText.Text = string.Empty;
             inputText.Text = string.Empty;
             nameArchivoText.Text = string.Empty;
+            existTaErrores = false;
+            existTaSimbolos = false;
+            Resetear();
+            LimpiarTablas();
             //AnalizadorLexicoMorse.Compilado = "";
+        }
+        private void LimpiarTablas()
+        {
+            TablaDummies.Rows.Clear();
+            TablaDummies.Columns.Clear();
+            TablaLiteralesGrid.Rows.Clear();
+            TablaLiteralesGrid.Columns.Clear();
+            tablasimbolos.Rows.Clear();
+            tablasimbolos.Columns.Clear();
+            ErroresLexicosGrid.Rows.Clear();
+            ErroresLexicosGrid.Columns.Clear();
+            ErroresSintacticosGrid.Rows.Clear();
+            ErroresSintacticosGrid.Columns.Clear();
+            ErroresSemanticosGrid.Rows.Clear();
+            ErroresSemanticosGrid.Columns.Clear();
         }
 
         private string[] ReturnLinesNumber(string[] vs)
@@ -209,7 +229,8 @@ namespace CompiladorForm
         {
             panelErrores.Visible = false;
             panelSimbolos.Visible = true;
-            if (!existTaSimbolos){
+            if (!existTaSimbolos)
+            {
 
                 foreach (string col in TablaSimbolosList.ColumnasTablaSimbolos)
                 {
@@ -225,13 +246,12 @@ namespace CompiladorForm
 
                 existTaSimbolos = true;
             }
- 
+
 
         }
 
         private void ListarTablasSimbolos(List<ComponenteLexico> list, DataGridView tabla)
         {
-
             foreach (ComponenteLexico simbolo in list)
             {
                 DataGridViewRow fila = new DataGridViewRow();
@@ -243,26 +263,21 @@ namespace CompiladorForm
                 fila.Cells[4].Value = simbolo.ObtenerPosicionFinal();
                 tabla.Rows.Add(fila);
             }
-
         }
-
-
-
         private void ErroresButton_Click(object sender, EventArgs e)
         {
-                panelErrores.Visible = true;
-                panelSimbolos.Visible = false;
-                foreach (string col in TablaSimbolosList.ColumnasTablaErrores)
-                {
-                    ErroresLexicosGrid.Columns.Add(col + "S", col);
-                    ErroresSemanticosGrid.Columns.Add(col + "R", col);
-                    ErroresSintacticosGrid.Columns.Add(col + "L", col);
-                }
-                ListarTablaErrores(TipoError.LEXICO, ErroresLexicosGrid);
-                ListarTablaErrores(TipoError.SINTACTICO, ErroresSintacticosGrid);
-                ListarTablaErrores(TipoError.SEMANTICO, ErroresSemanticosGrid);
+            panelErrores.Visible = true;
+            panelSimbolos.Visible = false;
+            foreach (string col in TablaSimbolosList.ColumnasTablaErrores)
+            {
+                ErroresLexicosGrid.Columns.Add(col + "S", col);
+                ErroresSemanticosGrid.Columns.Add(col + "R", col);
+                ErroresSintacticosGrid.Columns.Add(col + "L", col);
+            }
+            ListarTablaErrores(TipoError.LEXICO, ErroresLexicosGrid);
+            ListarTablaErrores(TipoError.SINTACTICO, ErroresSintacticosGrid);
+            ListarTablaErrores(TipoError.SEMANTICO, ErroresSemanticosGrid);
         }
-
         private void ListarTablaErrores(TipoError tipoError, DataGridView tabla)
         {
             if (!existTaErrores)
