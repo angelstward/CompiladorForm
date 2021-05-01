@@ -209,6 +209,8 @@ namespace CompiladorForm
             ErroresSintacticosGrid.Columns.Clear();
             ErroresSemanticosGrid.Rows.Clear();
             ErroresSemanticosGrid.Columns.Clear();
+            TablaReservadas.Rows.Clear();
+            TablaReservadas.Columns.Clear();
         }
 
         private string[] ReturnLinesNumber(string[] vs)
