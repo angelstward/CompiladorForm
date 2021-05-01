@@ -424,6 +424,7 @@ namespace CompiladorForm.AnalisisLexico
             else if (EsAsignacion())
             {
                 EstadoActual = 22;
+                FormarComponente();
             }
             else if (EsSignoDiferenteQue())
             {
@@ -584,8 +585,8 @@ namespace CompiladorForm.AnalisisLexico
 
         private void EstadoDieciseis()
         {
-            //DevolverPuntero();
             CrearComponente(Lexema, Categoria.IDENTIFICADOR, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
+            DevolverPuntero();
             ContinuarAnalisis = false;
 
         }
@@ -616,7 +617,7 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoDiecinueve()
         {
             ContinuarAnalisis = false;
-            CrearComponente(Lexema, Transversal.Categoria.IGUAL_QUE, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.IGUAL_QUE, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
         }
         private void EstadoVeinte()
         {
@@ -651,6 +652,7 @@ namespace CompiladorForm.AnalisisLexico
             LeerSiguienteCaracter();
             if (EsSignoIgual())
             {
+                FormarComponente();
                 EstadoActual = 28;
             }
             else
@@ -678,18 +680,18 @@ namespace CompiladorForm.AnalisisLexico
         private void EstadoVeintiseis()
         {
             ContinuarAnalisis = false;
-            CrearComponente(Lexema, Transversal.Categoria.MAYOR_IGUAL_QUE, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.MAYOR_IGUAL_QUE, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
         }
         private void EstadoVeintisiete()
         {
             DevolverPuntero();
             ContinuarAnalisis = false;
-            CrearComponente(Lexema, Transversal.Categoria.MAYOR_QUE, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.MAYOR_QUE, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
         }
         private void EstadoVeintiocho()
         {
             ContinuarAnalisis = false;
-            CrearComponente(Lexema, Transversal.Categoria.ASIGNACION, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.ASIGNACION, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
         }
         private void EstadoVeintinueve()
         {
