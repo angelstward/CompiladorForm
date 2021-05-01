@@ -250,11 +250,8 @@ namespace CompiladorForm
 
         private void ErroresButton_Click(object sender, EventArgs e)
         {
-            if (!existTaErrores) {
-
                 panelErrores.Visible = true;
                 panelSimbolos.Visible = false;
-
                 foreach (string col in TablaSimbolosList.ColumnasTablaErrores)
                 {
                     ErroresLexicosGrid.Columns.Add(col + "S", col);
@@ -264,11 +261,6 @@ namespace CompiladorForm
                 ListarTablaErrores(TipoError.LEXICO, ErroresLexicosGrid);
                 ListarTablaErrores(TipoError.SINTACTICO, ErroresSintacticosGrid);
                 ListarTablaErrores(TipoError.SEMANTICO, ErroresSemanticosGrid);
-                existTaErrores = true;
-
-            }
-
-
         }
 
         private void ListarTablaErrores(TipoError tipoError, DataGridView tabla)
