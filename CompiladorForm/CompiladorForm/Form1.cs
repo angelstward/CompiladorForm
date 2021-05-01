@@ -14,7 +14,8 @@ namespace CompiladorForm
 {
     public partial class Form1 : Form
     {
-
+        Boolean existTaSimbolos = false;
+        Boolean existTaErrores = false;
         public Form1()
         {
             InitializeComponent();
@@ -208,17 +209,24 @@ namespace CompiladorForm
         {
             panelErrores.Visible = false;
             panelSimbolos.Visible = true;
+            if (!existTaSimbolos){
 
-            foreach (string col in TablaSimbolosList.ColumnasTablaSimbolos)
-            {
-                tablasimbolos.Columns.Add(col + "S", col);
-                TablaReservadas.Columns.Add(col + "R", col);
-                TablaLiteralesGrid.Columns.Add(col + "L", col);
-                TablaDummies.Columns.Add(col + "D", col);
+                foreach (string col in TablaSimbolosList.ColumnasTablaSimbolos)
+                {
+                    tablasimbolos.Columns.Add(col + "S", col);
+                    TablaReservadas.Columns.Add(col + "R", col);
+                    TablaLiteralesGrid.Columns.Add(col + "L", col);
+                    TablaDummies.Columns.Add(col + "D", col);
+
+                }
+                ListarTablasSimbolos(TablaSimbolos.ObtenerSimbolos(), tablasimbolos);
+                ListarTablasSimbolos(TablaDummys.ObtenerDummys(), TablaDummies);
+                ListarTablasSimbolos(TablaLiterales.ObtenerLiterales(), TablaLiteralesGrid);
+
+                existTaSimbolos = true;
             }
-            ListarTablasSimbolos(TablaSimbolos.ObtenerSimbolos(), tablasimbolos);
-            ListarTablasSimbolos(TablaDummys.ObtenerDummys(), TablaDummies);
-            ListarTablasSimbolos(TablaLiterales.ObtenerLiterales(), TablaLiteralesGrid);
+ 
+
         }
 
         private void ListarTablasSimbolos(List<ComponenteLexico> list, DataGridView tabla)
@@ -240,18 +248,25 @@ namespace CompiladorForm
 
         private void ErroresButton_Click(object sender, EventArgs e)
         {
-            panelErrores.Visible = true;
-            panelSimbolos.Visible = false;
+            if (!existTaErrores) {
 
-            foreach (string col in TablaSimbolosList.ColumnasTablaErrores)
-            {
-                ErroresLexicosGrid.Columns.Add(col + "S", col);
-                ErroresSemanticosGrid.Columns.Add(col + "R", col);
-                ErroresSintacticosGrid.Columns.Add(col + "L", col);
+                panelErrores.Visible = true;
+                panelSimbolos.Visible = false;
+
+                foreach (string col in TablaSimbolosList.ColumnasTablaErrores)
+                {
+                    ErroresLexicosGrid.Columns.Add(col + "S", col);
+                    ErroresSemanticosGrid.Columns.Add(col + "R", col);
+                    ErroresSintacticosGrid.Columns.Add(col + "L", col);
+                }
+                ListarTablaErrores(TipoError.LEXICO, ErroresLexicosGrid);
+                ListarTablaErrores(TipoError.SINTACTICO, ErroresSintacticosGrid);
+                ListarTablaErrores(TipoError.SEMANTICO, ErroresSemanticosGrid);
+                existTaErrores = true;
+
             }
-            ListarTablaErrores(TipoError.LEXICO, ErroresLexicosGrid);
-            ListarTablaErrores(TipoError.SINTACTICO, ErroresSintacticosGrid);
-            ListarTablaErrores(TipoError.SEMANTICO, ErroresSemanticosGrid);
+
+
         }
 
         private void ListarTablaErrores(TipoError tipoError, DataGridView tabla)
