@@ -545,23 +545,25 @@ namespace CompiladorForm.AnalisisLexico
         }
         private void EstadoDiez()
         {
-            CrearComponente(Lexema, Transversal.Categoria.PARENTESIS_ABRE, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.PARENTESIS_ABRE, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
         }
         private void EstadoOnce()
         {
-            CrearComponente(Lexema, Transversal.Categoria.PARENTESIS_ABRE, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.PARENTESIS_ABRE, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
         }
         private void EstadoDoce()
         {
-            CrearComponente(Lexema, Categoria.ASIGNACION, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.FIN_ARCHIVO, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
         }
 
         private void EstadoTrece()
         {
+
             CargarNuevaLinea();
+            Resetear();
         }
 
 
@@ -582,7 +584,7 @@ namespace CompiladorForm.AnalisisLexico
 
         private void EstadoDieciseis()
         {
-            DevolverPuntero();
+            //DevolverPuntero();
             CrearComponente(Lexema, Categoria.IDENTIFICADOR, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
 
