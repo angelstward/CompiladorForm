@@ -26,7 +26,12 @@ namespace CompiladorForm.Transversal
 
 		}
 
-		public static ComponenteLexico CrearSimbolo(String Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal)
+        public static ComponenteLexico CrearPalabraReservada(string Lexema, Categoria Categoria)
+        {
+			return new ComponenteLexico(Lexema, Categoria, 0, 0, 0, TipoComponente.PALABRA_RESERVADA);
+		}
+
+        public static ComponenteLexico CrearSimbolo(String Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal)
 		{
 			return new ComponenteLexico(Lexema, Categoria, NumeroLinea, PosicionIncial, PosicionFinal, TipoComponente.SIMBOLO);
 		}

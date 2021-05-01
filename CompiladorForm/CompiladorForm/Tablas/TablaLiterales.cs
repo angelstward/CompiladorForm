@@ -26,7 +26,7 @@ namespace CompiladorForm.Tablas
 
         private List<ComponenteLexico> ObtenerLiteral(String Lexema)
         {
-            if (LITERALES.ContainsKey(Lexema))
+            if (!LITERALES.ContainsKey(Lexema))
             {
                 LITERALES.Add(Lexema, new List<ComponenteLexico>());
             }

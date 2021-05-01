@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Modelos\**" />
+    <EmbeddedResource Remove="Modelos\**" />
+    <None Remove="Modelos\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="NUnit.Console" Version="3.12.0" />
   </ItemGroup>
 
@@ -23,11 +29,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Modelos\Errores\" />
-    <Folder Include="Modelos\Simbolos\" />
   </ItemGroup>
 
 </Project>

@@ -85,10 +85,11 @@ namespace CompiladorForm.AnalisisLexico
         }
         private void Resetear()
         {
-            ContinuarAnalisis = true;
-            //Componente = null;
+            CaracterActual = string.Empty;
             ResetearLexema();
-
+            ContinuarAnalisis = true;
+            EstadoActual = 0;
+            Componente = null;
         }
 
         public ComponenteLexico Analizar()
@@ -370,30 +371,37 @@ namespace CompiladorForm.AnalisisLexico
             else if (EsSignoSuma())
             {
                 EstadoActual = 5;
+                FormarComponente();
             }
             else if (EsSignoResta())
             {
                 EstadoActual = 6;
+                FormarComponente();
             }
             else if (EsSignoMultiplicacion())
             {
                 EstadoActual = 7;
+                FormarComponente();
             }
             else if (EsSignoDivision())
             {
                 EstadoActual = 8;
+                FormarComponente();
             }
             else if (EsPorcentaje())
             {
                 EstadoActual = 9;
+                FormarComponente();
             }
             else if (EsParentesisAbre())
             {
                 EstadoActual = 10;
+                FormarComponente();
             }
             else if (EsParentesisCierra())
             {
                 EstadoActual = 11;
+                FormarComponente();
             }
             else if (EsFinArchivo())
             {
@@ -402,6 +410,8 @@ namespace CompiladorForm.AnalisisLexico
             else if (EsSignoIgual())
             {
                 EstadoActual = 12;
+                FormarComponente();
+
             }
             else if (EsSignoMenorQue())
             {
@@ -545,7 +555,7 @@ namespace CompiladorForm.AnalisisLexico
         }
         private void EstadoDoce()
         {
-            CrearComponente(Lexema, Transversal.Categoria.ASIGNACION, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
+            CrearComponente(Lexema, Categoria.ASIGNACION, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
             ContinuarAnalisis = false;
         }
 

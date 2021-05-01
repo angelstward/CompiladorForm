@@ -23,11 +23,10 @@ namespace CompiladorForm.Tablas
 
         private List<ComponenteLexico> ObtenerDummys(String Lexema)
         {
-            if (DUMMYS.ContainsKey(Lexema))
+            if (!DUMMYS.ContainsKey(Lexema))
             {
                 DUMMYS.Add(Lexema, new List<ComponenteLexico>());
             }
-
             return DUMMYS[Lexema];
 
 

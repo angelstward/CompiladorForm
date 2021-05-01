@@ -13,9 +13,9 @@ namespace CompiladorForm.Tablas
 
         private TablaPalabrasReservadas()
         {
-            PALABRAS_RESERVADAS.Add("A", ComponenteLexico.CrearPalabraReservada("A", Categoria.PALABRA_RESERVADA_A, 0, 0, 0));
-            PALABRAS_RESERVADAS.Add("B", ComponenteLexico.CrearPalabraReservada("B", Categoria.PALABRA_RESERVADA_B, 0, 0, 0));
-            PALABRAS_RESERVADAS.Add("C", ComponenteLexico.CrearPalabraReservada("C", Categoria.PALABRA_RESERVADA_C, 0, 0, 0));
+            PALABRAS_RESERVADAS.Add("A", ComponenteLexico.CrearPalabraReservada("A", Categoria.PALABRA_RESERVADA_A));
+            PALABRAS_RESERVADAS.Add("B", ComponenteLexico.CrearPalabraReservada("B", Categoria.PALABRA_RESERVADA_B));
+            PALABRAS_RESERVADAS.Add("C", ComponenteLexico.CrearPalabraReservada("C", Categoria.PALABRA_RESERVADA_C));
 
         }
 
@@ -27,7 +27,7 @@ namespace CompiladorForm.Tablas
 
         private List<ComponenteLexico> ObtenerPalabrasReservadas(string Lexema)
         {
-            if (PALABRA_RESERVADA.ContainsKey(Lexema))
+            if (!PALABRA_RESERVADA.ContainsKey(Lexema))
             {
                 PALABRA_RESERVADA.Add(Lexema, new List<ComponenteLexico>());
             }

@@ -17,9 +17,10 @@ namespace CompiladorForm
 
         public Form1()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
-        private void Resetear(){
+        private void Resetear()
+        {
             Cache.ObtenerCache().Limpiar();
             ManejadorErrores.Limpiar();
             TablaMaestra.Limpiar();
@@ -27,36 +28,6 @@ namespace CompiladorForm
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
-            Resetear();
-
-            //Cargar a caché los datos
-
-            //try
-            //{
-            //    //Disparar el procesamiento a nivel de Analizador Léxico
-            //    AnalizadorLexico anaLex = new AnalizadorLexico();
-            //    ComponenteLexico componente = anaLex.Analizar();
-
-            //    while (!componente.ObtenerCategoria().Equals(Categoria.FIN_ARCHIVO))
-            //    {
-            //        MessageBox.Show(componente.ToString());
-            //        componente = anaLex.Analizar();
-            //    }
-            //    if (ManejadorErrores.HayErrores())
-            //    {
-            //        MessageBox.Show("El proceso de compilación ha finalizado con errores.");
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("El proceso de compilación ha finalizado de forma exitosa.");
-            //    }
-
-            //}
-            //catch (Exception exception)
-            //{
-            //    MessageBox.Show(exception.Message);
-            //}
 
         }
 
@@ -117,7 +88,7 @@ namespace CompiladorForm
         public void ReadFile(string route)
         {
             string[] lines = File.ReadAllLines(route);
-            var linesConvert = lines[0];
+            string linesConvert = lines[0];
             for (int i = 1; i < lines.Count(); i++)
             {
                 linesConvert += "\r\n" + lines[i];
@@ -138,6 +109,9 @@ namespace CompiladorForm
             if (consolaCheck.Checked)
             {
                 string text = inputText.Text.ToUpper();
+
+
+
                 string Morse = GoToMorse(text);
                 string[] response = ReturnLinesNumber(Morse.Split(Environment.NewLine));
                 outputText.Text = string.Join(Environment.NewLine, response);
@@ -145,7 +119,7 @@ namespace CompiladorForm
 
             if (ManejadorErrores.HayErrores())
             {
-                EOFButton.Text ="Fallido";
+                EOFButton.Text = "Fallido";
                 EOFButton.BackColor = Color.FromArgb(255, 189, 189);
             }
             else
@@ -158,18 +132,45 @@ namespace CompiladorForm
 
         private string GoToMorse(string text)
         {
-            
-            //AnalizadorLexicoMorse analizadorLexicoMorse = new AnalizadorLexicoMorse();
+            Resetear();
+            //Cargar a caché los datos
             Cache cache = Cache.ObtenerCache();
             cache.AgregarLineas(text);
-            AnalizadorLexico analizadorLexico = new AnalizadorLexico();
-            
-            //analizadorLexicoMorse.Analizar();
-            var comp= analizadorLexico.Analizar();
-            //return AnalizadorLexicoMorse.Compilado;
-            return comp.ToString();
-        }
 
+            try
+            {
+                //Disparar el procesamiento a nivel de Analizador Léxico
+                AnalizadorLexico anaLex = new AnalizadorLexico();
+                ComponenteLexico componente = anaLex.Analizar();
+
+                while (!componente.ObtenerCategoria().Equals(Categoria.FIN_ARCHIVO))
+                {
+                    MessageBox.Show(componente.ToString());
+                    componente = anaLex.Analizar();
+                }
+                if (ManejadorErrores.HayErrores())
+                {
+                    MessageBox.Show("El proceso de compilación ha finalizado con errores.");
+                }
+                else
+                {
+                    MessageBox.Show("El proceso de compilación ha finalizado de forma exitosa.");
+                }
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+
+            //AnalizadorLexicoMorse analizadorLexicoMorse = new AnalizadorLexicoMorse();
+            //analizadorLexicoMorse.Analizar();
+            //return AnalizadorLexicoMorse.Compilado;
+
+            string[] response = ReturnLinesNumber(text.Split(Environment.NewLine));
+            return string.Join(Environment.NewLine, response);
+        }
+    
         private void OutputText_TextChanged(object sender, EventArgs e)
         {
             if (outputText.Text != string.Empty)
@@ -200,17 +201,17 @@ namespace CompiladorForm
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            
+
         }
 
         private void TablaSimbolosButton_Click(object sender, EventArgs e)
         {
             panelErrores.Visible = false;
-            panelSimbolos.Visible = true;            
-            
-            foreach(var col in TablaSimbolosList.ColumnasTablaSimbolos)
+            panelSimbolos.Visible = true;
+
+            foreach (string col in TablaSimbolosList.ColumnasTablaSimbolos)
             {
-                tablasimbolos.Columns.Add(col+"S", col);
+                tablasimbolos.Columns.Add(col + "S", col);
                 TablaReservadas.Columns.Add(col + "R", col);
                 TablaLiteralesGrid.Columns.Add(col + "L", col);
                 TablaDummies.Columns.Add(col + "D", col);
@@ -224,7 +225,7 @@ namespace CompiladorForm
         {
             DataGridViewRow fila = new DataGridViewRow();
             fila.CreateCells(tabla);
-            foreach (var simbolo in list)
+            foreach (ComponenteLexico simbolo in list)
             {
                 fila.Cells[0].Value = simbolo.ObtenerLexema();
                 fila.Cells[1].Value = simbolo.ObtenerCategoria();
@@ -235,18 +236,18 @@ namespace CompiladorForm
             tabla.Rows.Add(fila);
         }
 
-        
+
 
         private void ErroresButton_Click(object sender, EventArgs e)
         {
             panelErrores.Visible = true;
             panelSimbolos.Visible = false;
 
-            foreach (var col in TablaSimbolosList.ColumnasTablaErrores)
+            foreach (string col in TablaSimbolosList.ColumnasTablaErrores)
             {
                 ErroresLexicosGrid.Columns.Add(col + "S", col);
                 ErroresSemanticosGrid.Columns.Add(col + "R", col);
-                ErroresSintacticosGrid.Columns.Add(col + "L", col);                
+                ErroresSintacticosGrid.Columns.Add(col + "L", col);
             }
             ListarTablaErrores(TipoError.LEXICO, ErroresLexicosGrid);
             ListarTablaErrores(TipoError.SINTACTICO, ErroresSintacticosGrid);
@@ -255,10 +256,10 @@ namespace CompiladorForm
 
         private void ListarTablaErrores(TipoError tipoError, DataGridView tabla)
         {
-            var errores = ManejadorErrores.ObtenerErrores(tipoError);
+            List<Error> errores = ManejadorErrores.ObtenerErrores(tipoError);
             DataGridViewRow fila = new DataGridViewRow();
             fila.CreateCells(tabla);
-            foreach (var error in errores)
+            foreach (Error error in errores)
             {
                 fila.Cells[0].Value = error.ObtenerLexema();
                 fila.Cells[1].Value = error.ObtenerCategoria();
