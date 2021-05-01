@@ -231,17 +231,19 @@ namespace CompiladorForm
 
         private void ListarTablasSimbolos(List<ComponenteLexico> list, DataGridView tabla)
         {
-            DataGridViewRow fila = new DataGridViewRow();
-            fila.CreateCells(tabla);
+
             foreach (ComponenteLexico simbolo in list)
             {
+                DataGridViewRow fila = new DataGridViewRow();
+                fila.CreateCells(tabla);
                 fila.Cells[0].Value = simbolo.ObtenerLexema();
                 fila.Cells[1].Value = simbolo.ObtenerCategoria();
                 fila.Cells[2].Value = simbolo.ObtenerNumeroLinea();
                 fila.Cells[3].Value = simbolo.ObtenerPosicionInicial();
                 fila.Cells[4].Value = simbolo.ObtenerPosicionFinal();
+                tabla.Rows.Add(fila);
             }
-            tabla.Rows.Add(fila);
+
         }
 
 
@@ -271,22 +273,25 @@ namespace CompiladorForm
 
         private void ListarTablaErrores(TipoError tipoError, DataGridView tabla)
         {
-            List<Error> errores = ManejadorErrores.ObtenerErrores(tipoError);
-            DataGridViewRow fila = new DataGridViewRow();
-            fila.CreateCells(tabla);
-            foreach (Error error in errores)
+            if (!existTaErrores)
             {
-                fila.Cells[0].Value = error.ObtenerLexema();
-                fila.Cells[1].Value = error.ObtenerCategoria();
-                fila.Cells[2].Value = error.ObtenerNumeroLinea();
-                fila.Cells[3].Value = error.ObtenerPosicionInicial();
-                fila.Cells[4].Value = error.ObtenerPosicionFinal();
-                fila.Cells[5].Value = error.ObtenerFalla();
-                fila.Cells[6].Value = error.ObtenerCausa();
-                fila.Cells[7].Value = error.ObtenerSolucion();
+                List<Error> errores = ManejadorErrores.ObtenerErrores(tipoError);
+                foreach (Error error in errores)
+                {
+                    DataGridViewRow fila = new DataGridViewRow();
+                    fila.CreateCells(tabla);
+                    fila.Cells[0].Value = error.ObtenerLexema();
+                    fila.Cells[1].Value = error.ObtenerCategoria();
+                    fila.Cells[2].Value = error.ObtenerNumeroLinea();
+                    fila.Cells[3].Value = error.ObtenerPosicionInicial();
+                    fila.Cells[4].Value = error.ObtenerPosicionFinal();
+                    fila.Cells[5].Value = error.ObtenerFalla();
+                    fila.Cells[6].Value = error.ObtenerCausa();
+                    fila.Cells[7].Value = error.ObtenerSolucion();
+                    tabla.Rows.Add(fila);
+                }
+                existTaErrores = true;
             }
-            tabla.Rows.Add(fila);
-
         }
 
         private void IngresoInfoButton_Click(object sender, EventArgs e)
