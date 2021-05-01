@@ -409,7 +409,7 @@ namespace CompiladorForm.AnalisisLexico
             }
             else if (EsSignoIgual())
             {
-                EstadoActual = 12;
+                EstadoActual = 19;
                 FormarComponente();
 
             }
