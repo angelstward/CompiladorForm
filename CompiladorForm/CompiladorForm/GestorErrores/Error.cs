@@ -35,6 +35,18 @@ namespace CompiladorForm.GestorErrores
 
 		}
 
+		public static Error CrearErrorSintactico(String Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal, String Falla, String Causa, String Solucion)
+		{
+			return new Error(Lexema, Categoria, NumeroLinea, PosicionIncial, PosicionFinal, Falla, Causa, Solucion, TipoError.LEXICO);
+
+		}
+
+		public static Error CrearErrorSemantico(String Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal, String Falla, String Causa, String Solucion)
+		{
+			return new Error(Lexema, Categoria, NumeroLinea, PosicionIncial, PosicionFinal, Falla, Causa, Solucion, TipoError.LEXICO);
+
+		}
+
 		public String ObtenerLexema()
 		{
 			return Lexema;

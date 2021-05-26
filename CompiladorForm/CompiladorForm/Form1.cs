@@ -142,22 +142,50 @@ namespace CompiladorForm
             try
             {
                 //Disparar el procesamiento a nivel de Analizador Léxico
-                AnalizadorLexico anaLex = new AnalizadorLexico();
-                ComponenteLexico componente = anaLex.Analizar();
+                // AnalizadorLexico anaLex = new AnalizadorLexico();
+                bool depurar = true;
+                AnalisisSintactico.AnalizadorSintactico AnaSin = new AnalisisSintactico.AnalizadorSintactico();
+                Dictionary<String, Object> resultados = AnaSin.Analizar(depurar);
+                ComponenteLexico Componente = (ComponenteLexico) resultados["COMPONENTE"];
+                Stack<double> Pila =  (Stack<double>) resultados["PILA"];
+                //ComponenteLexico componente = anaLex.Analizar();
 
-                while (!componente.ObtenerCategoria().Equals(Categoria.FIN_ARCHIVO))
+                if (GestorErrores.ManejadorErrores.HayErrores())
                 {
-                    MessageBox.Show(componente.ToString());
-                    componente = anaLex.Analizar();
+                    System.Windows.Forms.MessageBox.Show("Hay problemas de compilación. Revise la información de los errores encontrados.");
+
                 }
-                if (ManejadorErrores.HayErrores())
+                else if (Transversal.Categoria.FIN_ARCHIVO.Equals(Componente.ObtenerCategoria()))
                 {
-                    MessageBox.Show("El proceso de compilación ha finalizado con errores.");
+                    System.Windows.Forms.MessageBox.Show("El programa se encuentra bien escrito..");
+                    if (Pila.Count == 1)
+                    {
+                        System.Windows.Forms.MessageBox.Show("El programa se encuentra bien escrito." + Pila.Pop().ToString());
+
+                    }else{
+                        System.Windows.Forms.MessageBox.Show("Faltaron números por evaluar.");
+
+                    }
+
                 }
                 else
                 {
-                    MessageBox.Show("El proceso de compilación ha finalizado de forma exitosa.");
+                    System.Windows.Forms.MessageBox.Show("Aunque el programa se encuentra bien escrito, faltaron componentes por evaluar.");
                 }
+
+                /* while (!componente.ObtenerCategoria().Equals(Categoria.FIN_ARCHIVO))
+                 {
+                     MessageBox.Show(componente.ToString());
+                     componente = anaLex.Analizar();
+                 }
+                 if (ManejadorErrores.HayErrores())
+                 {
+                     MessageBox.Show("El proceso de compilación ha finalizado con errores.");
+                 }
+                 else
+                 {
+                     MessageBox.Show("El proceso de compilación ha finalizado de forma exitosa.");
+                 }*/
 
             }
             catch (Exception exception)

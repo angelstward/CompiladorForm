@@ -416,10 +416,12 @@ namespace CompiladorForm.AnalisisLexico
             else if (EsSignoMenorQue())
             {
                 EstadoActual = 20;
+                FormarComponente();
             }
             else if (EsSignoMayorQue())
             {
                 EstadoActual = 21;
+                FormarComponente();
             }
             else if (EsAsignacion())
             {
@@ -429,6 +431,7 @@ namespace CompiladorForm.AnalisisLexico
             else if (EsSignoDiferenteQue())
             {
                 EstadoActual = 30;
+                FormarComponente();
             }
             else if (EsFinLinea())
             {
@@ -711,6 +714,7 @@ namespace CompiladorForm.AnalisisLexico
             if (EsSignoIgual())
             {
                 EstadoActual = 31;
+                FormarComponente();
             }
             else
             {
