@@ -13,6 +13,7 @@ namespace CompiladorForm.AnalisisLexico
         private int NumeroLineaActual;
         private Linea LineaActual;
         private string CaracterActual;
+        private ComponenteLexico Componente;
         public static string Compilado = "";
 
         public AnalizadorLexicoMorse()
@@ -66,8 +67,21 @@ namespace CompiladorForm.AnalisisLexico
             Puntero = Puntero != 1 ? Puntero - 1 : 1;
         }
 
-        public void Analizar()
+        private void Resetear()
         {
+            CaracterActual = string.Empty;
+            ResetearLexema();
+            ContinuarAnalisis = true;
+            EstadoActual = 0;
+            Componente = null;
+        }
+        private void ResetearLexema()
+        {
+            Lexema = string.Empty;
+        }
+        public ComponenteLexico Analizar()
+        {
+            Resetear();
             CargarNuevaLinea();
             while (ContinuarAnalisis)
             {
@@ -104,6 +118,7 @@ namespace CompiladorForm.AnalisisLexico
                     EstadoSiete();
                 }
             }
+            return Tablas.TablaMaestra.SincronizarTabla(Componente);
         }
 
         private void EstadoCero()
@@ -138,6 +153,7 @@ namespace CompiladorForm.AnalisisLexico
                 ContinuarAnalisis = false;
             }
         }
+
 
         private void EstadoUno()
         {
@@ -182,9 +198,8 @@ namespace CompiladorForm.AnalisisLexico
         }
         private void EstadoSeis()
         {
+            Resetear();
             CargarNuevaLinea();
-
-            EstadoActual = 0;
         }
 
         private void EstadoSiete()
@@ -224,6 +239,8 @@ namespace CompiladorForm.AnalisisLexico
         private void FormaSigno()
         {
             Lexema = DiccionarioToMorse.MorseaPuntuacion[CaracterActual];
+            CrearComponente(Lexema, Categoria.CARACTER, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
+
         }
 
         private bool EsSigno()
@@ -237,6 +254,8 @@ namespace CompiladorForm.AnalisisLexico
         private void FormarDigito()
         {
             Lexema = DiccionarioToMorse.MorseaNumeros[CaracterActual];
+            CrearComponente(Lexema, Categoria.NUMERO, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
+
         }
 
         private bool EsDigito()
@@ -252,7 +271,21 @@ namespace CompiladorForm.AnalisisLexico
         private void FormarLetra()
         {
             Lexema = DiccionarioToMorse.MorseAlfabeto[CaracterActual];
+            CrearComponente(Lexema, Categoria.LETRA, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
+        }
+        private void CrearComponente(string Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal)
+        {
+             if (IdentificadorTipoComponenteUtil.EsLiteral(Categoria))
+            {
+                Componente = ComponenteLexico.CrearLiteral(Lexema, Categoria, NumeroLinea, PosicionIncial, PosicionFinal);
+            }
+            else
+            {
+                Componente = ComponenteLexico.CrearDummy(Lexema, Categoria, NumeroLinea, PosicionIncial, PosicionFinal);
+            }
         }
     }
+
+
 
 }

@@ -143,12 +143,16 @@ namespace CompiladorForm
             {
                 //Disparar el procesamiento a nivel de Analizador Léxico
                 // AnalizadorLexico anaLex = new AnalizadorLexico();
-                bool depurar = true;
-                AnalisisSintactico.AnalizadorSintactico AnaSin = new AnalisisSintactico.AnalizadorSintactico();
-                Dictionary<String, Object> resultados = AnaSin.Analizar(depurar);
-                ComponenteLexico Componente = (ComponenteLexico) resultados["COMPONENTE"];
-                Stack<double> Pila =  (Stack<double>) resultados["PILA"];
+                //bool depurar = true;
+                //AnalisisSintactico.AnalizadorSintactico AnaSin = new AnalisisSintactico.AnalizadorSintactico();
+                //Dictionary<String, Object> resultados = AnaSin.Analizar(depurar);
+                //ComponenteLexico Componente = (ComponenteLexico) resultados["COMPONENTE"];
+                //Stack<double> Pila =  (Stack<double>) resultados["PILA"];
                 //ComponenteLexico componente = anaLex.Analizar();
+
+                AnalisisSintactico.AnalizadorSintacticoMorse AnaSin = new AnalisisSintactico.AnalizadorSintacticoMorse();
+                Dictionary<String, Object> resultados = AnaSin.Analizar();
+                ComponenteLexico Componente = (ComponenteLexico)resultados["COMPONENTE"];
 
                 if (GestorErrores.ManejadorErrores.HayErrores())
                 {
@@ -158,14 +162,14 @@ namespace CompiladorForm
                 else if (Transversal.Categoria.FIN_ARCHIVO.Equals(Componente.ObtenerCategoria()))
                 {
                     System.Windows.Forms.MessageBox.Show("El programa se encuentra bien escrito..");
-                    if (Pila.Count == 1)
-                    {
-                        System.Windows.Forms.MessageBox.Show("El programa se encuentra bien escrito." + Pila.Pop().ToString());
+                   // if (Pila.Count == 1)
+                   // {
+                    //System.Windows.Forms.MessageBox.Show("El programa se encuentra bien escrito."/* + Pila.Pop().ToString()*/);
 
-                    }else{
-                        System.Windows.Forms.MessageBox.Show("Faltaron números por evaluar.");
+                    //}else{
+                      //  System.Windows.Forms.MessageBox.Show("Faltaron números por evaluar.");
 
-                    }
+//                    }
 
                 }
                 else

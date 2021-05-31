@@ -11,6 +11,16 @@ namespace CompiladorForm.Transversal
         MENOR_QUE,
         MAYOR_IGUAL_QUE,
         MAYOR_QUE,
-        ASIGNACION
+        ASIGNACION,
+        LETRA,
+        NUMERO,
+        ACENTO,
+        CARACTER,
+        CADENA_LETRA,
+        CADENA_NUMERO,
+        CADENA_ACENTO,
+        CADENA_CARACTER,
+        ESPACIO_BLANCO,
+        MORSE
     }
 }

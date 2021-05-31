@@ -56,7 +56,7 @@ namespace CompiladorForm.Transversal
 		{
 			return new ComponenteLexico(Lexema, Categoria, 0, 0, 0, TipoComponente.PALABRA_RESERVADA);
 		}
-
+		
 		public String ObtenerLexema()
 		{
 			return Lexema;

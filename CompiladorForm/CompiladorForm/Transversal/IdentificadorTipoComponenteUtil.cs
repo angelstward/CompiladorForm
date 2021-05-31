@@ -30,6 +30,12 @@ public class IdentificadorTipoComponenteUtil
 		TipoLiteral.Add(Categoria.DIVISION);
 		TipoLiteral.Add(Categoria.MODULO);
 		TipoLiteral.Add(Categoria.ASIGNACION);
+		TipoLiteral.Add(Categoria.CADENA_NUMERO);
+		TipoLiteral.Add(Categoria.CADENA_LETRA);
+		TipoLiteral.Add(Categoria.CADENA_CARACTER);
+
+
+
 		return TipoLiteral;
 	}
 
