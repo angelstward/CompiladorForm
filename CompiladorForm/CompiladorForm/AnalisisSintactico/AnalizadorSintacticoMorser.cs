@@ -97,6 +97,7 @@ namespace CompiladorForm.AnalisisSintactico
             }
 
         }
+
         //<cadena-número> := <número> | <número><cadena-número>
         private void CadenaNumero()
         {
