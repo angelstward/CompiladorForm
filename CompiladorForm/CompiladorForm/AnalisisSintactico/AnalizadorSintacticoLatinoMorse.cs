@@ -4,6 +4,8 @@ using System.Text;
 using CompiladorForm.Transversal;
 
 using CompiladorForm.AnalisisLexico;
+using CompiladorForm.GestorErrores;
+
 namespace CompiladorForm.AnalisisSintactico
 {
     public class AnalizadorSintacticoLatinoMorse
@@ -62,16 +64,27 @@ namespace CompiladorForm.AnalisisSintactico
             {
                 FormarResultado(Componente);
                 Avanzar();
-                LatinMorse(jerarquia + 1);
+            }
+            else
+            {
+                String causa = "Categoria no valida" + Componente.ObtenerCategoria();
+                String falla = "Caracter no reconocido por el lenguaje";
+                String solucion = "Asegurese que la entrada sea sintacticamente correcta";
+                Error error = Error.CrearErrorSintactico(Componente.ObtenerLexema(), Categoria.ERROR, Componente.ObtenerNumeroLinea(), Componente.ObtenerPosicionInicial(), Componente.ObtenerPosicionFinal(), falla, causa, solucion);
+                ManejadorErrores.Reportar(error);
+                throw new Exception("Se ha producido un error del tipo stopper dentro del compilador en el analizador sintactico");
             }
             TrazarSalida("</Alfabeto>", jerarquia);
         }
 
         private void FormarResultado(ComponenteLexico Componente)
         {
-       
-
+      
             resultadoCompilacion.Append(DiccionarioLatinoMorse.MorseAlfabeto[Componente.ObtenerCategoria()] + " ");
+            do
+            {
+                resultadoCompilacion.Replace("/ / ", "/ ");
+            } while (resultadoCompilacion.ToString().Contains("/ / "));
         }
 
         private void Avanzar()

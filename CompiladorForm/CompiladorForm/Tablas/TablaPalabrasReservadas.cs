@@ -13,9 +13,9 @@ namespace CompiladorForm.Tablas
 
         private TablaPalabrasReservadas()
         {
-            PALABRAS_RESERVADAS.Add("A", ComponenteLexico.CrearPalabraReservada("A", Categoria.PALABRA_RESERVADA_A));
+          /*  PALABRAS_RESERVADAS.Add("A", ComponenteLexico.CrearPalabraReservada("A", Categoria.PALABRA_RESERVADA_A));
             PALABRAS_RESERVADAS.Add("B", ComponenteLexico.CrearPalabraReservada("B", Categoria.PALABRA_RESERVADA_B));
-            PALABRAS_RESERVADAS.Add("C", ComponenteLexico.CrearPalabraReservada("C", Categoria.PALABRA_RESERVADA_C));
+            PALABRAS_RESERVADAS.Add("C", ComponenteLexico.CrearPalabraReservada("C", Categoria.PALABRA_RESERVADA_C));*/
 
         }
 

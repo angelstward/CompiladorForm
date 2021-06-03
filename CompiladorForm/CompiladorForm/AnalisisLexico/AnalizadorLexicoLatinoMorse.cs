@@ -20,6 +20,7 @@ namespace CompiladorForm.AnalisisLexico
         public AnalizadorLexicoLatinoMorse()
         {
             NumeroLineaActual = 0;
+            CargarNuevaLinea();
         }
         private void CargarNuevaLinea()
         {
@@ -27,6 +28,7 @@ namespace CompiladorForm.AnalisisLexico
             LineaActual = Cache.ObtenerCache().ObtenerLinea(NumeroLineaActual);
             NumeroLineaActual = LineaActual.ObtenerNumeroLinea();
             InicializarPuntero();
+            Resetear();
 
         }
         private void LeerSiguienteCaracter()
@@ -82,7 +84,6 @@ namespace CompiladorForm.AnalisisLexico
          public ComponenteLexico Analizar()
          {
              Resetear();
-             CargarNuevaLinea();
              while (ContinuarAnalisis)
              {
                  if (EstadoActual == 0)

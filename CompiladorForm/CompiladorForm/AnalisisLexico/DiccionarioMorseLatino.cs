@@ -73,6 +73,8 @@ namespace CompiladorForm.AnalisisLexico
                 { Transversal.Categoria.ARROBA, "@" },
                 { Transversal.Categoria.PREGUNTA_ENTRA, "¿" },
                 { Transversal.Categoria.ADMIRACION_ABRE, "¡" },
+                                { Transversal.Categoria.ESPACIO_BLANCO, " " },
+
         };
 
         public static Boolean ExisteCategoria(Transversal.Categoria Categoria)
