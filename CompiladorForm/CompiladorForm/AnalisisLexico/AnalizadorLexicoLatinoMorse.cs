@@ -1,10 +1,11 @@
 ﻿using CompiladorForm.Transversal;
 using System;
+using CompiladorForm.GestorErrores;
 using System.Linq;
 
 namespace CompiladorForm.AnalisisLexico
 {
-    public class AnalizadorLexicoMorse
+    public class AnalizadorLexicoLatinoMorse
     {
         private string Lexema;
         private int EstadoActual;
@@ -16,7 +17,7 @@ namespace CompiladorForm.AnalisisLexico
         private ComponenteLexico Componente;
         public static string Compilado = "";
 
-        public AnalizadorLexicoMorse()
+        public AnalizadorLexicoLatinoMorse()
         {
             NumeroLineaActual = 0;
         }
@@ -26,26 +27,24 @@ namespace CompiladorForm.AnalisisLexico
             LineaActual = Cache.ObtenerCache().ObtenerLinea(NumeroLineaActual);
             NumeroLineaActual = LineaActual.ObtenerNumeroLinea();
             InicializarPuntero();
-            if (LineaActual.ObtenerContenido().Equals("@EOF@"))
-            {
-                ContinuarAnalisis = false;
-            }
+
         }
         private void LeerSiguienteCaracter()
         {
-            CaracterActual = "????";
 
             if (LineaActual.EsFinArchivo())
             {
                 CaracterActual = LineaActual.ObtenerContenido();
             }
-            if ("@JL@".Equals(LineaActual.ObtenerContenido()))
+           /* if ("@JL@".Equals(LineaActual.ObtenerContenido()))
             {
                 CaracterActual = "@JL@";
-            }
+            }*/
             else if (Puntero > LineaActual.ObtenerContenido().Length)
             {
                 CaracterActual = "@FL@";
+                AdelantarPuntero();
+
             }
             else
             {
@@ -102,10 +101,11 @@ namespace CompiladorForm.AnalisisLexico
                  {
                      EstadoTres();
                  }
-                /* else if(EstadoActual == 4)
+                 else if(EstadoActual == 4)
                  {
                      EstadoCuatro();
                  }
+                 /*
                  else if(EstadoActual == 5)
                  {
                      EstadoCinco();
@@ -398,63 +398,99 @@ namespace CompiladorForm.AnalisisLexico
 
         }
 
-        
-         //private void EstadoUno()
-         //{
-         //    FormarLetra();
-         //    EstadoActual = 0;
-         //    Compilado += Lexema + " ";
-         //}
+        private void EstadoUno()
+        {
+            ContinuarAnalisis = false;
+            CrearComponente(Lexema,Categoria.FIN_ARCHIVO,NumeroLineaActual,Puntero-Lexema.Length,Puntero-1);
+        }
 
-         //private void EstadoDos()
-         //{
-         //    FormarDigito();
-         //    EstadoActual = 0;
-         //    Compilado += Lexema + " ";
-         //}
+        private void CrearComponente(String Lexema, Categoria Categoria, int NumeroLineaActual, int PosicionInicial, int PosicionFinal)
+        {
+            Componente = ComponenteLexico.CrearSimbolo(Lexema, Categoria, NumeroLineaActual, PosicionInicial, PosicionFinal);
 
-         //private void EstadoTres()
-         //{
-         //    FormaSigno();
-         //    EstadoActual = 0;
-         //    Compilado += Lexema + " ";
+        }
 
-         //}
+        private void EstadoDos()
+        {
+            CargarNuevaLinea();
+   
+        }
 
-         //private void EstadoCuatro()
-         //{
-         //    do
-         //    {
-         //        if (EsSaltoDeLinea())
-         //        {
-         //            CargarNuevaLinea();
-         //        }
-         //        LeerSiguienteCaracter();
-         //    } while (EsSaltoDeLinea() || EsBlanco());
-         //    EstadoActual = 7;
-         //}
 
-         //private void EstadoCinco()
-         //{
-         //    Lexema = "#";
-         //    Compilado += Lexema + " ";
-         //    EstadoActual = 0;
-         //}
-         //private void EstadoSeis()
-         //{
-         //    Resetear();
-         //    CargarNuevaLinea();
-         //}
+        private void EstadoTres()
+        {
+            ContinuarAnalisis = false;
+            CrearComponente(Lexema, DiccionarioMorseLatino.ValidarCategoria(Lexema), NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
 
-         //private void EstadoSiete()
-         //{
-         //    Lexema = "/";
-         //    Compilado += Lexema +" ";
-         //    DevolverPuntero();
-         //    EstadoActual = 0;
-         //}
+        }
 
-         private bool EsFinDocumento()
+        private void EstadoCuatro()
+        {
+            ContinuarAnalisis = false;
+            String causa = "Se esperaba un caracter valido dentro del lenguaje y se recibio : " + CaracterActual;
+            String falla = "Caracter no reconocido por el lenguaje";
+            String solucion = "Asegurese de que el caracter sea valido para el lenguaje";
+            Error error = Error.CrearErrorLexico(Lexema,Categoria.ERROR,NumeroLineaActual,Puntero-Lexema.Length,Puntero-1,falla,causa,solucion);
+            ManejadorErrores.Reportar(error);
+            throw new Exception("Se ha producidop un error del tipo stopper dentro del compilador en el analizador lexico");
+        }
+
+        //private void EstadoUno()
+        //{
+        //    FormarLetra();
+        //    EstadoActual = 0;
+        //    Compilado += Lexema + " ";
+        //}
+
+        //private void EstadoDos()
+        //{
+        //    FormarDigito();
+        //    EstadoActual = 0;
+        //    Compilado += Lexema + " ";
+        //}
+
+        //private void EstadoTres()
+        //{
+        //    FormaSigno();
+        //    EstadoActual = 0;
+        //    Compilado += Lexema + " ";
+
+        //}
+
+        //private void EstadoCuatro()
+        //{
+        //    do
+        //    {
+        //        if (EsSaltoDeLinea())
+        //        {
+        //            CargarNuevaLinea();
+        //        }
+        //        LeerSiguienteCaracter();
+        //    } while (EsSaltoDeLinea() || EsBlanco());
+        //    EstadoActual = 7;
+        //}
+
+        //private void EstadoCinco()
+        //{
+        //    Lexema = "#";
+        //    Compilado += Lexema + " ";
+        //    EstadoActual = 0;
+        //}
+        //private void EstadoSeis()
+        //{
+        //    Resetear();
+        //    CargarNuevaLinea();
+        //}
+
+        //private void EstadoSiete()
+        //{
+        //    Lexema = "/";
+        //    Compilado += Lexema +" ";
+        //    DevolverPuntero();
+        //    EstadoActual = 0;
+        //}
+
+        private bool EsFinDocumento()
          {
              return "@EOF@".Equals(CaracterActual);
          }
@@ -482,7 +518,7 @@ namespace CompiladorForm.AnalisisLexico
 
          private void FormarComponente()
          {
-
+            Lexema += CaracterActual;
          }
 
         /*private void FormaSigno()

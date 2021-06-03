@@ -33,7 +33,7 @@ namespace CompiladorForm.AnalisisLexico
                 { Transversal.Categoria.LETRA_W, ".--" },
                 { Transversal.Categoria.LETRA_X, "-..-" },
                 { Transversal.Categoria.LETRA_Y, "-.--" },
-                { Transversal.Categoria.LETRA_Y, "--.." },
+                { Transversal.Categoria.LETRA_Z, "--.." },
                 { Transversal.Categoria.ACENTO_A, ".--.-" },
                 { Transversal.Categoria.ACENTO_E, "..-.." },
                 { Transversal.Categoria.ENIE, "--.--" },

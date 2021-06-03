@@ -17,6 +17,7 @@ namespace CompiladorForm
     {
         Boolean existTaSimbolos = false;
         Boolean existTaErrores = false;
+        string resultado = "";
         public Form1()
         {
             InitializeComponent();
@@ -150,9 +151,10 @@ namespace CompiladorForm
                 //Stack<double> Pila =  (Stack<double>) resultados["PILA"];
                 //ComponenteLexico componente = anaLex.Analizar();
 
-                AnalisisSintactico.AnalizadorSintacticoMorse AnaSin = new AnalisisSintactico.AnalizadorSintacticoMorse();
-                Dictionary<String, Object> resultados = AnaSin.Analizar();
+                AnalisisSintactico.AnalizadorSintacticoLatinoMorse AnaSin = new AnalisisSintactico.AnalizadorSintacticoLatinoMorse();
+                Dictionary<String, Object> resultados = AnaSin.Analizar(false);
                 ComponenteLexico Componente = (ComponenteLexico)resultados["COMPONENTE"];
+                resultado = Convert.ToString(resultados["RESULTADO"]);
 
                 if (GestorErrores.ManejadorErrores.HayErrores())
                 {
@@ -202,7 +204,7 @@ namespace CompiladorForm
             //return AnalizadorLexicoMorse.Compilado;
 
             string[] response = ReturnLinesNumber(text.Split(Environment.NewLine));
-            return string.Join(Environment.NewLine, response);
+            return string.Join(Environment.NewLine, resultado);
         }
 
         private void OutputText_TextChanged(object sender, EventArgs e)

@@ -75,10 +75,14 @@ namespace CompiladorForm.AnalisisLexico
                 { Transversal.Categoria.ADMIRACION_ABRE, "¡" },
         };
 
+        public static Boolean ExisteCategoria(Transversal.Categoria Categoria)
+        {
+            return MorseAlfabeto.ContainsKey(Categoria);
+        }
         public static Transversal.Categoria ValidarCategoria(string lexema)
         {
 
-            return MorseAlfabeto.FirstOrDefault(x => x.Value == lexema).Key;
+            return MorseAlfabeto.FirstOrDefault(x => x.Value == lexema.ToUpper()).Key;
 
 
         }

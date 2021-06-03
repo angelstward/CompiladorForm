@@ -1,0 +1,126 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using CompiladorForm.Transversal;
+
+using CompiladorForm.AnalisisLexico;
+namespace CompiladorForm.AnalisisSintactico
+{
+    public class AnalizadorSintacticoLatinoMorse
+    {
+        private Transversal.ComponenteLexico Componente;
+        private AnalizadorLexicoLatinoMorse AnaLex;
+        private StringBuilder TrazaDerivacion;
+        private Stack<double> pila = new Stack<double>();
+        private StringBuilder resultadoCompilacion;
+
+
+        public Dictionary<String, Object> Analizar(bool depurar)
+        {
+            AnaLex = new AnalizadorLexicoLatinoMorse();
+            TrazaDerivacion = new StringBuilder();
+            resultadoCompilacion = new StringBuilder();
+            Avanzar();
+            LatinMorse(0);
+
+            if (depurar)
+            {
+                System.Windows.Forms.MessageBox.Show(TrazaDerivacion.ToString());
+            }
+            Dictionary<String, Object> resultado = new Dictionary<String, Object>();
+            resultado.Add("COMPONENTE" , Componente);
+            resultado.Add("RESULTADO", resultadoCompilacion);
+
+            return resultado;
+        }
+
+        private void LatinMorse(int jerarquia)
+        {
+            TrazarEntrada("<LatinMorse>", jerarquia);
+            Alfabeto(jerarquia+1);
+            LatinoMorseAux(jerarquia+1);
+            TrazarSalida("</LatinMorse>", jerarquia);
+
+
+        }
+
+        private void LatinoMorseAux(int jerarquia)
+        {
+            TrazarEntrada("<LatinoMorseAux>", jerarquia);
+            if (!Categoria.FIN_ARCHIVO.Equals(Componente.ObtenerCategoria()))
+            {
+                LatinMorse(jerarquia + 1);
+            }
+            TrazarSalida("</LatinoMorseAux>", jerarquia);
+        }
+
+        private void Alfabeto(int jerarquia)
+        {
+            TrazarEntrada("<Alfabeto>", jerarquia);
+             
+            if (DiccionarioMorseLatino.ExisteCategoria(Componente.ObtenerCategoria()))
+            {
+                FormarResultado(Componente);
+                Avanzar();
+                LatinMorse(jerarquia + 1);
+            }
+            TrazarSalida("</Alfabeto>", jerarquia);
+        }
+
+        private void FormarResultado(ComponenteLexico Componente)
+        {
+       
+
+            resultadoCompilacion.Append(DiccionarioLatinoMorse.MorseAlfabeto[Componente.ObtenerCategoria()] + " ");
+        }
+
+        private void Avanzar()
+        {
+            Componente = AnaLex.Analizar();
+        }
+
+        private void TrazarEntrada(string NombreRegla, int jerarquia)
+        {
+            TrazaDerivacion.Append(FormarCadenaEspaciosEnBlanco(jerarquia));
+            //TrazaDerivacion.Append("Entrando a derivar regla").Append(NombreRegla).Append("con componente").Append(Componente.ObtenerCategoria());
+            TrazaDerivacion.Append("(").Append(Componente.ObtenerCategoria()).Append(")");
+            TrazaDerivacion.Append(Environment.NewLine);
+        }
+
+        private void TrazarSalida(string NombreRegla, int jerarquia)
+        {
+            TrazaDerivacion.Append(FormarCadenaEspaciosEnBlanco(jerarquia));
+            //TrazaDerivacion.Append("Saliendo a derivar regla").Append(NombreRegla);
+            TrazaDerivacion.Append(NombreRegla);
+            TrazaDerivacion.Append(Environment.NewLine);
+
+        }
+        public void TrazarPush(int jerarquia, double valor)
+        {
+            TrazaDerivacion.Append(FormarCadenaEspaciosEnBlanco(jerarquia));
+            TrazaDerivacion.Append("PUSH->").Append(valor);
+            TrazaDerivacion.Append(Environment.NewLine);
+
+        }
+        public void TrazarPop(int jerarquia, double valor)
+        {
+            TrazaDerivacion.Append(FormarCadenaEspaciosEnBlanco(jerarquia));
+            TrazaDerivacion.Append("POP->").Append(valor);
+            TrazaDerivacion.Append(Environment.NewLine);
+
+        }
+
+        private string FormarCadenaEspaciosEnBlanco(int jerarquia)
+        {
+            String EspaciosBlanco = "";
+            for (int indice = 1; indice <= jerarquia * 2; indice++)
+            {
+                EspaciosBlanco = EspaciosBlanco + "";
+            }
+
+            return EspaciosBlanco;
+
+        }
+    }
+}
+

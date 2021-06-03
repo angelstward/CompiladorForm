@@ -7,8 +7,10 @@ using CompiladorForm.AnalisisLexico;
 using CompiladorForm.GestorErrores;
 using CompiladorForm.Transversal;
 
+
 namespace CompiladorForm.AnalisisSintactico
 {
+    /*
     public class AnalizadorSintacticoMorse
     {
         private Transversal.ComponenteLexico Componente;
@@ -237,6 +239,6 @@ namespace CompiladorForm.AnalisisSintactico
             return EspaciosBlanco;
 
         }
-    }
+    }*/
 }
 
