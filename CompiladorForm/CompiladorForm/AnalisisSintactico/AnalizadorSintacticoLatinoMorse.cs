@@ -8,7 +8,7 @@ using CompiladorForm.GestorErrores;
 
 namespace CompiladorForm.AnalisisSintactico
 {
-    public class AnalizadorSintacticoLatinoMorse
+    public class AnalizadorSintacticoLatinoMorse : AnalizadorSintacticoBase
     {
         private Transversal.ComponenteLexico Componente;
         private AnalizadorLexicoLatinoMorse AnaLex;
