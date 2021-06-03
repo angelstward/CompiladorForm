@@ -521,56 +521,6 @@ namespace CompiladorForm.AnalisisLexico
          {
             Lexema += CaracterActual;
          }
-
-        /*private void FormaSigno()
-        {
-
-            Lexema = DiccionarioLatinoMorse.MorseaPuntuacion[CaracterActual];
-            CrearComponente(Lexema, Categoria.CARACTER, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
-
-        }
-
-        private bool EsSigno()
-        {
-            char comillaDoble = '"';
-            string[] opciones = { ".", ",", "?", "'","!","/","(",")","&",":",";",
-            "=","+","-","_", comillaDoble.ToString(),"$","@","¿", "¡"};
-            return opciones.Contains(CaracterActual) && DiccionarioLatinoMorse.MorseaPuntuacion.ContainsKey(CaracterActual);
-        }
-
-        private void FormarDigito()
-        {
-            Lexema = DiccionarioLatinoMorse.MorseaNumeros[CaracterActual];
-            CrearComponente(Lexema, Categoria.NUMERO, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
-
-        }
-
-        private bool EsDigito()
-        {
-            return char.IsDigit(CaracterActual.ToCharArray()[0]);
-        }
-
-        private bool EsLetra()
-        {
-            return char.IsLetter(CaracterActual.ToCharArray()[0]) && DiccionarioLatinoMorse.MorseAlfabeto.ContainsKey(CaracterActual);
-        }
-
-        private void FormarLetra()
-        {
-            Lexema = DiccionarioLatinoMorse.MorseAlfabeto[CaracterActual];
-            CrearComponente(Lexema, Categoria.LETRA, NumeroLineaActual, Puntero - Lexema.Length, Puntero - 1);
-        }
-        private void CrearComponente(string Lexema, Categoria Categoria, int NumeroLinea, int PosicionIncial, int PosicionFinal)
-        {
-             if (IdentificadorTipoComponenteUtil.EsLiteral(Categoria))
-            {
-                Componente = ComponenteLexico.CrearLiteral(Lexema, Categoria, NumeroLinea, PosicionIncial, PosicionFinal);
-            }
-            else
-            {
-                Componente = ComponenteLexico.CrearDummy(Lexema, Categoria, NumeroLinea, PosicionIncial, PosicionFinal);
-            }
-        }*/
     }
 
 
