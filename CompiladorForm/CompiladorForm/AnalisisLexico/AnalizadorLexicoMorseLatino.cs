@@ -131,7 +131,7 @@ namespace CompiladorForm.AnalisisLexico
 
 
 
-        public ComponenteLexico Analizador()
+        public ComponenteLexico Analizar()
         {
             Resetear();
             while (ContinuarAnalisis)

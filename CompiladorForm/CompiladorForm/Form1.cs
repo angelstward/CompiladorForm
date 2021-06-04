@@ -19,7 +19,7 @@ namespace CompiladorForm
         Boolean existTaErrores = false;
         AnalizadorSintacticoBase AnaSin;
         AnalizadorSintacticoLatinoMorse AnaSinLatinoMorse = new AnalizadorSintacticoLatinoMorse();
-        AnalizadorSintacticoMorse AnaSinMorseLatino = new AnalizadorSintacticoMorse();
+        AnalizadorSintacticoMorseLatino AnaSinMorseLatino = new AnalizadorSintacticoMorseLatino();
 
         string resultado = "";
         public Form1()
