@@ -46,8 +46,7 @@ namespace CompiladorForm.AnalisisLexico
         }
 
         private void LeerSiguienteCaracter()
-        {
-            CaracterActual = "????";
+        {            
 
             if (LineaActual.EsFinArchivo())
             {
@@ -56,6 +55,7 @@ namespace CompiladorForm.AnalisisLexico
             else if (Puntero > LineaActual.ObtenerContenido().Length)
             {
                 CaracterActual = "@FL@";
+                AdelantarPuntero();
             }
             else
             {

@@ -17,7 +17,7 @@ namespace CompiladorForm
     {
         Boolean existTaSimbolos = false;
         Boolean existTaErrores = false;
-        AnalizadorSintacticoBase AnaSin;
+        //AnalizadorSintacticoBase AnaSin;
         AnalizadorSintacticoLatinoMorse AnaSinLatinoMorse = new AnalizadorSintacticoLatinoMorse();
         AnalizadorSintacticoMorseLatino AnaSinMorseLatino = new AnalizadorSintacticoMorseLatino();
 
@@ -148,16 +148,17 @@ namespace CompiladorForm
             {
                 //Disparar el procesamiento a nivel de Analizador Léxico
                 // AnalizadorLexico anaLex = new AnalizadorLexico();
-                //bool depurar = true;
-                //AnalisisSintactico.AnalizadorSintactico AnaSin = new AnalisisSintactico.AnalizadorSintactico();
-                //Dictionary<String, Object> resultados = AnaSin.Analizar(depurar);
-                //ComponenteLexico Componente = (ComponenteLexico) resultados["COMPONENTE"];
-                //Stack<double> Pila =  (Stack<double>) resultados["PILA"];
+                bool depurar = true;
+                AnalisisSintactico.AnalizadorSintactico AnaSin = new AnalisisSintactico.AnalizadorSintactico();               
+                //ComponenteLexico Componente = (ComponenteLexico) resultados["COMPONENTE"];                
                 //ComponenteLexico componente = anaLex.Analizar();
-
-                Dictionary<String, Object> resultados = AnaSin.Analizar(false);
+                Dictionary<String, Object> resultados = AnaSin.Analizar(depurar);
                 ComponenteLexico Componente = (ComponenteLexico)resultados["COMPONENTE"];
-                resultado = Convert.ToString(resultados["RESULTADO"]);
+                Stack<double> Pila = (Stack<double>)resultados["PILA"];
+                resultado = Pila.Pop().ToString();
+                //resultado = Convert.ToString(resultados["RESULTADO"]);
+                //resultado = Convert.ToString(resultados["PILA"]);        
+
 
                 if (GestorErrores.ManejadorErrores.HayErrores())
                 {
@@ -166,45 +167,19 @@ namespace CompiladorForm
                 }
                 else if (Transversal.Categoria.FIN_ARCHIVO.Equals(Componente.ObtenerCategoria()))
                 {
-                    System.Windows.Forms.MessageBox.Show("El programa se encuentra bien escrito..");
-                   // if (Pila.Count == 1)
-                   // {
-                    //System.Windows.Forms.MessageBox.Show("El programa se encuentra bien escrito."/* + Pila.Pop().ToString()*/);
-
-                    //}else{
-                      //  System.Windows.Forms.MessageBox.Show("Faltaron números por evaluar.");
-
-//                    }
-
+                    System.Windows.Forms.MessageBox.Show("El programa se encuentra bien escrito..");                   
                 }
                 else
                 {
                     System.Windows.Forms.MessageBox.Show("Aunque el programa se encuentra bien escrito, faltaron componentes por evaluar.");
                 }
-
-                /* while (!componente.ObtenerCategoria().Equals(Categoria.FIN_ARCHIVO))
-                 {
-                     MessageBox.Show(componente.ToString());
-                     componente = anaLex.Analizar();
-                 }
-                 if (ManejadorErrores.HayErrores())
-                 {
-                     MessageBox.Show("El proceso de compilación ha finalizado con errores.");
-                 }
-                 else
-                 {
-                     MessageBox.Show("El proceso de compilación ha finalizado de forma exitosa.");
-                 }*/
+                
 
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
-
-            //AnalizadorLexicoMorse analizadorLexicoMorse = new AnalizadorLexicoMorse();
-            //analizadorLexicoMorse.Analizar();
-            //return AnalizadorLexicoMorse.Compilado;
 
             string[] response = ReturnLinesNumber(text.Split(Environment.NewLine));
             return string.Join(Environment.NewLine, resultado);
@@ -348,13 +323,13 @@ namespace CompiladorForm
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            AnaSin = AnaSinMorseLatino;
+            //AnaSin = AnaSinMorseLatino;
 
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            AnaSin =AnaSinLatinoMorse;
+            //AnaSin =AnaSinLatinoMorse;
         }
     }
 }
