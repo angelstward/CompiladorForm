@@ -4,6 +4,7 @@ using CompiladorForm.GestorErrores;
 using CompiladorForm.Transversal;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 
 namespace CompiladorForm.AnalisisSintactico
@@ -12,20 +13,21 @@ namespace CompiladorForm.AnalisisSintactico
     {
         private readonly AnalizadorLexico analex = new AnalizadorLexico();
         private ComponenteLexico componente = null;
-        private string traza;
-        private readonly bool mostrarTraza = true;
-        private readonly Stack<double> pila = new Stack<double>();
-        private string lexemaAnterior = "";
         private bool apilar = true;
+        private readonly Stack<double> pila = new Stack<double>();
+        private StringBuilder TrazaDerivacion;
+
 
         public Dictionary<string, object> Analizar(bool x)
         {
-            
-
-            traza = "";
-            pila.Clear();
+            TrazaDerivacion = new StringBuilder();           
             Avanzar();
-            Expresion("-");
+            Expresion(0);
+            if (x)
+            {
+                Console.WriteLine(TrazaDerivacion.ToString());
+                MessageBox.Show(TrazaDerivacion.ToString());
+            }
             Dictionary<string, object> resultado = new Dictionary<string, object>
             {
                 { "COMPONENTE", componente },
@@ -35,61 +37,59 @@ namespace CompiladorForm.AnalisisSintactico
             return resultado;
         }
 
-        private void Expresion(string posicion)
+        private void Expresion(int jerarquia)
         {
-            posicion = posicion + "-->";
-            formarTrazaEntrada(posicion, "Expresion");
-            Termino(posicion);
-            ExpresionPrima(posicion);
-            formarTrazaSalida(posicion, "Expresion");
+            TrazarEntrada("<Expresion>", jerarquia);
+            Termino(jerarquia + 1);
+            ExpresionPrima(jerarquia + 1);
+            TrazarSalida("</Expresion>", jerarquia);           
         }
 
-      
-        private void Termino(string posicion)
+
+        private void Termino(int jerarquia)
         {
-            posicion = posicion + "-->";
-            formarTrazaEntrada(posicion, "Multdiv");
-            Factor(posicion);
-            TerminoPrima(posicion);
-            formarTrazaSalida(posicion, "Multdiv");
+            TrazarEntrada("<Termino>", jerarquia);
+            Factor(jerarquia +1);
+            TerminoPrima(jerarquia+1);
+            TrazarSalida("</Termino>", jerarquia);
         }
 
-        private void ExpresionPrima(string posicion)
+        private void ExpresionPrima(int jerarquia)
         {
-            posicion = posicion + "-->"; componente.ObtenerCategoria();
-            formarTrazaEntrada(posicion, "CSumaResta");
+            TrazarEntrada("<ExpresionPrima>", jerarquia);
 
             if (Categoria.SUMA.Equals(componente.ObtenerCategoria()))
             {
                 Avanzar();
-                Expresion(posicion);
-                if (!ManejadorErrores.HayErrores())
-                {
-                    double derecho = pila.Pop();
-                    double izquierdo = pila.Pop();
-                    pila.Push(izquierdo + derecho);
-                    traza = traza + posicion + "Operando: " + izquierdo + "+" + derecho + "\n";
-                }
+                Expresion(jerarquia);
+                double derecho = pila.Pop();
+                TrazarPop(jerarquia, derecho);
+                double izquierdo = pila.Pop();
+                TrazarPop(jerarquia, izquierdo);
+                pila.Push(izquierdo + derecho);
+                TrazarSalida(izquierdo+"+"+derecho+"="+ (izquierdo+derecho), jerarquia);
+                TrazarPush(jerarquia, izquierdo + derecho);                
+
             }
             else if (Categoria.RESTA.Equals(componente.ObtenerCategoria()))
             {
                 Avanzar();
-                Expresion(posicion);
-                if (!ManejadorErrores.HayErrores())
-                {
-                    double derecho = pila.Pop();
-                    double izquierdo = pila.Pop();
-                    pila.Push(izquierdo + derecho);
-                    traza = traza + posicion + "Operando: " + izquierdo + "+" + derecho + "\n";
-                }
+                Expresion(jerarquia);
+                double derecho = pila.Pop();
+                TrazarPop(jerarquia, derecho);
+                double izquierdo = pila.Pop();
+                TrazarPop(jerarquia, izquierdo);
+                pila.Push(izquierdo - derecho);
+                TrazarSalida(izquierdo+"-"+derecho+"="+ (izquierdo- derecho), jerarquia);
+                TrazarPush(jerarquia, izquierdo + derecho);
+
             }
-            formarTrazaSalida(posicion, "CSumaResta");
+            TrazarSalida("</ExpresionPrima>", jerarquia);
         }
 
-        private void TerminoPrima(string posicion)
+        private void TerminoPrima(int jerarquia)
         {
-            posicion = posicion + "-->";
-            formarTrazaEntrada(posicion, "CMultdiv");
+            TrazarEntrada("<TerminoPrima>", jerarquia);
             if (Categoria.MULTIPLICACION.Equals(componente.ObtenerCategoria()))
             {
                 Avanzar();
@@ -97,25 +97,34 @@ namespace CompiladorForm.AnalisisSintactico
                 {
                     if ((Categoria.NUMERO_ENTERO.Equals(componente.ObtenerCategoria()) || Categoria.NUMERO_DECIMAL.Equals(componente.ObtenerCategoria())))
                     {
+
                         double derecho = Convert.ToDouble(componente.ObtenerLexema());
                         double izquierdo = pila.Pop();
+                        TrazarPop(jerarquia, izquierdo);
                         pila.Push(izquierdo * derecho);
+                        TrazarSalida(izquierdo + "*" + derecho + "=" + (izquierdo * derecho), jerarquia);
+                        TrazarPush(jerarquia, izquierdo * derecho);
                         apilar = false;
-                        traza = traza + posicion + "Operando: " + izquierdo + "*" + derecho + "\n";
-                        Termino(posicion);
+                        Termino(jerarquia+1);
                     }
                 }
                 else
                 {
-                    Termino(posicion);
+                    Termino(jerarquia+1);
                     if (!ManejadorErrores.HayErrores())
                     {
                         double derecho = pila.Pop();
+                        TrazarPop(jerarquia, derecho);
                         double izquierdo = pila.Pop();
+                        TrazarPop(jerarquia, izquierdo);
+                        TrazarPop(jerarquia, izquierdo);
                         pila.Push(izquierdo * derecho);
-                        traza = traza + posicion + "Operando: " + izquierdo + "*" + derecho + "\n";
+                        TrazarSalida(izquierdo + "*" + derecho + "=" + (izquierdo * derecho), jerarquia);
+                        TrazarPush(jerarquia, izquierdo * derecho);
+                        Termino(jerarquia + 1);
                     }
                 }
+                TrazarSalida("</TerminoPrima>", jerarquia);
 
             }
             else if (Categoria.DIVISION.Equals(componente.ObtenerCategoria()))
@@ -127,7 +136,7 @@ namespace CompiladorForm.AnalisisSintactico
                     {
                         double derecho = Convert.ToDouble(componente.ObtenerLexema());
                         double izquierdo = pila.Pop();
-                        traza = traza + posicion + "Operando: " + izquierdo + "/" + derecho + "\n";
+                        TrazarPop(jerarquia,izquierdo);                        
                         if (derecho == 0)
                         {
                             Error error = Error.CrearErrorSintactico(componente.ObtenerLexema(), componente.ObtenerCategoria(),
@@ -138,20 +147,23 @@ namespace CompiladorForm.AnalisisSintactico
                             ManejadorErrores.Reportar(error);
                             izquierdo = 1;
                             derecho = 1;
-                        }
+                        }                       
                         pila.Push(izquierdo / derecho);
                         apilar = false;
-                        Termino(posicion);
+                        TrazarSalida(izquierdo + "/" + derecho + "=" + (izquierdo / derecho), jerarquia);
+                        TrazarPush(jerarquia, izquierdo/derecho);                        
+                        Termino(jerarquia+1);
                     }
                 }
                 else
                 {
-                    Termino(posicion);
+                    Termino(jerarquia+1);
                     if (!ManejadorErrores.HayErrores())
                     {
                         double derecho = pila.Pop();
+                        TrazarPop(jerarquia,derecho);
                         double izquierdo = pila.Pop();
-                        traza = traza + posicion + "Operando: " + izquierdo + "/" + derecho + "\n";
+                        TrazarPop(jerarquia, izquierdo);                        
                         if (derecho == 0)
                         {
                             Error error = Error.CrearErrorSintactico(componente.ObtenerLexema(), componente.ObtenerCategoria(),
@@ -164,60 +176,52 @@ namespace CompiladorForm.AnalisisSintactico
                             derecho = 1;
                         }
                         pila.Push(izquierdo / derecho);
+                        TrazarSalida(izquierdo + "/" + derecho + "=" + (izquierdo / derecho), jerarquia);
+                        TrazarPush(jerarquia, izquierdo/derecho);
+                        
                     }
                 }
             }
-            formarTrazaSalida(posicion, "CMultDiv");
+            TrazarSalida("</TerminoPrima>", jerarquia);
         }
 
         // <Factor> := ENTERO|NUMERO_DECIMAL|(<Expresion>)
-        private void Factor(string posicion)
+        private void Factor(int jerarquia)
         {
-            posicion = posicion + "-->";
-            formarTrazaEntrada(posicion, "Resto");
+            TrazarEntrada("<Factor>", jerarquia);
 
             if (Categoria.NUMERO_ENTERO.Equals(componente.ObtenerCategoria()))
             {
                 if (apilar)
                 {
-                    if (lexemaAnterior.Equals("-"))
-                    {
-                        pila.Push(Convert.ToDouble(componente.ObtenerLexema()) * -1);
-                    }
-                    else
-                    {
-                        pila.Push(Convert.ToDouble(componente.ObtenerLexema()));
-                    }
+                    pila.Push(Convert.ToDouble(componente.ObtenerLexema()));
+                    TrazarPush(jerarquia, Convert.ToDouble(componente.ObtenerLexema()));
                 }
                 else
                 {
-                    apilar = true;
-                }
+                    apilar = true;                   
+                }            
+
                 Avanzar();
             }
             else if (Categoria.NUMERO_DECIMAL.Equals(componente.ObtenerCategoria()))
             {
                 if (apilar)
                 {
-                    if (lexemaAnterior.Equals("-"))
-                    {
-                        pila.Push(Convert.ToDouble(componente.ObtenerLexema()) * -1);
-                    }
-                    else
-                    {
-                        pila.Push(Convert.ToDouble(componente.ObtenerLexema()));
-                    }
+                    pila.Push(Convert.ToDouble(componente.ObtenerLexema()));
+                    TrazarPush(jerarquia, Convert.ToDouble(componente.ObtenerLexema()));
+
                 }
                 else
                 {
                     apilar = true;
-                }
+                }                
                 Avanzar();
             }
             else if (Categoria.PARENTESIS_ABRE.Equals(componente.ObtenerCategoria()))
             {
                 Avanzar();
-                Expresion(posicion);
+                Expresion(jerarquia);
 
                 if (Categoria.PARENTESIS_CIERRA.Equals(componente.ObtenerCategoria()))
                 {
@@ -227,7 +231,7 @@ namespace CompiladorForm.AnalisisSintactico
                 {
                     Error error = Error.CrearErrorSintactico(componente.ObtenerLexema(), componente.ObtenerCategoria(),
                     componente.ObtenerNumeroLinea(), componente.ObtenerPosicionInicial(), componente.ObtenerPosicionFinal(),
-                    "componente no valido en la posicion actual", "Lei \"" + componente.ObtenerLexema() + "\" y esperaba el parentesis que cierra: \")\"",
+                    "componente no valido en la jerarquia actual", "Lei \"" + componente.ObtenerLexema() + "\" y esperaba el parentesis que cierra: \")\"",
                     "Asegurese de que el caracter sea el parentesis que cierra: \")\"");
 
                     ManejadorErrores.Reportar(error);
@@ -237,7 +241,7 @@ namespace CompiladorForm.AnalisisSintactico
             {
                 Error error = Error.CrearErrorSintactico(componente.ObtenerLexema(), componente.ObtenerCategoria(),
                   componente.ObtenerNumeroLinea(), componente.ObtenerPosicionInicial(), componente.ObtenerPosicionFinal(),
-                  "componente no valido en la posicion actual", "Lei \"" + componente.ObtenerLexema() + "\" y esperaba un entero, NUMERO_DECIMAL o parentesis que abre" +
+                  "componente no valido en la jerarquia actual", "Lei \"" + componente.ObtenerLexema() + "\" y esperaba un entero, NUMERO_DECIMAL o parentesis que abre" +
                   "un Numero, NUMERO_DECIMAL o parentesis que abre" + ")",
                   "Asegurese de que el caracter sea un entero, NUMERO_DECIMAL o parentesis que abre");
 
@@ -245,33 +249,56 @@ namespace CompiladorForm.AnalisisSintactico
 
                 throw new Exception("Se ha presentado un error de tipo Stopper durante el analisis sintactico verifique la consola de errores");
             }
-            formarTrazaSalida(posicion, "Resto");
+            TrazarSalida("</Factor>", jerarquia);
         }
 
         private void Avanzar()
-        {            
+        {
             componente = analex.Analizar();
         }
 
-        private void formarTrazaEntrada(string posicion, string nombreRegla)
+        private void TrazarEntrada(string NombreRegla, int jerarquia)
         {
-            traza = traza + posicion + "Entrada Regla :" + nombreRegla + ", Categoria: " + componente.ObtenerCategoria() + "\n";
-            //imprimirTraza();
+            TrazaDerivacion.Append(FormarCadenaEspaciosEnBlanco(jerarquia));
+            //TrazaDerivacion.Append("Entrando a derivar regla").Append(NombreRegla).Append("con componente").Append(Componente.ObtenerCategoria());
+            TrazaDerivacion.Append("(").Append(componente.ObtenerCategoria()).Append(")");
+            TrazaDerivacion.Append(Environment.NewLine);
         }
 
-        private void formarTrazaSalida(string posicion, string Nombreregla)
+        private void TrazarSalida(string NombreRegla, int jerarquia)
         {
-            traza = traza + posicion + "Salida Regla :" + Nombreregla + ", componente" + componente.ObtenerCategoria() + "\n";
-            //imprimirTraza();
-        }
+            TrazaDerivacion.Append(FormarCadenaEspaciosEnBlanco(jerarquia));
+            //TrazaDerivacion.Append("Saliendo a derivar regla").Append(NombreRegla);
+            TrazaDerivacion.Append(NombreRegla);
+            TrazaDerivacion.Append(Environment.NewLine);
 
-        private void imprimirTraza()
+        }
+        public void TrazarPush(int jerarquia, double valor)
         {
-            if (mostrarTraza)
+            TrazaDerivacion.Append(FormarCadenaEspaciosEnBlanco(jerarquia));
+            TrazaDerivacion.Append("PUSH->").Append(valor);
+            TrazaDerivacion.Append(Environment.NewLine);
+
+        }
+        public void TrazarPop(int jerarquia, double valor)
+        {
+            TrazaDerivacion.Append(FormarCadenaEspaciosEnBlanco(jerarquia));
+            TrazaDerivacion.Append("POP->").Append(valor);
+            TrazaDerivacion.Append(Environment.NewLine);
+
+        }
+        private string FormarCadenaEspaciosEnBlanco(int jerarquia)
+        {
+            string EspaciosBlanco = "";
+            for (int indice = 1; indice <= jerarquia * 2; indice++)
             {
-                MessageBox.Show(traza);
+                EspaciosBlanco = EspaciosBlanco + " ";
             }
+
+            return EspaciosBlanco;
+
         }
+    
     }
 
 }
