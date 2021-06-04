@@ -68,6 +68,8 @@ namespace CompiladorForm
             this.PosicionFinalC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label10 = new System.Windows.Forms.Label();
             this.EOFButton = new System.Windows.Forms.Button();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelSimbolos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TablaDummies)).BeginInit();
@@ -246,7 +248,7 @@ namespace CompiladorForm
             this.panelSimbolos.Controls.Add(this.tablasimbolos);
             this.panelSimbolos.Location = new System.Drawing.Point(12, 39);
             this.panelSimbolos.Name = "panelSimbolos";
-            this.panelSimbolos.Size = new System.Drawing.Size(744, 402);
+            this.panelSimbolos.Size = new System.Drawing.Size(755, 402);
             this.panelSimbolos.TabIndex = 12;
             this.panelSimbolos.Visible = false;
             // 
@@ -428,11 +430,37 @@ namespace CompiladorForm
             this.EOFButton.TabIndex = 16;
             this.EOFButton.UseVisualStyleBackColor = false;
             // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(541, 4);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(104, 19);
+            this.radioButton1.TabIndex = 17;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Morse->Latino";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(660, 4);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(104, 19);
+            this.radioButton2.TabIndex = 18;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Latino->Morse";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.EOFButton);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.panelSimbolos);
@@ -512,6 +540,8 @@ namespace CompiladorForm
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button EOFButton;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
     }
 }
 

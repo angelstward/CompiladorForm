@@ -10,13 +10,17 @@ using CompiladorForm.AnalisisLexico;
 using CompiladorForm.GestorErrores;
 using CompiladorForm.Tablas;
 using CompiladorForm.Transversal;
-
+using CompiladorForm.AnalisisSintactico;
 namespace CompiladorForm
 {
     public partial class Form1 : Form
     {
         Boolean existTaSimbolos = false;
         Boolean existTaErrores = false;
+        AnalizadorSintacticoBase AnaSin;
+        AnalizadorSintacticoLatinoMorse AnaSinLatinoMorse = new AnalizadorSintacticoLatinoMorse();
+        AnalizadorSintacticoMorse AnaSinMorseLatino = new AnalizadorSintacticoMorse();
+
         string resultado = "";
         public Form1()
         {
@@ -151,7 +155,6 @@ namespace CompiladorForm
                 //Stack<double> Pila =  (Stack<double>) resultados["PILA"];
                 //ComponenteLexico componente = anaLex.Analizar();
 
-                AnalisisSintactico.AnalizadorSintacticoLatinoMorse AnaSin = new AnalisisSintactico.AnalizadorSintacticoLatinoMorse();
                 Dictionary<String, Object> resultados = AnaSin.Analizar(false);
                 ComponenteLexico Componente = (ComponenteLexico)resultados["COMPONENTE"];
                 resultado = Convert.ToString(resultados["RESULTADO"]);
@@ -341,6 +344,17 @@ namespace CompiladorForm
         {
             panelSimbolos.Visible = false;
             panelErrores.Visible = false;
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            AnaSin = AnaSinMorseLatino;
+
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            AnaSin =AnaSinLatinoMorse;
         }
     }
 }
